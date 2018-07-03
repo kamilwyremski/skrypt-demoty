@@ -1,0 +1,125 @@
+@media(max-width: 1120px) {
+	.adsense, .elastyczna { 
+		width: 300px; height: 250px;
+	}
+}
+@media(max-width: 1000px) {
+	#form_dodaj input, #form_dodaj textarea, #form_dodaj fieldset, #form_stworz label, #form_stworz textarea {
+		width: 70%;
+	}
+	#form_dodaj textarea{
+		height: 100px;
+	}
+}
+@media(max-width: 850px) {
+	.boks{
+		display: inline-block; vertical-align: top;
+	}
+	#losowe_obrazki{
+		display: none;
+	}
+}
+@media(max-width: 650px) {
+	#logo img{
+		width: 70px;
+	}
+	#menu ul {
+		margin-top:0; padding: 0 20px;
+	}
+	#konkurs{
+		padding: 20px 20px 25px;
+	}
+}
+@media(max-width: 600px) {
+	#mapa_google {
+		width: 100%; height: 400px;
+	}
+	#podpis_obrazka{
+		text-align: center; padding-top: 10px;
+	}
+	#glosy{
+		display: block; text-align: center; float: none; margin: 15px 0 -25px 0;
+	}
+	#podpis_obrazka p {
+		margin-right: 0px;
+	}
+	#podpis_obrazka #glosy p.glos_p  {
+		margin-right: 10px;
+	}
+	#menu ul li a{
+		padding: 5px;
+	}
+}
+@media(max-width: 500px) {
+	.box_obrazek_lewo {
+		display: block;	width: auto;
+	}
+	.box_obrazek_prawo {
+		padding-top: 15px;		width: auto;
+	}
+	.glos_p{
+		display: inline-block; vertical-align: top; padding: 10px;
+	}
+	#glosy .glos_p{
+		padding:0;
+	}
+	.box_obrazek_opis{
+		display: none;
+	}
+	.box_zobacz{
+		display: inline-block; float: right; padding-top: 25px;	
+	}	
+	#wybor_stron p {
+		display: block;
+	}
+	#form_dodaj input, #form_dodaj textarea, #form_dodaj fieldset, #form_stworz label, #form_stworz textarea {
+		width: 80%;
+	}
+	#form_dodaj select  {
+		max-width: 250px;
+	}
+	#mapa_google {
+		height: 300px;
+	}
+	#strona_komentarze h3 {
+		text-align: center;
+	}
+	#strona_komentarze form input {
+		width: calc(100% - 159px); margin-right:0;
+	}
+	#strona_komentarze form input[type=submit]{
+		width: 100%; float: none;
+	}
+}
+@media(max-width: 380px) {
+	#facebook2_2, .boks:not(.boks_tekst) {
+		display: none;
+	}
+	#div_logowanie {
+		width: 90%; 
+	}
+	#okno_logowania input, #okno_logowania label {
+		padding: 10px 5px; width: calc(100% - 14px); margin: 5px auto 5px;
+	}
+	#okno_logowania input[type="submit"]{
+		width: 100%; margin: 5px auto 5px; display: block;
+	}
+	#image_captcha{
+		margin: 0 auto 7px; display: block;
+	}
+	input#input_captcha{
+		margin: auto; width: calc(100% - 14px);
+	}
+	.box_obrazek_prawo{
+		display: block; text-align: center; padding-left:0;
+	}
+	.box_zobacz{
+		display: block; float: none; text-align: center; padding-top: 10px;
+	}	
+	#form_dodaj select  {
+		max-width: 220px;
+	}
+	#mapa_google {
+		height: 200px;
+	}
+}

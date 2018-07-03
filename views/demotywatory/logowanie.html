@@ -1,0 +1,17 @@
+<div id="div_logowanie">
+	<div id="okno_logowania">
+		<h1><a href="{$ustawienia.base_url}" title="{$ustawienia.tytul}">{$ustawienia.tytul|truncate:40}</a></h1>
+		<h2>{$tlumaczenia_teksty.zaloguj}</h2>
+		{if isset($info)}<p class="ok">{$info}</p>{elseif isset($blad)}<p class="blad">{$blad}</p>{/if}
+		<form method="post" action="">
+			<input type="hidden" name="logowanie">
+			<input type="text" placeholder="{$tlumaczenia_teksty.login_lub_email}" name="login_email" title="{$tlumaczenia_teksty.login_lub_email}" required {if isset($login_email)}value="{$login_email}"{/if} maxlength="32">
+			<input type="password" placeholder="{$tlumaczenia_teksty.haslo}" name="haslo" title="{$tlumaczenia_teksty.haslo}" required maxlength="32">
+			<input type="submit" value="{$tlumaczenia_teksty.zaloguj}">
+		</form>
+		{if $ustawienia.logowanie_facebook==1 && isset($url_facebook)}<a href="{$url_facebook}" title="{$tlumaczenia_teksty.zaloguj_przez_fb}" id="logowanie_facebook"><img src="{$ustawienia.base_url}/views/{$ustawienia.szablon}/images/facebook_ikona.png">{$tlumaczenia_teksty.zaloguj_przez_fb}</a>{/if}
+		<a href="{$ustawienia.base_url}/{$tlumaczenia_linki.reset_hasla}" title="{$tlumaczenia_teksty.reset_hasla}">{$tlumaczenia_teksty.reset_hasla}</a>
+		<a href="{$ustawienia.base_url}/{$tlumaczenia_linki.rejestracja}" title="{$tlumaczenia_teksty.rejestracja}">{$tlumaczenia_teksty.rejestracja}</a>
+		<a href="{$ustawienia.base_url}" title="{$ustawienia.tytul}">{$tlumaczenia_teksty.wroc_do_serwisu}</a>
+	</div>
+</div>

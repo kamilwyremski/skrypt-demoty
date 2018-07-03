@@ -1,0 +1,76 @@
+<div id="profil">
+{if isset($profil)}
+	<h2>{$tlumaczenia_teksty.profil} {$profil.login}</h2>
+	{if $profil.moderator==1}<h3>{$tlumaczenia_teksty.moderator}</h3>{/if}
+	{if $profil.imie!=''}<p><b>{$profil.imie}</b></p>{/if}
+	{if $profil.adres!=''}<p><b>{$tlumaczenia_teksty.adres}:</b><br>{$profil.adres}</p>{/if}
+	{if $profil.miasta!=''}<p><b>{$tlumaczenia_teksty.miasta}:</b><br>{$profil.miasta}</p>{/if}
+	<br>
+	<p>{$tlumaczenia_teksty.data_rejestracji}: <b>{$profil.data|date_format:"%d-%m-%Y"}</b></p>
+	<p>{$tlumaczenia_teksty.dodanych_obrazkow}: <b>{$profil.ile_obrazkow}</b></p>
+	<p>{$tlumaczenia_teksty.obrazkow_na_glownej}: <b>{$profil.ile_obrazkow_glowna}</b></p>
+	<p>{$tlumaczenia_teksty.dodanych_komentarzy}: <b>{$profil.ile_komentarzy}</b></p>
+	{if $ustawienia.tworzenie==1}<p>{$tlumaczenia_teksty.stworzonych_obrazkow}: <b>{$profil.ile_stworzono}</b></p>{/if}
+	<br>
+	{if $ustawienia.mapa_uzytkownikow==1 && $profil.mapa!=''}
+		<div id="mapa_google"></div>
+		{literal}
+		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp{/literal}{if ($ustawienia.google_maps_api)}&key={$ustawienia.google_maps_api}{/if}{literal}"></script>
+		<script>
+			google.maps.event.addDomListener(window, "load", function() {
+				var myLatlng = new google.maps.LatLng({/literal}{$profil.mapa}{literal});
+				var map = new google.maps.Map(document.getElementById("mapa_google"), {
+					zoom: 10,
+					center: myLatlng
+				});
+				var marker = new google.maps.Marker({
+					position: myLatlng,
+					map: map,
+					title: '{/literal}{$profil.login}{literal}'
+				});
+			})
+		</script>
+		{/literal}	
+	{/if}
+	<br>
+	{if isset($profil_obrazki)}
+		{foreach key=key item=item from=$profil_obrazki name=profil_obrazki}
+			{include file="miniaturki.tpl"}
+		{/foreach}
+		{if $ile_stron>1}
+		 <div id="wybor_stron">
+			<p>{$tlumaczenia_teksty.strona} {$ktora_strona} / {$ile_stron}</p>
+			<a href="{$url_strony}" title="{$tlumaczenia_teksty.strona} 1" class="link_stron stron_pierwsza {if $ktora_strona==1}nieaktywny{/if}"></a>
+			<a href="{$url_strony}?page={$ktora_strona-1}" title="{$tlumaczenia_teksty.strona} {$ktora_strona-1}" class="link_stron stron_poprzednia {if $ktora_strona==1}nieaktywny{/if}"></a>
+			<a href="{$url_strony}?page={$ktora_strona+1}" title="{$tlumaczenia_teksty.strona} {$ktora_strona+1}" class="link_stron stron_nastepna {if $ktora_strona==$ile_stron}nieaktywny{/if}"></a>
+			<a href="{$url_strony}?page={$ile_stron}" title="{$tlumaczenia_teksty.strona} {$ile_stron}" class="link_stron stron_ostatnia {if $ktora_strona==$ile_stron}nieaktywny{/if}"></a>
+		</div>
+		{/if}
+		<hr style="border:none; border-top: solid 1px grey; margin: 10px 0 30px 0; clear: both">
+	{else}
+		<h3>{$tlumaczenia_teksty.nie_znaleziono}</h3>
+	{/if}
+	{if $ustawienia.adsense!=''}
+		<div class="adsense">
+			{$ustawienia.adsense}
+		</div>
+	{/if}
+		<div id="kontakt">
+			<h3>{$tlumaczenia_teksty.kontakt_z_uzytkownikiem}</h3>
+			<p>{$tlumaczenia_teksty.kontakt_z_uzytkownikiem_opis}</p><br>
+			<form action="" method="post">
+				<input type="hidden" name="id" value="{$profil.id}">
+				<input type="text" placeholder="{$tlumaczenia_teksty.imie}" name="imie" value="{if isset($email_imie)}{$email_imie}{/if}" title="{$tlumaczenia_teksty.imie}" required><br>
+				<input type="email" placeholder="{$tlumaczenia_teksty.email}" name="email" value="{if isset($email_email)}{$email_email}{/if}" title="{$tlumaczenia_teksty.email}" required><br>
+				<input type="text" placeholder="{$tlumaczenia_teksty.temat}" name="temat" value="{if isset($email_temat)}{$email_temat}{/if}" title="{$tlumaczenia_teksty.temat}" required><br>
+				<img src="{$ustawienia.base_url}/php/captcha.php" alt="Captcha" style="margin-top:10px"/>
+				<input type="text" name="captcha" placeholder="{$tlumaczenia_teksty.captcha}" required style="min-width:100px; width: 100px; margin:5px 0px 3px 14px; vertical-align:top" title="{$tlumaczenia_teksty.captcha}"><br>
+				<textarea name="tresc" placeholder="{$tlumaczenia_teksty.wiadomosc}" style="margin-top:5px" required title="{$tlumaczenia_teksty.wiadomosc}">{if isset($email_tresc)}{$email_tresc}{/if}</textarea><br>
+				<span>{if isset($email_info)}{$email_info}{/if}</span>
+				<input type="submit" value="{$tlumaczenia_teksty.wyslij}">
+			</form>
+		</div>
+{else}
+	<h2>{$tlumaczenia_teksty.nie_znaleziono_uzytkownika}</h2>
+{/if}
+</div>

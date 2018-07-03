@@ -1,0 +1,225 @@
+
+	
+	<div class="center">
+		<h1>Język - edycja tekstów (słów)</h1>
+		<p>Po lewej wyświetlany jest aktualnie aktywny język</p>
+		<br>
+		<p><a href="?akcja=jezyki" title="Języki - edycja">Wróć do edycji języków</a></p>
+		<br>
+	</div>
+	<br>
+	{if isset($tlumaczenia_teksty) and isset($tlumaczenia_teksty_aktywny)}
+	<form action="" method="post">
+		<input type="hidden" name="akcja" value="zapisz_jezyk_teksty">
+		<table class="table table_tlumaczenia">
+			<tr>
+				<td colspan="2">Język - teksty (słowa)</td>
+			</tr>
+			<tr>
+				<td>Słowo w języku: <b>{$tlumaczenia_teksty_aktywny.jezyk}</b></td><td>Słowo w języku: <b>{$tlumaczenia_teksty.jezyk}</b></td>
+			</tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.menu_glowna}</p></td><td><input type="text" name="menu_glowna" value="{$tlumaczenia_teksty.menu_glowna}" maxlength="64" placeholder="menu_glowna" title="menu_glowna"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.menu_top}</p></td><td><input type="text" name="menu_top" value="{$tlumaczenia_teksty.menu_top}" maxlength="64" placeholder="menu_top" title="menu_top"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.menu_dodaj}</p></td><td><input type="text" name="menu_dodaj" value="{$tlumaczenia_teksty.menu_dodaj}" maxlength="64" placeholder="menu_dodaj" title="menu_dodaj"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.menu_stworz}</p></td><td><input type="text" name="menu_stworz" value="{$tlumaczenia_teksty.menu_stworz}" maxlength="64" placeholder="menu_stworz" title="menu_stworz"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.menu_poczekalnia}</p></td><td><input type="text" name="menu_poczekalnia" value="{$tlumaczenia_teksty.menu_poczekalnia}" maxlength="64" placeholder="menu_poczekalnia" title="menu_poczekalnia"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.menu_mapa_obiektow}</p></td><td><input type="text" name="menu_mapa_obiektow" value="{$tlumaczenia_teksty.menu_mapa_obiektow}" maxlength="64" placeholder="menu_mapa_obiektow" title="menu_mapa_obiektow"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.menu_mapa_uzytkownikow}</p></td><td><input type="text" name="menu_mapa_uzytkownikow" value="{$tlumaczenia_teksty.menu_mapa_uzytkownikow}" maxlength="64" placeholder="menu_mapa_uzytkownikow" title="menu_mapa_uzytkownikow"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.menu_konkursy}</p></td><td><input type="text" name="menu_konkursy" value="{$tlumaczenia_teksty.menu_konkursy}" maxlength="64" placeholder="menu_konkursy" title="menu_konkursy"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.menu_konto}</p></td><td><input type="text" name="menu_konto" value="{$tlumaczenia_teksty.menu_konto}" maxlength="64" placeholder="menu_konto" title="menu_konto"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.menu_wyloguj}</p></td><td><input type="text" name="menu_wyloguj" value="{$tlumaczenia_teksty.menu_wyloguj}" maxlength="64" placeholder="menu_wyloguj" title="menu_wyloguj"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.menu_rejestracja}</p></td><td><input type="text" name="menu_rejestracja" value="{$tlumaczenia_teksty.menu_rejestracja}" maxlength="64" placeholder="menu_rejestracja" title="menu_rejestracja"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.menu_logowanie}</p></td><td><input type="text" name="menu_logowanie" value="{$tlumaczenia_teksty.menu_logowanie}" maxlength="64" placeholder="menu_logowanie" title="menu_logowanie"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.menu_stworzone}</p></td><td><input type="text" name="menu_stworzone" value="{$tlumaczenia_teksty.menu_stworzone}" maxlength="64" placeholder="menu_stworzone" title="menu_stworzone"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.menu_uzytkownicy}</p></td><td><input type="text" name="menu_uzytkownicy" value="{$tlumaczenia_teksty.menu_uzytkownicy}" maxlength="64" placeholder="menu_uzytkownicy" title="menu_uzytkownicy"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.menu_onas}</p></td><td><input type="text" name="menu_onas" value="{$tlumaczenia_teksty.menu_onas}" maxlength="64" placeholder="menu_onas" title="menu_onas"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.menu_kategorie}</p></td><td><input type="text" name="menu_kategorie" value="{$tlumaczenia_teksty.menu_kategorie}" maxlength="64" placeholder="menu_kategorie" title="menu_kategorie"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.dodaj_nowy}</p></td><td><input type="text" name="dodaj_nowy" value="{$tlumaczenia_teksty.dodaj_nowy}" maxlength="64" placeholder="dodaj_nowy" title="dodaj_nowy"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.udalo_sie}</p></td><td><input type="text" name="udalo_sie" value="{$tlumaczenia_teksty.udalo_sie}" maxlength="64" placeholder="udalo_sie" title="udalo_sie"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.zobacz}</p></td><td><input type="text" name="zobacz" value="{$tlumaczenia_teksty.zobacz}" maxlength="64" placeholder="zobacz" title="zobacz"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.tytul}</p></td><td><input type="text" name="tytul" value="{$tlumaczenia_teksty.tytul}" maxlength="64" placeholder="tytul" title="tytul"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.opis}</p></td><td><input type="text" name="opis" value="{$tlumaczenia_teksty.opis}" maxlength="64" placeholder="opis" title="opis"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.film_youtube}</p></td><td><input type="text" name="film_youtube" value="{$tlumaczenia_teksty.film_youtube}" maxlength="64" placeholder="film_youtube" title="film_youtube"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.film_vimeo}</p></td><td><input type="text" name="film_vimeo" value="{$tlumaczenia_teksty.film_vimeo}" maxlength="64" placeholder="film_vimeo" title="film_vimeo"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.film_dailymotion}</p></td><td><input type="text" name="film_dailymotion" value="{$tlumaczenia_teksty.film_dailymotion}" maxlength="64" placeholder="film_dailymotion" title="film_dailymotion"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.obrazek_z_dysku}</p></td><td><input type="text" name="obrazek_z_dysku" value="{$tlumaczenia_teksty.obrazek_z_dysku}" maxlength="64" placeholder="obrazek_z_dysku" title="obrazek_z_dysku"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.obrazek_z_internetu}</p></td><td><input type="text" name="obrazek_z_internetu" value="{$tlumaczenia_teksty.obrazek_z_internetu}" maxlength="64" placeholder="obrazek_z_internetu" title="obrazek_z_internetu"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.kategoria}</p></td><td><input type="text" name="kategoria" value="{$tlumaczenia_teksty.kategoria}" maxlength="64" placeholder="kategoria" title="kategoria"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.tagi_po_przecinku}</p></td><td><input type="text" name="tagi_po_przecinku" value="{$tlumaczenia_teksty.tagi_po_przecinku}" maxlength="64" placeholder="tagi_po_przecinku" title="tagi_po_przecinku"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.dodaj}</p></td><td><input type="text" name="dodaj" value="{$tlumaczenia_teksty.dodaj}" maxlength="64" placeholder="dodaj" title="dodaj"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.zaznacz_lokalizacje}</p></td><td><input type="text" name="zaznacz_lokalizacje" value="{$tlumaczenia_teksty.zaznacz_lokalizacje}" maxlength="64" placeholder="zaznacz_lokalizacje" title="zaznacz_lokalizacje"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.edytuj}</p></td><td><input type="text" name="edytuj" value="{$tlumaczenia_teksty.edytuj}" maxlength="64" placeholder="edytuj" title="edytuj"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.zapisz}</p></td><td><input type="text" name="zapisz" value="{$tlumaczenia_teksty.zapisz}" maxlength="64" placeholder="zapisz" title="zapisz"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.blad}</p></td><td><input type="text" name="blad" value="{$tlumaczenia_teksty.blad}" maxlength="64" placeholder="blad" title="blad"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.poczekalnia}</p></td><td><input type="text" name="poczekalnia" value="{$tlumaczenia_teksty.poczekalnia}" maxlength="64" placeholder="poczekalnia" title="poczekalnia"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.autor}</p></td><td><input type="text" name="autor" value="{$tlumaczenia_teksty.autor}" maxlength="64" placeholder="autor" title="autor"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.data}</p></td><td><input type="text" name="data" value="{$tlumaczenia_teksty.data}" maxlength="64" placeholder="data" title="data"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.komentarzy}</p></td><td><input type="text" name="komentarzy" value="{$tlumaczenia_teksty.komentarzy}" maxlength="64" placeholder="komentarzy" title="komentarzy"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.musisz_zalogowany}</p></td><td><input type="text" name="musisz_zalogowany" value="{$tlumaczenia_teksty.musisz_zalogowany}" maxlength="64" placeholder="musisz_zalogowany" title="musisz_zalogowany"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.strona}</p></td><td><input type="text" name="strona" value="{$tlumaczenia_teksty.strona}" maxlength="64" placeholder="strona" title="strona"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.nie_dodano}</p></td><td><input type="text" name="nie_dodano" value="{$tlumaczenia_teksty.nie_dodano}" maxlength="64" placeholder="nie_dodano" title="nie_dodano"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.aktywny}</p></td><td><input type="text" name="aktywny" value="{$tlumaczenia_teksty.aktywny}" maxlength="64" placeholder="aktywny" title="aktywny"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.zakonczony}</p></td><td><input type="text" name="zakonczony" value="{$tlumaczenia_teksty.zakonczony}" maxlength="64" placeholder="zakonczony" title="zakonczony"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.data_start}</p></td><td><input type="text" name="data_start" value="{$tlumaczenia_teksty.data_start}" maxlength="64" placeholder="data_start" title="data_start"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.data_koniec}</p></td><td><input type="text" name="data_koniec" value="{$tlumaczenia_teksty.data_koniec}" maxlength="64" placeholder="data_koniec" title="data_koniec"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.konkurs_nie_znaleziono}</p></td><td><input type="text" name="konkurs_nie_znaleziono" value="{$tlumaczenia_teksty.konkurs_nie_znaleziono}" maxlength="64" placeholder="konkurs_nie_znaleziono" title="konkurs_nie_znaleziono"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.konkursy}</p></td><td><input type="text" name="konkursy" value="{$tlumaczenia_teksty.konkursy}" maxlength="64" placeholder="konkursy" title="konkursy"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.konkurs}</p></td><td><input type="text" name="konkurs" value="{$tlumaczenia_teksty.konkurs}" maxlength="64" placeholder="konkurs" title="konkurs"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.zwyciezca}</p></td><td><input type="text" name="zwyciezca" value="{$tlumaczenia_teksty.zwyciezca}" maxlength="64" placeholder="zwyciezca" title="zwyciezca"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.status}</p></td><td><input type="text" name="status" value="{$tlumaczenia_teksty.status}" maxlength="64" placeholder="status" title="status"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.konto}</p></td><td><input type="text" name="konto" value="{$tlumaczenia_teksty.konto}" maxlength="64" placeholder="konto" title="konto"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.login}</p></td><td><input type="text" name="login" value="{$tlumaczenia_teksty.login}" maxlength="64" placeholder="login" title="login"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.email}</p></td><td><input type="text" name="email" value="{$tlumaczenia_teksty.email}" maxlength="64" placeholder="email" title="email"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.statystyki}</p></td><td><input type="text" name="statystyki" value="{$tlumaczenia_teksty.statystyki}" maxlength="64" placeholder="statystyki" title="statystyki"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.data_rejestracji}</p></td><td><input type="text" name="data_rejestracji" value="{$tlumaczenia_teksty.data_rejestracji}" maxlength="64" placeholder="data_rejestracji" title="data_rejestracji"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.dodanych_obrazkow}</p></td><td><input type="text" name="dodanych_obrazkow" value="{$tlumaczenia_teksty.dodanych_obrazkow}" maxlength="64" placeholder="dodanych_obrazkow" title="dodanych_obrazkow"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.obrazkow_na_glownej}</p></td><td><input type="text" name="obrazkow_na_glownej" value="{$tlumaczenia_teksty.obrazkow_na_glownej}" maxlength="64" placeholder="obrazkow_na_glownej" title="obrazkow_na_glownej"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.dodanych_komentarzy}</p></td><td><input type="text" name="dodanych_komentarzy" value="{$tlumaczenia_teksty.dodanych_komentarzy}" maxlength="64" placeholder="dodanych_komentarzy" title="dodanych_komentarzy"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.stworzonych_obrazkow}</p></td><td><input type="text" name="stworzonych_obrazkow" value="{$tlumaczenia_teksty.stworzonych_obrazkow}" maxlength="64" placeholder="stworzonych_obrazkow" title="stworzonych_obrazkow"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.twoje_obrazki}</p></td><td><input type="text" name="twoje_obrazki" value="{$tlumaczenia_teksty.twoje_obrazki}" maxlength="64" placeholder="twoje_obrazki" title="twoje_obrazki"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.glosow}</p></td><td><input type="text" name="glosow" value="{$tlumaczenia_teksty.glosow}" maxlength="64" placeholder="glosow" title="glosow"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.usun}</p></td><td><input type="text" name="usun" value="{$tlumaczenia_teksty.usun}" maxlength="64" placeholder="usun" title="usun"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.nie_znaleziono}</p></td><td><input type="text" name="nie_znaleziono" value="{$tlumaczenia_teksty.nie_znaleziono}" maxlength="64" placeholder="nie_znaleziono" title="nie_znaleziono"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.dane_osobowe}</p></td><td><input type="text" name="dane_osobowe" value="{$tlumaczenia_teksty.dane_osobowe}" maxlength="64" placeholder="dane_osobowe" title="dane_osobowe"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.imie}</p></td><td><input type="text" name="imie" value="{$tlumaczenia_teksty.imie}" maxlength="64" placeholder="imie" title="imie"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.adres}</p></td><td><input type="text" name="adres" value="{$tlumaczenia_teksty.adres}" maxlength="64" placeholder="adres" title="adres"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.miasta}</p></td><td><input type="text" name="miasta" value="{$tlumaczenia_teksty.miasta}" maxlength="64" placeholder="miasta" title="miasta"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.zmiana_hasla}</p></td><td><input type="text" name="zmiana_hasla" value="{$tlumaczenia_teksty.zmiana_hasla}" maxlength="64" placeholder="zmiana_hasla" title="zmiana_hasla"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.stare_haslo}</p></td><td><input type="text" name="stare_haslo" value="{$tlumaczenia_teksty.stare_haslo}" maxlength="64" placeholder="stare_haslo" title="stare_haslo"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.nowe_haslo}</p></td><td><input type="text" name="nowe_haslo" value="{$tlumaczenia_teksty.nowe_haslo}" maxlength="64" placeholder="nowe_haslo" title="nowe_haslo"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.powtorz_nowe_haslo}</p></td><td><input type="text" name="powtorz_nowe_haslo" value="{$tlumaczenia_teksty.powtorz_nowe_haslo}" maxlength="64" placeholder="powtorz_nowe_haslo" title="powtorz_nowe_haslo"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.zmien_haslo}</p></td><td><input type="text" name="zmien_haslo" value="{$tlumaczenia_teksty.zmien_haslo}" maxlength="64" placeholder="zmien_haslo" title="zmien_haslo"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.zaloguj}</p></td><td><input type="text" name="zaloguj" value="{$tlumaczenia_teksty.zaloguj}" maxlength="64" placeholder="zaloguj" title="zaloguj"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.login_lub_email}</p></td><td><input type="text" name="login_lub_email" value="{$tlumaczenia_teksty.login_lub_email}" maxlength="64" placeholder="login_lub_email" title="login_lub_email"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.haslo}</p></td><td><input type="text" name="haslo" value="{$tlumaczenia_teksty.haslo}" maxlength="64" placeholder="haslo" title="haslo"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.zaloguj_przez_fb}</p></td><td><input type="text" name="zaloguj_przez_fb" value="{$tlumaczenia_teksty.zaloguj_przez_fb}" maxlength="64" placeholder="zaloguj_przez_fb" title="zaloguj_przez_fb"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.reset_hasla}</p></td><td><input type="text" name="reset_hasla" value="{$tlumaczenia_teksty.reset_hasla}" maxlength="64" placeholder="reset_hasla" title="reset_hasla"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.rejestracja}</p></td><td><input type="text" name="rejestracja" value="{$tlumaczenia_teksty.rejestracja}" maxlength="64" placeholder="rejestracja" title="rejestracja"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.wroc_do_serwisu}</p></td><td><input type="text" name="wroc_do_serwisu" value="{$tlumaczenia_teksty.wroc_do_serwisu}" maxlength="64" placeholder="wroc_do_serwisu" title="wroc_do_serwisu"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.onas}</p></td><td><input type="text" name="onas" value="{$tlumaczenia_teksty.onas}" maxlength="64" placeholder="onas" title="onas"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.losowo_wybrane}</p></td><td><input type="text" name="losowo_wybrane" value="{$tlumaczenia_teksty.losowo_wybrane}" maxlength="64" placeholder="losowo_wybrane" title="losowo_wybrane"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.stopka_opis}</p></td><td><input type="text" name="stopka_opis" value="{$tlumaczenia_teksty.stopka_opis}" maxlength="512" placeholder="stopka_opis" title="stopka_opis"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.mapa_obiektow}</p></td><td><input type="text" name="mapa_obiektow" value="{$tlumaczenia_teksty.mapa_obiektow}" maxlength="64" placeholder="mapa_obiektow" title="mapa_obiektow"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.mapa_obiektow_opis}</p></td><td><input type="text" name="mapa_obiektow_opis" value="{$tlumaczenia_teksty.mapa_obiektow_opis}" maxlength="128" placeholder="mapa_obiektow_opis" title="mapa_obiektow_opis"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.nie_dodano_lokalizacji}</p></td><td><input type="text" name="nie_dodano_lokalizacji" value="{$tlumaczenia_teksty.nie_dodano_lokalizacji}" maxlength="64" placeholder="nie_dodano_lokalizacji" title="nie_dodano_lokalizacji"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.mapa_uzytkownikow}</p></td><td><input type="text" name="mapa_uzytkownikow" value="{$tlumaczenia_teksty.mapa_uzytkownikow}" maxlength="64" placeholder="mapa_uzytkownikow" title="mapa_uzytkownikow"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.mapa_uzytkownikow_opis}</p></td><td><input type="text" name="mapa_uzytkownikow_opis" value="{$tlumaczenia_teksty.mapa_uzytkownikow_opis}" maxlength="128" placeholder="mapa_uzytkownikow_opis" title="mapa_uzytkownikow_opis"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.na_glowna}</p></td><td><input type="text" name="na_glowna" value="{$tlumaczenia_teksty.na_glowna}" maxlength="64" placeholder="na_glowna" title="na_glowna"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.nie_mozna_zaladowac}</p></td><td><input type="text" name="nie_mozna_zaladowac" value="{$tlumaczenia_teksty.nie_mozna_zaladowac}" maxlength="64" placeholder="nie_mozna_zaladowac" title="nie_mozna_zaladowac"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.komentarze}</p></td><td><input type="text" name="komentarze" value="{$tlumaczenia_teksty.komentarze}" maxlength="64" placeholder="komentarze" title="komentarze"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.usun_komentarz}</p></td><td><input type="text" name="usun_komentarz" value="{$tlumaczenia_teksty.usun_komentarz}" maxlength="64" placeholder="usun_komentarz" title="usun_komentarz"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.nie_dodano_komentarzy}</p></td><td><input type="text" name="nie_dodano_komentarzy" value="{$tlumaczenia_teksty.nie_dodano_komentarzy}" maxlength="64" placeholder="nie_dodano_komentarzy" title="nie_dodano_komentarzy"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.komentarz_zalogowany}</p></td><td><input type="text" name="komentarz_zalogowany" value="{$tlumaczenia_teksty.komentarz_zalogowany}" maxlength="64" placeholder="komentarz_zalogowany" title="komentarz_zalogowany"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.nie_znaleziono_obrazka}</p></td><td><input type="text" name="nie_znaleziono_obrazka" value="{$tlumaczenia_teksty.nie_znaleziono_obrazka}" maxlength="64" placeholder="nie_znaleziono_obrazka" title="nie_znaleziono_obrazka"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.tresc_komentarza}</p></td><td><input type="text" name="tresc_komentarza" value="{$tlumaczenia_teksty.tresc_komentarza}" maxlength="64" placeholder="tresc_komentarza" title="tresc_komentarza"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.captcha}</p></td><td><input type="text" name="captcha" value="{$tlumaczenia_teksty.captcha}" maxlength="64" placeholder="captcha" title="captcha"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.kontakt}</p></td><td><input type="text" name="kontakt" value="{$tlumaczenia_teksty.kontakt}" maxlength="64" placeholder="kontakt" title="kontakt"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.kontakt_info}</p></td><td><input type="text" name="kontakt_info" value="{$tlumaczenia_teksty.kontakt_info}" maxlength="128" placeholder="kontakt_info" title="kontakt_info"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.temat}</p></td><td><input type="text" name="temat" value="{$tlumaczenia_teksty.temat}" maxlength="64" placeholder="temat" title="temat"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.wiadomosc}</p></td><td><input type="text" name="wiadomosc" value="{$tlumaczenia_teksty.wiadomosc}" maxlength="64" placeholder="wiadomosc" title="wiadomosc"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.wyslij}</p></td><td><input type="text" name="wyslij" value="{$tlumaczenia_teksty.wyslij}" maxlength="64" placeholder="wyslij" title="wyslij"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.polityka_prywatnosci}</p></td><td><input type="text" name="polityka_prywatnosci" value="{$tlumaczenia_teksty.polityka_prywatnosci}" maxlength="64" placeholder="polityka_prywatnosci" title="polityka_prywatnosci"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.moderator}</p></td><td><input type="text" name="moderator" value="{$tlumaczenia_teksty.moderator}" maxlength="64" placeholder="moderator" title="moderator"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.kontakt_z_uzytkownikiem}</p></td><td><input type="text" name="kontakt_z_uzytkownikiem" value="{$tlumaczenia_teksty.kontakt_z_uzytkownikiem}" maxlength="64" placeholder="kontakt_z_uzytkownikiem" title="kontakt_z_uzytkownikiem"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.kontakt_z_uzytkownikiem_opis}</p></td><td><input type="text" name="kontakt_z_uzytkownikiem_opis" value="{$tlumaczenia_teksty.kontakt_z_uzytkownikiem_opis}" maxlength="64" placeholder="kontakt_z_uzytkownikiem_opis" title="kontakt_z_uzytkownikiem_opis"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.nie_znaleziono_uzytkownika}</p></td><td><input type="text" name="nie_znaleziono_uzytkownika" value="{$tlumaczenia_teksty.nie_znaleziono_uzytkownika}" maxlength="128" placeholder="nie_znaleziono_uzytkownika" title="nie_znaleziono_uzytkownika"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.regulamin}</p></td><td><input type="text" name="regulamin" value="{$tlumaczenia_teksty.regulamin}" maxlength="64" placeholder="regulamin" title="regulamin"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.powtorz_haslo}</p></td><td><input type="text" name="powtorz_haslo" value="{$tlumaczenia_teksty.powtorz_haslo}" maxlength="64" placeholder="powtorz_haslo" title="powtorz_haslo"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.akceptuje}</p></td><td><input type="text" name="akceptuje" value="{$tlumaczenia_teksty.akceptuje}" maxlength="64" placeholder="akceptuje" title="akceptuje"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.oraz}</p></td><td><input type="text" name="oraz" value="{$tlumaczenia_teksty.oraz}" maxlength="64" placeholder="oraz" title="oraz"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.polityke_prywatnosci}</p></td><td><input type="text" name="polityke_prywatnosci" value="{$tlumaczenia_teksty.polityke_prywatnosci}" maxlength="64" placeholder="polityke_prywatnosci" title="polityke_prywatnosci"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.dodatkowe_informacje}</p></td><td><input type="text" name="dodatkowe_informacje" value="{$tlumaczenia_teksty.dodatkowe_informacje}" maxlength="64" placeholder="dodatkowe_informacje" title="dodatkowe_informacje"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.obrazkow_i_filmow}</p></td><td><input type="text" name="obrazkow_i_filmow" value="{$tlumaczenia_teksty.obrazkow_i_filmow}" maxlength="64" placeholder="obrazkow_i_filmow" title="obrazkow_i_filmow"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.w_poczekalni}</p></td><td><input type="text" name="w_poczekalni" value="{$tlumaczenia_teksty.w_poczekalni}" maxlength="64" placeholder="w_poczekalni" title="w_poczekalni"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.kategorii}</p></td><td><input type="text" name="kategorii" value="{$tlumaczenia_teksty.kategorii}" maxlength="64" placeholder="kategorii" title="kategorii"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.tagow}</p></td><td><input type="text" name="tagow" value="{$tlumaczenia_teksty.tagow}" maxlength="64" placeholder="tagow" title="tagow"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.stworzonych}</p></td><td><input type="text" name="stworzonych" value="{$tlumaczenia_teksty.stworzonych}" maxlength="64" placeholder="stworzonych" title="stworzonych"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.uzytkownikow}</p></td><td><input type="text" name="uzytkownikow" value="{$tlumaczenia_teksty.uzytkownikow}" maxlength="64" placeholder="uzytkownikow" title="uzytkownikow"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.najlepsze}</p></td><td><input type="text" name="najlepsze" value="{$tlumaczenia_teksty.najlepsze}" maxlength="64" placeholder="najlepsze" title="najlepsze"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.najnowsze}</p></td><td><input type="text" name="najnowsze" value="{$tlumaczenia_teksty.najnowsze}" maxlength="64" placeholder="najnowsze" title="najnowsze"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.najnowsze_komentarze}</p></td><td><input type="text" name="najnowsze_komentarze" value="{$tlumaczenia_teksty.najnowsze_komentarze}" maxlength="64" placeholder="najnowsze_komentarze" title="najnowsze_komentarze"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.wyszukiwarka}</p></td><td><input type="text" name="wyszukiwarka" value="{$tlumaczenia_teksty.wyszukiwarka}" maxlength="64" placeholder="wyszukiwarka" title="wyszukiwarka"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.szukaj}</p></td><td><input type="text" name="szukaj" value="{$tlumaczenia_teksty.szukaj}" maxlength="64" placeholder="szukaj" title="szukaj"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.wyszukiwarka_uzytkownikow}</p></td><td><input type="text" name="wyszukiwarka_uzytkownikow" value="{$tlumaczenia_teksty.wyszukiwarka_uzytkownikow}" maxlength="64" placeholder="wyszukiwarka_uzytkownikow" title="wyszukiwarka_uzytkownikow"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.tag}</p></td><td><input type="text" name="tag" value="{$tlumaczenia_teksty.tag}" maxlength="64" placeholder="tag" title="tag"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.stworz_obrazek}</p></td><td><input type="text" name="stworz_obrazek" value="{$tlumaczenia_teksty.stworz_obrazek}" maxlength="64" placeholder="stworz_obrazek" title="stworz_obrazek"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.zapisz_obrazek}</p></td><td><input type="text" name="zapisz_obrazek" value="{$tlumaczenia_teksty.zapisz_obrazek}" maxlength="64" placeholder="zapisz_obrazek" title="zapisz_obrazek"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.stworz_nowy_obrazek}</p></td><td><input type="text" name="stworz_nowy_obrazek" value="{$tlumaczenia_teksty.stworz_nowy_obrazek}" maxlength="64" placeholder="stworz_nowy_obrazek" title="stworz_nowy_obrazek"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.kolor_w_formacie}</p></td><td><input type="text" name="kolor_w_formacie" value="{$tlumaczenia_teksty.kolor_w_formacie}" maxlength="64" placeholder="kolor_w_formacie" title="kolor_w_formacie"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.dodaj_obrazek_z_dysku}</p></td><td><input type="text" name="dodaj_obrazek_z_dysku" value="{$tlumaczenia_teksty.dodaj_obrazek_z_dysku}" maxlength="64" placeholder="dodaj_obrazek_z_dysku" title="dodaj_obrazek_z_dysku"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.typ}</p></td><td><input type="text" name="typ" value="{$tlumaczenia_teksty.typ}" maxlength="64" placeholder="typ" title="typ"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.obrazek}</p></td><td><input type="text" name="obrazek" value="{$tlumaczenia_teksty.obrazek}" maxlength="64" placeholder="obrazek" title="obrazek"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.mem}</p></td><td><input type="text" name="mem" value="{$tlumaczenia_teksty.mem}" maxlength="64" placeholder="mem" title="mem"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.kolor_tla}</p></td><td><input type="text" name="kolor_tla" value="{$tlumaczenia_teksty.kolor_tla}" maxlength="64" placeholder="kolor_tla" title="kolor_tla"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.kolor_ramki}</p></td><td><input type="text" name="kolor_ramki" value="{$tlumaczenia_teksty.kolor_ramki}" maxlength="64" placeholder="kolor_ramki" title="kolor_ramki"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.podglad}</p></td><td><input type="text" name="podglad" value="{$tlumaczenia_teksty.podglad}" maxlength="64" placeholder="podglad" title="podglad"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.stworz}</p></td><td><input type="text" name="stworz" value="{$tlumaczenia_teksty.stworz}" maxlength="64" placeholder="stworz" title="stworz"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.stworzone}</p></td><td><input type="text" name="stworzone" value="{$tlumaczenia_teksty.stworzone}" maxlength="64" placeholder="stworzone" title="stworzone"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.obrazkow}</p></td><td><input type="text" name="obrazkow" value="{$tlumaczenia_teksty.obrazkow}" maxlength="64" placeholder="obrazkow" title="obrazkow"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.na_glownej}</p></td><td><input type="text" name="na_glownej" value="{$tlumaczenia_teksty.na_glownej}" maxlength="64" placeholder="na_glownej" title="na_glownej"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.nic_nie_znaleziono}</p></td><td><input type="text" name="nic_nie_znaleziono" value="{$tlumaczenia_teksty.nic_nie_znaleziono}" maxlength="64" placeholder="nic_nie_znaleziono" title="nic_nie_znaleziono"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.mapa_strony}</p></td><td><input type="text" name="mapa_strony" value="{$tlumaczenia_teksty.mapa_strony}" maxlength="64" placeholder="mapa_strony" title="mapa_strony"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.tagi}</p></td><td><input type="text" name="tagi" value="{$tlumaczenia_teksty.tagi}" maxlength="64" placeholder="tagi" title="tagi"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.top}</p></td><td><input type="text" name="top" value="{$tlumaczenia_teksty.top}" maxlength="64" placeholder="top" title="top"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.logowanie}</p></td><td><input type="text" name="logowanie" value="{$tlumaczenia_teksty.logowanie}" maxlength="64" placeholder="logowanie" title="logowanie"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.uzytkownicy}</p></td><td><input type="text" name="uzytkownicy" value="{$tlumaczenia_teksty.uzytkownicy}" maxlength="64" placeholder="uzytkownicy" title="uzytkownicy"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.profil}</p></td><td><input type="text" name="profil" value="{$tlumaczenia_teksty.profil}" maxlength="64" placeholder="profil" title="profil"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.dodano}</p></td><td><input type="text" name="dodano" value="{$tlumaczenia_teksty.dodano}" maxlength="64" placeholder="dodano" title="dodano"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.kategorie}</p></td><td><input type="text" name="kategorie" value="{$tlumaczenia_teksty.kategorie}" maxlength="64" placeholder="kategorie" title="kategorie"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.na_pewno_usunac}</p></td><td><input type="text" name="na_pewno_usunac" value="{$tlumaczenia_teksty.na_pewno_usunac}" maxlength="128" placeholder="na_pewno_usunac" title="na_pewno_usunac"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.blad_typ_pliku}</p></td><td><input type="text" name="blad_typ_pliku" value="{$tlumaczenia_teksty.blad_typ_pliku}" maxlength="128" placeholder="blad_typ_pliku" title="blad_typ_pliku"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.blad_plik_z_dysku}</p></td><td><input type="text" name="blad_plik_z_dysku" value="{$tlumaczenia_teksty.blad_plik_z_dysku}" maxlength="64" placeholder="blad_plik_z_dysku" title="blad_plik_z_dysku"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.blad_url_nie_istnieje}</p></td><td><input type="text" name="blad_url_nie_istnieje" value="{$tlumaczenia_teksty.blad_url_nie_istnieje}" maxlength="64" placeholder="blad_url_nie_istnieje" title="blad_url_nie_istnieje"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.blad_youtube}</p></td><td><input type="text" name="blad_youtube" value="{$tlumaczenia_teksty.blad_youtube}" maxlength="64" placeholder="blad_youtube" title="blad_youtube"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.blad_vimeo}</p></td><td><input type="text" name="blad_vimeo" value="{$tlumaczenia_teksty.blad_vimeo}" maxlength="64" placeholder="blad_vimeo" title="blad_vimeo"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.blad_dailymotion}</p></td><td><input type="text" name="blad_dailymotion" value="{$tlumaczenia_teksty.blad_dailymotion}" maxlength="64" placeholder="blad_dailymotion" title="blad_dailymotion"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.blad_inny}</p></td><td><input type="text" name="blad_inny" value="{$tlumaczenia_teksty.blad_inny}" maxlength="64" placeholder="blad_inny" title="blad_inny"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.blad_dodales_juz}</p></td><td><input type="text" name="blad_dodales_juz" value="{$tlumaczenia_teksty.blad_dodales_juz}" maxlength="64" placeholder="blad_dodales_juz" title="blad_dodales_juz"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.blad_kategoria}</p></td><td><input type="text" name="blad_kategoria" value="{$tlumaczenia_teksty.blad_kategoria}" maxlength="64" placeholder="blad_kategoria" title="blad_kategoria"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.blad_opis}</p></td><td><input type="text" name="blad_opis" value="{$tlumaczenia_teksty.blad_opis}" maxlength="64" placeholder="blad_opis" title="blad_opis"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.zaloguj_sie}</p></td><td><input type="text" name="zaloguj_sie" value="{$tlumaczenia_teksty.zaloguj_sie}" maxlength="64" placeholder="zaloguj_sie" title="zaloguj_sie"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.zapisano}</p></td><td><input type="text" name="zapisano" value="{$tlumaczenia_teksty.zapisano}" maxlength="64" placeholder="zapisano" title="zapisano"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.dane_zaktualizowane}</p></td><td><input type="text" name="dane_zaktualizowane" value="{$tlumaczenia_teksty.dane_zaktualizowane}" maxlength="64" placeholder="dane_zaktualizowane" title="dane_zaktualizowane"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.blad_hasla_rozne}</p></td><td><input type="text" name="blad_hasla_rozne" value="{$tlumaczenia_teksty.blad_hasla_rozne}" maxlength="64" placeholder="blad_hasla_rozne" title="blad_hasla_rozne"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.blad_stare_haslo}</p></td><td><input type="text" name="blad_stare_haslo" value="{$tlumaczenia_teksty.blad_stare_haslo}" maxlength="64" placeholder="blad_stare_haslo" title="blad_stare_haslo"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.blad_dlugie_haslo}</p></td><td><input type="text" name="blad_dlugie_haslo" value="{$tlumaczenia_teksty.blad_dlugie_haslo}" maxlength="64" placeholder="blad_dlugie_haslo" title="blad_dlugie_haslo"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.blad_wszystkie_pola}</p></td><td><input type="text" name="blad_wszystkie_pola" value="{$tlumaczenia_teksty.blad_wszystkie_pola}" maxlength="64" placeholder="blad_wszystkie_pola" title="blad_wszystkie_pola"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.konto_nie_aktywowane}</p></td><td><input type="text" name="konto_nie_aktywowane" value="{$tlumaczenia_teksty.konto_nie_aktywowane}" maxlength="64" placeholder="konto_nie_aktywowane" title="konto_nie_aktywowane"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.dane_nieprawidlowe}</p></td><td><input type="text" name="dane_nieprawidlowe" value="{$tlumaczenia_teksty.dane_nieprawidlowe}" maxlength="64" placeholder="dane_nieprawidlowe" title="dane_nieprawidlowe"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.potwierdz_link_aktywacyjny}</p></td><td><input type="text" name="potwierdz_link_aktywacyjny" value="{$tlumaczenia_teksty.potwierdz_link_aktywacyjny}" maxlength="128" placeholder="potwierdz_link_aktywacyjny" title="potwierdz_link_aktywacyjny"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.nowe_haslo_wyslane}</p></td><td><input type="text" name="nowe_haslo_wyslane" value="{$tlumaczenia_teksty.nowe_haslo_wyslane}" maxlength="128" placeholder="nowe_haslo_wyslane" title="nowe_haslo_wyslane"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.blad_captcha}</p></td><td><input type="text" name="blad_captcha" value="{$tlumaczenia_teksty.blad_captcha}" maxlength="64" placeholder="blad_captcha" title="blad_captcha"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.blad_dlugi_komentarz}</p></td><td><input type="text" name="blad_dlugi_komentarz" value="{$tlumaczenia_teksty.blad_dlugi_komentarz}" maxlength="64" placeholder="blad_dlugi_komentarz" title="blad_dlugi_komentarz"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.wiadomosc_wyslana}</p></td><td><input type="text" name="wiadomosc_wyslana" value="{$tlumaczenia_teksty.wiadomosc_wyslana}" maxlength="64" placeholder="wiadomosc_wyslana" title="wiadomosc_wyslana"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.blad_login}</p></td><td><input type="text" name="blad_login" value="{$tlumaczenia_teksty.blad_login}" maxlength="64" placeholder="blad_login" title="blad_login"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.blad_login_zajety}</p></td><td><input type="text" name="blad_login_zajety" value="{$tlumaczenia_teksty.blad_login_zajety}" maxlength="64" placeholder="blad_login_zajety" title="blad_login_zajety"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.blad_email}</p></td><td><input type="text" name="blad_email" value="{$tlumaczenia_teksty.blad_email}" maxlength="64" placeholder="blad_email" title="blad_email"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.blad_email_zajety}</p></td><td><input type="text" name="blad_email_zajety" value="{$tlumaczenia_teksty.blad_email_zajety}" maxlength="64" placeholder="blad_email_zajety" title="blad_email_zajety"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.pole_obowiazkowe}</p></td><td><input type="text" name="pole_obowiazkowe" value="{$tlumaczenia_teksty.pole_obowiazkowe}" maxlength="64" placeholder="pole_obowiazkowe" title="pole_obowiazkowe"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.aktywacja_info}</p></td><td><input type="text" name="aktywacja_info" value="{$tlumaczenia_teksty.aktywacja_info}" maxlength="128" placeholder="aktywacja_info" title="aktywacja_info"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.aktywacja_blad}</p></td><td><input type="text" name="aktywacja_blad" value="{$tlumaczenia_teksty.aktywacja_blad}" maxlength="128" placeholder="aktywacja_blad" title="aktywacja_blad"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.email_nie_zarejestrowany}</p></td><td><input type="text" name="email_nie_zarejestrowany" value="{$tlumaczenia_teksty.email_nie_zarejestrowany}" maxlength="128" placeholder="email_nie_zarejestrowany" title="email_nie_zarejestrowany"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.cookies_tekst}</p></td><td><input type="text" name="cookies_tekst" value="{$tlumaczenia_teksty.cookies_tekst}" maxlength="128" placeholder="cookies_tekst" title="cookies_tekst"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.cookies_zamknij}</p></td><td><input type="text" name="cookies_zamknij" value="{$tlumaczenia_teksty.cookies_zamknij}" maxlength="64" placeholder="cookies_zamknij" title="cookies_zamknij"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.usunac_komentarz}</p></td><td><input type="text" name="usunac_komentarz" value="{$tlumaczenia_teksty.usunac_komentarz}" maxlength="64" placeholder="usunac_komentarz" title="usunac_komentarz"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.mocne}</p></td><td><input type="text" name="mocne" value="{$tlumaczenia_teksty.mocne}" maxlength="64" placeholder="mocne" title="mocne"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.slabe}</p></td><td><input type="text" name="slabe" value="{$tlumaczenia_teksty.slabe}" maxlength="64" placeholder="slabe" title="slabe"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.nastepna_strona}</p></td><td><input type="text" name="nastepna_strona" value="{$tlumaczenia_teksty.nastepna_strona}" maxlength="64" placeholder="nastepna_strona" title="nastepna_strona"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.mem_obrazek}</p></td><td><input type="text" name="mem_obrazek" value="{$tlumaczenia_teksty.mem_obrazek}" maxlength="64" placeholder="mem_obrazek" title="mem_obrazek"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.blad_404}</p></td><td><input type="text" name="blad_404" value="{$tlumaczenia_teksty.blad_404}" maxlength="128" placeholder="blad_404" title="blad_404"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.komentarz_glos_tak}</p></td><td><input type="text" name="komentarz_glos_tak" value="{$tlumaczenia_teksty.komentarz_glos_tak}" maxlength="64" placeholder="komentarz_glos_tak" title="komentarz_glos_tak"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.komentarz_glos_nie}</p></td><td><input type="text" name="komentarz_glos_nie" value="{$tlumaczenia_teksty.komentarz_glos_nie}" maxlength="64" placeholder="komentarz_glos_nie" title="komentarz_glos_nie"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.komentarz_niezalogowany}</p></td><td><input type="text" name="komentarz_niezalogowany" value="{$tlumaczenia_teksty.komentarz_niezalogowany}" maxlength="128" placeholder="komentarz_niezalogowany" title="komentarz_niezalogowany"></tr>
+			<tr><td><p>{$tlumaczenia_teksty_aktywny.najlepszy_komentarz}</p></td><td><input type="text" name="najlepszy_komentarz" value="{$tlumaczenia_teksty.najlepszy_komentarz}" maxlength="128" placeholder="najlepszy_komentarz" title="najlepszy_komentarz"></tr>
+		</table>
+		<div class="center">
+			<br>
+			<input type="submit" value="Zapisz!">
+			<br><br><br>
+			<p><a href="?akcja=jezyki" title="Języki - edycja">Wróć do edycji języków</a></p>
+		</div>
+	</form>
+	{else}
+		<h3 class="center">Nieprawidłowy link</h3>
+	{/if}
+	

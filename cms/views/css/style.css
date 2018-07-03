@@ -1,0 +1,103 @@
+/* kategorie */
+.kategorie_wybor_1{
+	font-weight: bold;  font-style: normal; background-color: black; color: white;
+}
+.kategorie_wybor_2{
+	font-weight: normal;  font-style: normal; padding-left: 10px; background-color: #515151; color: white;
+}
+.kategorie_wybor_3{
+	font-weight: normal;  font-style: normal; padding-left: 20px;
+}
+/* menu */
+#menu li a.kategorie_podmenu_1{
+	font-weight: bold;
+}
+#menu li a.kategorie_podmenu_2{
+	padding-left: 30px;
+}
+#menu li a.kategorie_podmenu_3{
+	padding-left: 45px;
+}
+/* różne */
+.table_overflow{
+	max-width: 100%; display: inline-block; text-align: left;
+}
+.table_overflow tbody {
+	display: block;     width: 100%;        overflow-x: auto;       overflow-y: hidden;  
+}
+/* obrazki */
+.obrazki_img{
+	max-width: 100px; max-height: 100px;
+}
+/* konkursy */
+#dodaj_konkurs input[type=text], #edytuj_konkurs input[type=text]{
+	width: 300px; margin: 3px 0;
+}
+#dodaj_konkurs input[type=date], #edytuj_konkurs input[type=date]{
+	width: 150px;
+}
+/* logo */
+#box_logo img{
+	max-width: 250px; max-height: 250px;
+}
+#box_logo h5{
+	color: red; display: none;
+}
+/* ustawienia */
+#ustawienia_box input[type=text], #ustawienia_box input[type=email], #ustawienia_box textarea{
+	width: 70%; max-width: 500px;
+}
+#ustawienia_box textarea{
+	height: 60px;
+}
+#ustawienia_box input[type=checkbox]{
+	bottom: 0px; width: 15px; height: 15px; margin-right: 7px;
+}
+#pobierz_url{
+	border: solid 2px #02cf9c; background-color: rgba(0,0,0,0.05);	font-weight:bold;	font-size:14px;	 border-radius: 2px;
+    color: #545454;    padding: 5px 6px; transition: all 0.5s; display: inline-block;
+}
+#pobierz_url:hover{
+	border-color: grey;    box-shadow: 0 0 5px grey;	color: #2E2E2E;	background-color:white; text-decoration: none;
+}
+#ustawienia_box input[type=button]:active, #ustawienia_box input[type=button]:focus{
+	border-color: #02cf9c;    box-shadow: none;	color: #545454;	background-color: rgba(0,0,0,0.05);
+}
+#ustawienia_box hr{
+	width: 70%; margin: 15px auto 15px;
+}
+#ustawienia_box input[type=color]{
+	width: 100px; padding:2px; height: 26px; position: relative; top:-4px;
+}
+/* automatyzacja */
+#automatyzacja_box label, #automatyzacja_box fieldset{
+	color: #333333; font-family: 'Lato', sans-serif;	font-size:14px; 
+}
+#automatyzacja_box input[type=number]{
+	width: 70px;
+}
+#automatyzacja_box hr{
+	width: 70%; margin: 15px auto 15px;
+}
+/* boksy */
+#edytuj_boks form select, #dodaj_boks form select{
+	width: 300px;
+}
+.boks_ilosc{
+	display: none;
+}
+.boks_ilosc input{
+	width: 100px;
+}
+/* użytkownicy */
+.facebook_icon_mini{
+	position: relative; bottom:-3px; margin-right: 5px;
+}
+/* tłumaczenia języki */
+.table_tlumaczenia tr td{
+	max-width: 400px;
+}
+/* maile */
+#form_maile input[type=text]{
+	width: 100%; box-sizing: border-box;
+}

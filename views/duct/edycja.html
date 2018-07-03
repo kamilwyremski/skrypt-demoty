@@ -1,0 +1,84 @@
+<div id="edycja_box">
+	<h2>{$tlumaczenia_teksty.edytuj}</h2>
+	{if isset($blad)}
+		<br><h3>{$blad}</h3>
+	{else}
+		{if isset($obrazek)}
+			{if isset($zapisano)}<h3 style="padding-top: 10px">{$zapisano}</h3>{/if}
+			<div class="miniaturki">
+			<a href="{$ustawienia.base_url}/{$obrazek.id},{$obrazek.prosty_tytul}">
+			{if $obrazek.wybor_obrazka=='z_dysku' || $obrazek.wybor_obrazka=='stworzony'}
+				<img src="{$ustawienia.base_url}/upload/{$obrazek.url}" class="miniaturka" alt="{$obrazek.tytul}" onerror="this.src='{$ustawienia.base_url}/views/{$ustawienia.szablon}/images/brak_obrazka.png'">
+			{elseif $obrazek.wybor_obrazka=='z_internetu'}
+				<img src="{$obrazek.url}" class="miniaturka" alt="{$obrazek.tytul}"  onerror="this.src='{$ustawienia.base_url}/views/{$ustawienia.szablon}/images/brak_obrazka.png'">
+			{elseif $obrazek.wybor_obrazka=='z_youtube' || $obrazek.wybor_obrazka=='z_vimeo' || $obrazek.wybor_obrazka=='z_dailymotion'}
+				<img src="{$obrazek.miniaturka}" class="miniaturka" alt="{$obrazek.tytul}"  onerror="this.src='{$ustawienia.base_url}/views/{$ustawienia.szablon}/images/brak_obrazka.png'">
+			{/if}
+			</a>
+			<h4><a href="{$ustawienia.base_url}/{$obrazek.id},{$obrazek.prosty_tytul}" title="{$obrazek.tytul}">{$obrazek.tytul}</a></h4>
+			</div>
+			<form action="" method="post" id="form_dodaj">
+				<input type="hidden" name="edytuj">
+				<input type="hidden" name="id" value="{$obrazek.id}">
+				<input type="text" name="tytul" placeholder="{$tlumaczenia_teksty.tytul}" title="{$tlumaczenia_teksty.tytul}" required value="{$obrazek.tytul}" maxlength="128"><br>
+				<textarea name="opis" placeholder="{$tlumaczenia_teksty.opis}" title="{$tlumaczenia_teksty.opis}" maxlength="3000">{$obrazek.opis}</textarea><br>
+				{if isset($kategorie)}
+					<fieldset>{$tlumaczenia_teksty.kategoria}: 
+						<select name="kategoria">
+							{foreach key=key item=item from=$kategorie name=kategorie}
+								<option value="{$item.id}" class="kategorie_wybor_1" {if $obrazek.kategoria==$item.id}selected{/if}>{$item.nazwa}</option>
+								{if isset($item.podkategorie)}
+									{foreach key=key2 item=item2 from=$item.podkategorie name=kategorie2}
+										<option value="{$item2.id}" class="kategorie_wybor_2" {if $obrazek.kategoria==$item2.id}selected{/if}>{$item2.nazwa}</option>
+										{if isset($item2.podkategorie)}
+											{foreach key=key3 item=item3 from=$item2.podkategorie name=kategorie3}
+												<option value="{$item3.id}" class="kategorie_wybor_3" {if $obrazek.kategoria==$item3.id}selected{/if}>{$item3.nazwa}</option>
+											{/foreach}
+										{/if}
+									{/foreach}
+								{/if}
+							{/foreach}							
+						</select>
+					</fieldset>
+				{/if}	
+				<br>
+				<p>{$tlumaczenia_teksty.tagi_po_przecinku}:</p>
+				<input type="text" name="tagi" placeholder="{$tlumaczenia_teksty.tagi_po_przecinku}" title="{$tlumaczenia_teksty.tagi_po_przecinku}" value="{$obrazek.tagi}" maxlength="512">
+				<br>
+				{if $ustawienia.mapa==1}
+					<label><input type="checkbox" name="zaznacz_na_mapie" {if $obrazek.mapa!=''}checked{/if} id="pokaz_mape">{$tlumaczenia_teksty.zaznacz_lokalizacje}</label><br>
+					<div id="box_mapa"><div id="mapa_google"></div></div>
+					{literal}
+					<script src="https://maps.googleapis.com/maps/api/js?v=3.exp{/literal}{if ($ustawienia.google_maps_api)}&key={$ustawienia.google_maps_api}{/if}{literal}"></script>
+					<script>
+						google.maps.event.addDomListener(window, "load", function() {
+							var myLatlng = new google.maps.LatLng({/literal}{$obrazek.mapa}{literal});
+							var map = new google.maps.Map(document.getElementById("mapa_google"), {
+								center: new google.maps.LatLng( {/literal}{$ustawienia.mapa_center}{literal}),
+								zoom: 6
+							});
+							var marker = new google.maps.Marker({
+								draggable: true,
+								position: myLatlng,
+								map: map
+							});
+							google.maps.event.addListener(marker, 'dragend', function (event) {
+								$('input[name=mapa]').val(this.getPosition().lat()+','+this.getPosition().lng());
+							});
+							google.maps.event.addListener(map, 'click', function (mapEvent) {
+								map.panTo(mapEvent.latLng);
+								marker.setPosition(map.getCenter());
+								$('input[name=mapa]').val(marker.getPosition().lat()+', '+marker.getPosition().lng());
+							});	
+						});
+					</script>
+					{/literal}
+					<input type="hidden" name="mapa" {if $obrazek.mapa!=''}value="{$obrazek.mapa}"{/if}>		
+				{/if}
+				<input type="submit" value="{$tlumaczenia_teksty.zapisz}!">
+			</form>
+		{else}
+			<br><h3>{$tlumaczenia_teksty.blad}</h3>
+		{/if}
+	{/if}
+</div>

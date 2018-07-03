@@ -1,0 +1,57 @@
+	<form action="" method="post" id="form_stworz" enctype="multipart/form-data">
+		<h2>{$tlumaczenia_teksty.stworz_obrazek}</h2>
+		
+		{if isset($ok_link)}
+			<h3><a href="{$ustawienia.base_url}/upload/{$ok_link}" title="{$ok_tytul}" download>{$tlumaczenia_teksty.zapisz_obrazek}</a></h3>
+			<h3><a href="{$ustawienia.base_url}/{$tlumaczenia_linki.dodaj}?created={$ok_id}" title="{$ok_tytul}">{$tlumaczenia_teksty.na_glowna}</a></h3>
+			<h3><a href="{$ustawienia.base_url}/{$tlumaczenia_linki.stworz}" title="{$tlumaczenia_teksty.stworz_nowy_obrazek}">{$tlumaczenia_teksty.stworz_nowy_obrazek}</a></h3>
+			<input type="text" readOnly value="{$ustawienia.base_url}/upload/{$ok_link}" onClick="this.select();"><br>
+			<img src="{$ustawienia.base_url}/upload/{$ok_link}" alt="{$ok_tytul}" class="obrazek">
+		{else}
+			{if isset($blad)}<p class="blad">{$blad}</p>{/if}<br>
+			<input type="hidden" name="stworz">
+			<input type="hidden" name="akcja" value="stworz_podglad">
+			<fieldset>{$tlumaczenia_teksty.tytul}: 
+				<input type="color" name="kolor_tytul" title="{$tlumaczenia_teksty.kolor_w_formacie}" value="#FFFFFF">
+				<select name="tytul_font"><option value="10">10</option><option value="15">15</option><option value="18">18</option><option value="21">21</option><option value="25">25</option><option value="30">30</option><option value="35">35</option><option value="40" selected>40</option><option value="45">45</option><option value="50">50</option></select>
+			</fieldset>
+			<br>
+			<textarea name="tytul" title="{$tlumaczenia_teksty.tytul}" placeholder="{$tlumaczenia_teksty.tytul}" required maxlength="128">{if isset($tytul)}{$tytul}{/if}</textarea><br>
+			<fieldset>{$tlumaczenia_teksty.opis}: 
+				<input type="color" name="kolor_opis" title="{$tlumaczenia_teksty.kolor_w_formacie}" value="#FFFFFF">
+				<select name="opis_font"><option value="10">10</option><option value="15" selected>15</option><option value="18">18</option><option value="21">21</option><option value="25">25</option><option value="30">30</option><option value="35">35</option><option value="40">40</option><option value="45">45</option><option value="50">50</option></select>
+			</fieldset><br>
+			<textarea name="opis" title="{$tlumaczenia_teksty.opis}" placeholder="{$tlumaczenia_teksty.opis}" maxlength="2048">{if isset($tytul)}{$opis}{/if}</textarea><br>
+						<div id="typ_nie_mem_obrazek">
+				<input type="file" name="obraz" title="{$tlumaczenia_teksty.dodaj_obrazek_z_dysku}" {if $ustawienia.memy=='1' && $ustawienia.domyslnie_mem=='1'}required{/if}><br>
+			</div>
+			<div id="typ_mem_obrazek" style="display:none">
+				{foreach from=$memy_obrazki item=item key=key}
+					<label {if $key=='0'}class="active"{/if}><input type="radio" name="mem_obrazek" value="{$item.id}" {if $key=='0'}checked{/if}><img src="{$ustawienia.base_url}/upload/{$item.miniaturka}" alt="Miniaturka"></label>
+				{/foreach}
+			</div>
+			{if $ustawienia.memy==1}
+			<label>{$tlumaczenia_teksty.typ}: 
+				<select name="typ">
+					<option value="obrazek">{$tlumaczenia_teksty.obrazek}</option>
+					<option value="mem" {if $ustawienia.domyslnie_mem=='1'}selected{/if}>{$tlumaczenia_teksty.mem}</option>
+					{if isset($memy_obrazki)}<option value="mem_obrazek">{$tlumaczenia_teksty.mem_obrazek}</option>{/if}
+				</select>
+			</label><br>
+			{/if}
+			<div id="typ_obrazek" {if $ustawienia.memy=='1' && $ustawienia.domyslnie_mem=='1'}style="display: none"{/if}>
+				<fieldset>{$tlumaczenia_teksty.kolor_tla}: <input type="color" name="kolor_tla" title="{$tlumaczenia_teksty.kolor_w_formacie}" value="#000000">
+				{if $ustawienia.wybor_kolor_ramki=='1'}
+					{$tlumaczenia_teksty.kolor_ramki}: <input type="color" name="kolor_ramki" title="{$tlumaczenia_teksty.kolor_w_formacie}" value="#FFFFFF">
+				{/if}
+				</fieldset><br>
+			</div>
+			<input type="submit" value="{$tlumaczenia_teksty.stworz}!">
+			<img src="{$ustawienia.base_url}/views/{$ustawienia.szablon}/images/loading.gif" alt="Loading.." id="podglad_laduje">
+			<div id="stworz_podglad">
+				<h3>{$tlumaczenia_teksty.podglad}:</h3>
+				<img src="" class="obrazek">
+				<input type="submit" value="{$tlumaczenia_teksty.stworz}!">
+			</div>
+		{/if}
+	</form>

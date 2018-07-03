@@ -1,0 +1,46 @@
+	<div class="content center">
+		<h1>Komentarze {$nazwa_kategorii}</h1>
+		<p>Tutaj możesz usuwać komentarze dodane przez użytkowników.</p><br>
+	</div>
+	<br>
+	{if isset($komentarze)}
+	<div class="center">
+		<table class="table table_overflow">
+			<tr>
+				<td colspan="7">Komentarze</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td style="min-width: 60px">Autor<a href="{$url_sortowania}&sortuj=login" title="Sortuj po loginie" class="ikona sortuj_gora"></a><a href="{$url_sortowania}&sortuj=login&desc" title="Sortuj odwrotnie po loginie" class="ikona sortuj_dol"></a></td>
+				<td style="min-width: 60px">Email<a href="{$url_sortowania}&sortuj=email" title="Sortuj po adresie email" class="ikona sortuj_gora"></a><a href="{$url_sortowania}&sortuj=email&desc" title="Sortuj odwrotnie po adresie email" class="ikona sortuj_dol"></a></td>
+				<td style="min-width: 110px">Obrazek, film<a href="{$url_sortowania}&sortuj=tytul" title="Sortuj po tytule" class="ikona sortuj_gora"></a><a href="{$url_sortowania}&sortuj=tytul&desc" title="Sortuj odwrotnie po tytule" class="ikona sortuj_dol"></a></td>
+				<td>Treść</td>
+				<td class="center" style="min-width: 65px">Data<a href="{$url_sortowania}" title="Sortuj po dacie" class="ikona sortuj_gora"></a><a href="{$url_sortowania}&sortuj=data&desc" title="Sortuj odwrotnie po dacie" class="ikona sortuj_dol"></a></td>
+				<td class="center">Usuń</td>
+			</tr>
+			{foreach key=key item=item from=$komentarze name=komentarze}
+			<tr>
+				<td>{$smarty.foreach.komentarze.iteration+$iteration}</td>
+				<td><a href="{$ustawienia.base_url}/{$tlumaczenia_linki.profil}/{$item.login}" target="_blank" title="Profil użytkownika {$item.login}">{$item.login}</a></td>
+				<td><a href="mailto:{$item.email}" title="Napisz do {$item.login}">{$item.email}</a></td>
+				<td><a href="{$ustawienia.base_url}/{$item.obrazek_id},{$item.prosty_tytul}" target="_blank" title="Zobacz: {$item.tytul}">{$item.tytul}</a></td>
+				<td>{$item.tresc}</td>
+				<td class="center"><b>{$item.data|date_format:"%d-%m-%Y"}</b><br>{$item.data|date_format:"%H:%M"}</td>		
+				<td class="center"><a href="#" title="Usuń komentarz" class="submit_no_css ikona ikona_usun usun_komentarz" data-id="{$item.id}"></a></td>
+			</tr>
+			{/foreach}
+		</table>
+	</div>
+	{if $ile_stron>1}
+	<div id="wybor_stron">
+		<p>Strona {$ktora_strona} z {$ile_stron}</p>
+		<a href="{$url_strony}" title="Pierwsza strona" class="link_strony link_strony_pierwsza {if $ktora_strona==1}nieaktywny{/if}"></a>
+		<a href="{$url_strony}&strona={$ktora_strona-1}" title="Poprzednia strona" class="link_strony link_strony_lewo {if $ktora_strona==1}nieaktywny{/if}"></a>	
+		<a href="{$url_strony}&strona={$ktora_strona+1}" title="Następna strona" class="link_strony link_strony_prawo {if $ktora_strona==$ile_stron}nieaktywny{/if}"></a>
+		<a href="{$url_strony}&strona={$ile_stron}" title="Ostatnia strona" class="link_strony link_strony_ostatnia {if $ktora_strona==$ile_stron}nieaktywny{/if}"></a>
+	 </div>
+	{/if}
+	{else}
+		<h2>Brak komentarzy do wyświetlenia.</h2>
+	{/if}
+	

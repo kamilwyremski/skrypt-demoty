@@ -1,0 +1,82 @@
+<div id="ustawienia_konta">
+	<h2>{$tlumaczenia_teksty.konto}</h2>
+	<p>{$tlumaczenia_teksty.login}: <b>{$uzytkownik.login}</b></p>
+	<p>{$tlumaczenia_teksty.email}: <b>{$uzytkownik.email}</b></p>
+	<br><h3>{$tlumaczenia_teksty.statystyki}</h3>
+	<p>{$tlumaczenia_teksty.data_rejestracji}: <b>{$uzytkownik.data|date_format:"%d-%m-%Y"}</b></p>
+	<p>{$tlumaczenia_teksty.dodanych_obrazkow}: <b>{$uzytkownik.ile_obrazkow}</b></p>
+	<p>{$tlumaczenia_teksty.obrazkow_na_glownej}: <b>{$uzytkownik.ile_obrazkow_glowna}</b></p>
+	<p>{$tlumaczenia_teksty.dodanych_komentarzy}: <b>{$uzytkownik.ile_komentarzy}</b></p>
+	{if $ustawienia.tworzenie==1}<p>{$tlumaczenia_teksty.stworzonych_obrazkow}: <b>{$uzytkownik.ile_stworzono}</b></p>{/if}
+	{if isset($konto_obrazki)}
+		<br><h3>{$tlumaczenia_teksty.twoje_obrazki}</h3>
+		{foreach key=key item=item from=$konto_obrazki name=konto_obrazki}
+			{include file="miniaturki.tpl"}
+		{/foreach}
+		{if $ile_stron>1}
+		<div id="wybor_stron">
+			<p>{$tlumaczenia_teksty.strona} {$ktora_strona} / {$ile_stron}</p>
+			<a href="{$url_strony}" title="{$tlumaczenia_teksty.strona} 1" class="link_stron stron_pierwsza {if $ktora_strona==1}nieaktywny{/if}"></a>
+			<a href="{$url_strony}?page={$ktora_strona-1}" title="{$tlumaczenia_teksty.strona} {$ktora_strona-1}" class="link_stron stron_poprzednia {if $ktora_strona==1}nieaktywny{/if}"></a>
+			<a href="{$url_strony}?page={$ktora_strona+1}" title="{$tlumaczenia_teksty.strona} {$ktora_strona+1}" class="link_stron stron_nastepna {if $ktora_strona==$ile_stron}nieaktywny{/if}"></a>
+			<a href="{$url_strony}?page={$ile_stron}" title="{$tlumaczenia_teksty.strona} {$ile_stron}" class="link_stron stron_ostatnia {if $ktora_strona==$ile_stron}nieaktywny{/if}"></a>
+		</div>
+		{/if}
+		<hr style="border:none; border-top: solid 1px grey; margin: 10px 0 30px 0">
+	{else}
+		<br><h3>{$tlumaczenia_teksty.nie_znaleziono}</h3>
+	{/if}
+	{if $ustawienia.adsense!=''}
+		<div class="adsense">
+			{$ustawienia.adsense}
+		</div>
+	{/if}
+	<form action="" method="post" id="form_dane_osobowe">
+		<br><h3>{$tlumaczenia_teksty.dane_osobowe}</h3>
+		{if isset($ok_dane_osobowe)}<p class="ok">{$ok_dane_osobowe}</p>{/if}
+		<input type="hidden" name="zmiana_danych_osobowych" value="1">
+		<input type="text" name="imie" placeholder="{$tlumaczenia_teksty.imie}" title="{$tlumaczenia_teksty.imie}" maxlength="32" value="{$uzytkownik.imie}"><br>
+		<textarea name="adres" placeholder="{$tlumaczenia_teksty.adres}" title="{$tlumaczenia_teksty.adres}" maxlength="256">{$uzytkownik.adres}</textarea><br>
+		<textarea name="miasta" placeholder="{$tlumaczenia_teksty.miasta}" title="{$tlumaczenia_teksty.miasta}" maxlength="1024">{$uzytkownik.miasta}</textarea><br>
+		{if $ustawienia.mapa_uzytkownikow==1}
+			<label><input type="checkbox" name="zaznacz_na_mapie" {if $uzytkownik.mapa!=''}checked{/if} id="pokaz_mape">{$tlumaczenia_teksty.zaznacz_lokalizacje}</label><br>
+			<div id="box_mapa"><div id="mapa_google"></div></div>
+			{literal}
+			<script src="https://maps.googleapis.com/maps/api/js?v=3.exp{/literal}{if ($ustawienia.google_maps_api)}&key={$ustawienia.google_maps_api}{/if}{literal}"></script>
+			<script>
+				google.maps.event.addDomListener(window, "load", function() {
+					var myLatlng = new google.maps.LatLng({/literal}{$uzytkownik.mapa}{literal});
+					var map = new google.maps.Map(document.getElementById("mapa_google"), {
+						center: new google.maps.LatLng({/literal}{$ustawienia.mapa_center}{literal}),
+						zoom: 6
+					});
+					var marker = new google.maps.Marker({
+						draggable: true,
+						position: myLatlng,
+						map: map
+					});
+					google.maps.event.addListener(marker, 'dragend', function (event) {
+						$('input[name=mapa]').val(this.getPosition().lat()+','+this.getPosition().lng());
+					});
+					google.maps.event.addListener(map, 'click', function (mapEvent) {
+						map.panTo(mapEvent.latLng);
+						marker.setPosition(map.getCenter());
+						$('input[name=mapa]').val(marker.getPosition().lat()+', '+marker.getPosition().lng());
+					});	
+				});
+			</script>
+			{/literal}
+			<input type="hidden" name="mapa" {if $uzytkownik.mapa!=''}value="{$uzytkownik.mapa}"{/if}>		
+		{/if}
+		<input type="submit" value="{$tlumaczenia_teksty.zapisz}"/>
+	</form>
+	<form action="" method="post" id="form_zmiana_hasla">
+		<br><h3>{$tlumaczenia_teksty.zmiana_hasla}</h3>
+		{if isset($ok)}<p class="ok">{$ok}</p>{elseif isset($blad)}<p class="blad">{$blad}</p>{/if}
+		<input type="hidden" name="zmiana_hasla" value="1">
+		<input type="password" name="stare_haslo" placeholder="{$tlumaczenia_teksty.stare_haslo}" title="{$tlumaczenia_teksty.stare_haslo}" required/><br>
+		<input type="password" name="nowe_haslo" placeholder="{$tlumaczenia_teksty.nowe_haslo}" title="{$tlumaczenia_teksty.nowe_haslo}" maxlength="32" required/><br>
+		<input type="password" name="powtorz_haslo" placeholder="{$tlumaczenia_teksty.powtorz_nowe_haslo}" title="{$tlumaczenia_teksty.powtorz_nowe_haslo}" maxlength="32" required/><br>
+		<input type="submit" value="{$tlumaczenia_teksty.zmien_haslo}"/>
+	</form>
+</div>

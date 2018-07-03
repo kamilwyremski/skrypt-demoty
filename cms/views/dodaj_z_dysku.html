@@ -1,0 +1,78 @@
+	<div class="content center">
+		<h1>Dodaj masowo obrazki z dysku</h1>
+		<p>Tutaj możesz masowo dodać wiele obrazków z dysku.</p><br>
+		{if isset($wykonano)}<h2>Obrazki zostały poprawnie dodane!</h2><br>{/if}
+{if !isset($dodane)}
+		{if isset($dodaj_z_dysku_uzytkownicy)}
+		<form action="" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="dodaj_z_dysku" value="1">
+			<label>Dodaj obrazki do: 
+				<select name="dodaj_z_dysku_cel">
+					<option value="0">Poczekalnia</option>
+					<option value="1">Główna</option>
+				</select>
+			</label>
+			<label>Dodaj obrazki jako użytkownik: 
+				<select name="dodaj_z_dysku_uzytkownik" required>
+						<option value="">-- wybierz --</option>
+					{foreach item=item key=key from=$dodaj_z_dysku_uzytkownicy}
+						<option value="{$item.id}">{$item.login}</option>
+					{/foreach}
+				</select>
+			</label>
+			{if isset($kategorie)}
+				<label>Dodaj obrazki do kategorii: 
+					<select name="dodaj_z_dysku_kategoria">
+							<option value="">-- wybierz --</option>
+						{foreach key=key item=item from=$kategorie name=kategorie}
+							<option value="{$item.id}" class="kategorie_wybor_1">{$item.nazwa}</option>
+							{if isset($item.podkategorie)}
+								{foreach key=key2 item=item2 from=$item.podkategorie name=kategorie2}
+									<option value="{$item2.id}" class="kategorie_wybor_2">{$item2.nazwa}</option>
+									{if isset($item2.podkategorie)}
+										{foreach key=key3 item=item3 from=$item2.podkategorie name=kategorie3}
+											<option value="{$item3.id}" class="kategorie_wybor_3">{$item3.nazwa}</option>
+										{/foreach}
+									{/if}
+								{/foreach}
+							{/if}
+						{/foreach}
+					</select>
+				</label>
+			{/if}
+			<input type="file" name="obrazy[]" multiple required title="Wybierz obrazki które chcesz dodać"><br>
+			<input type="submit" value="DODAJ!">
+		</form>
+		{else}
+			<p>Fukcja nie jest dostępna ponieważ nie ma żadnych zarejestrowanych użytkowników.</p>
+		{/if}
+	</div>
+	<br>
+{else}
+	</div>
+	<br>
+	<div class="center">
+		<form action="" method="post">
+			<input type="hidden" name="dodaj_z_dysku_zatwierdz" value="1">
+			<table class="table table_overflow">
+				<tr>
+					<td colspan="3">Sprawdź tytuły dodanych obrazków</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Miniaturka</td>
+					<td>Tytuł</td>
+				</tr>
+				{foreach key=key item=item from=$dodane name=dodane}
+				<tr>
+					<td>{$smarty.foreach.dodane.iteration}</td>
+					<td><a href="../upload/{$item.url}" target="_blank" title="{$item.tytul}"><img src="../upload/{$item.url}" class="obrazki_img" alt="{$item.tytul}"></a></td>
+					<td><input type="text" name="id[{$item.id}]" placeholder="Tytuł obrazka" title="Tu wpisz tytuł obrazka" required value="{$item.tytul}" maxlength="128"></td>
+				</tr>
+				{/foreach}
+			</table><br>
+			<input type="submit" value="Zatwierdź">
+		</form>
+	</div>
+{/if}
+	

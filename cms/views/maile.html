@@ -1,0 +1,105 @@
+	<div class="center">
+		<h1>Maile - edycja</h1>
+		<p>Tutaj możesz edytować maile wysyłane ze strony.</p>
+		<p>Poniżej znajdują się znaczniki które po wstawieniu w kod zostaną zamienione na odpowiednie wartości</p>
+		{literal}
+			<p><b>{tytul}</b> - tytuł strony</p>
+		{/literal}
+		<br>
+	</div>
+	<form action="" method="post" id="form_maile">
+		<input type="hidden" name="zapisz" value="maile">
+		<h2>Rejestracja</h2>
+		<h3>Temat:</h3><input type="text" id="email_rejestracja_temat" name="email_rejestracja_temat" value="{$ustawienia.email_rejestracja_temat}">
+		<h3>Treść:</h3>
+		{literal}
+			<p><b>{link_aktywacyjny}</b> - link aktywacyjny do serwisu</p>
+		{/literal}
+		<br>
+		<textarea id="email_rejestracja_tresc" name="email_rejestracja_tresc">{$ustawienia.email_rejestracja_tresc}</textarea>
+		<script type="text/javascript">
+			CKEDITOR.replace( 'email_rejestracja_tresc',
+            {ldelim}
+				height: '200px',
+                 filebrowserBrowseUrl :'js/ckeditor/filemanager/browser/default/browser.html?Connector={$ustawienia.base_url}/cms/js/ckeditor/filemanager/connectors/php/connector.php',
+                filebrowserImageBrowseUrl : 'js/ckeditor/filemanager/browser/default/browser.html?Type=Image&Connector={$ustawienia.base_url}/cms/js/ckeditor/filemanager/connectors/php/connector.php',
+                filebrowserFlashBrowseUrl :'js/ckeditor/filemanager/browser/default/browser.html?Type=Flash&Connector={$ustawienia.base_url}/cms/js/ckeditor/filemanager/connectors/php/connector.php',
+				filebrowserUploadUrl  :'{$ustawienia.base_url}/cms/js/ckeditor/filemanager/connectors/php/upload.php?Type=File',
+				filebrowserImageUploadUrl : '{$ustawienia.base_url}/cms/js/ckeditor/filemanager/connectors/php/upload.php?Type=Image',
+				filebrowserFlashUploadUrl : '{$ustawienia.base_url}/cms/js/ckeditor/filemanager/connectors/php/upload.php?Type=Flash'
+			{rdelim});
+		</script>
+		<br>
+		<h2>Rejestracja przez Facebooka</h2>
+		<h3>Temat:</h3><input type="text" id="email_rejestracja_fb_temat" name="email_rejestracja_fb_temat" value="{$ustawienia.email_rejestracja_fb_temat}">
+		<h3>Treść:</h3>
+		{literal}
+			<p><b>{login}</b> - wygenerowany login</p>
+			<p><b>{haslo}</b> - wygenerowane haslo</p>
+		{/literal}
+		<br>
+		<textarea id="email_rejestracja_fb_tresc" name="email_rejestracja_fb_tresc">{$ustawienia.email_rejestracja_fb_tresc}</textarea>
+		<script type="text/javascript">
+			CKEDITOR.replace( 'email_rejestracja_fb_tresc',
+            {ldelim}
+				height: '200px',
+                 filebrowserBrowseUrl :'js/ckeditor/filemanager/browser/default/browser.html?Connector={$ustawienia.base_url}/cms/js/ckeditor/filemanager/connectors/php/connector.php',
+                filebrowserImageBrowseUrl : 'js/ckeditor/filemanager/browser/default/browser.html?Type=Image&Connector={$ustawienia.base_url}/cms/js/ckeditor/filemanager/connectors/php/connector.php',
+                filebrowserFlashBrowseUrl :'js/ckeditor/filemanager/browser/default/browser.html?Type=Flash&Connector={$ustawienia.base_url}/cms/js/ckeditor/filemanager/connectors/php/connector.php',
+				filebrowserUploadUrl  :'{$ustawienia.base_url}/cms/js/ckeditor/filemanager/connectors/php/upload.php?Type=File',
+				filebrowserImageUploadUrl : '{$ustawienia.base_url}/cms/js/ckeditor/filemanager/connectors/php/upload.php?Type=Image',
+				filebrowserFlashUploadUrl : '{$ustawienia.base_url}/cms/js/ckeditor/filemanager/connectors/php/upload.php?Type=Flash'
+			{rdelim});
+		</script>
+		<br>
+		<h2>Reset hasła</h2>
+		<h3>Temat:</h3><input type="text" id="email_reset_temat" name="email_reset_temat" value="{$ustawienia.email_reset_temat}">
+		<h3>Treść:</h3>
+		{literal}
+			<p><b>{login}</b> - login użytkownika</p>
+			<p><b>{haslo}</b> - wygenerowane nowe haslo</p>
+		{/literal}
+		<br>
+		<textarea id="email_reset_tresc" name="email_reset_tresc">{$ustawienia.email_reset_tresc}</textarea>
+		<script type="text/javascript">
+			CKEDITOR.replace( 'email_reset_tresc',
+            {ldelim}
+				height: '200px',
+                 filebrowserBrowseUrl :'js/ckeditor/filemanager/browser/default/browser.html?Connector={$ustawienia.base_url}/cms/js/ckeditor/filemanager/connectors/php/connector.php',
+                filebrowserImageBrowseUrl : 'js/ckeditor/filemanager/browser/default/browser.html?Type=Image&Connector={$ustawienia.base_url}/cms/js/ckeditor/filemanager/connectors/php/connector.php',
+                filebrowserFlashBrowseUrl :'js/ckeditor/filemanager/browser/default/browser.html?Type=Flash&Connector={$ustawienia.base_url}/cms/js/ckeditor/filemanager/connectors/php/connector.php',
+				filebrowserUploadUrl  :'{$ustawienia.base_url}/cms/js/ckeditor/filemanager/connectors/php/upload.php?Type=File',
+				filebrowserImageUploadUrl : '{$ustawienia.base_url}/cms/js/ckeditor/filemanager/connectors/php/upload.php?Type=Image',
+				filebrowserFlashUploadUrl : '{$ustawienia.base_url}/cms/js/ckeditor/filemanager/connectors/php/upload.php?Type=Flash'
+			{rdelim});
+		</script>
+		<br>
+		<h2>Kontakt</h2>
+		<h3>Temat:</h3><input type="text" id="email_kontakt_temat" name="email_kontakt_temat" value="{$ustawienia.email_kontakt_temat}">
+		<h3>Treść:</h3>
+		{literal}
+			<p><b>{host}</b> - host strony (domena)</p>
+			<p><b>{email}</b> - email nadawcy</p>
+			<p><b>{imie}</b> - imię i nazwisko nadawcy</p>
+			<p><b>{temat}</b> - temat wiadomości</p>
+			<p><b>{tresc}</b> - treść wiadomości</p>
+		{/literal}
+		<br>
+		<textarea id="email_kontakt_tresc" name="email_kontakt_tresc">{$ustawienia.email_kontakt_tresc}</textarea>
+		<script type="text/javascript">
+			CKEDITOR.replace( 'email_kontakt_tresc',
+            {ldelim}
+				height: '200px',
+                 filebrowserBrowseUrl :'js/ckeditor/filemanager/browser/default/browser.html?Connector={$ustawienia.base_url}/cms/js/ckeditor/filemanager/connectors/php/connector.php',
+                filebrowserImageBrowseUrl : 'js/ckeditor/filemanager/browser/default/browser.html?Type=Image&Connector={$ustawienia.base_url}/cms/js/ckeditor/filemanager/connectors/php/connector.php',
+                filebrowserFlashBrowseUrl :'js/ckeditor/filemanager/browser/default/browser.html?Type=Flash&Connector={$ustawienia.base_url}/cms/js/ckeditor/filemanager/connectors/php/connector.php',
+				filebrowserUploadUrl  :'{$ustawienia.base_url}/cms/js/ckeditor/filemanager/connectors/php/upload.php?Type=File',
+				filebrowserImageUploadUrl : '{$ustawienia.base_url}/cms/js/ckeditor/filemanager/connectors/php/upload.php?Type=Image',
+				filebrowserFlashUploadUrl : '{$ustawienia.base_url}/cms/js/ckeditor/filemanager/connectors/php/upload.php?Type=Flash'
+			{rdelim});
+		</script>
+		<br><br>
+		<div class="center">
+			<input type="submit" value="Zapisz">
+		</div>		
+	</form>

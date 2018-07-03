@@ -1,0 +1,38 @@
+<div id="uzytkownicy">
+	<h2>{$tlumaczenia_teksty.uzytkownicy}</h2>
+	<form action="" method="get">
+		<input type="hidden" name="search_users">
+		<input type="text" name="login" placeholder="{$tlumaczenia_teksty.login}" title="{$tlumaczenia_teksty.login}" {if isset($login)}value="{$login}"{/if}>
+		<input type="text" name="name" placeholder="{$tlumaczenia_teksty.imie}" title="{$tlumaczenia_teksty.imie}" {if isset($imie)}value="{$imie}"{/if}><br>
+		<input type="text" name="address" placeholder="{$tlumaczenia_teksty.adres}" title="{$tlumaczenia_teksty.adres}" {if isset($adres)}value="{$adres}"{/if}>
+		<input type="text" name="city" placeholder="{$tlumaczenia_teksty.miasta}" title="{$tlumaczenia_teksty.miasta}" {if isset($miasta)}value="{$miasta}"{/if}><br>
+		<input type="submit" value="{$tlumaczenia_teksty.szukaj}!">
+	</form>
+{if isset($uzytkownicy)}
+	<table>
+		<tr><td></td><td>{$tlumaczenia_teksty.login}</td><td>{$tlumaczenia_teksty.imie}</td><td>{$tlumaczenia_teksty.adres}</td><td>{$tlumaczenia_teksty.miasta}</td><td style="text-align: center; width: 80px;">{$tlumaczenia_teksty.obrazkow}<br><b>{$tlumaczenia_teksty.na_glownej}</b></td><td style="text-align: center; width:120px;">{$tlumaczenia_teksty.data_rejestracji}</td></tr>
+		{foreach item=item key=key from=$uzytkownicy name=uzytkownicy}
+		<tr>
+			<td>{$smarty.foreach.uzytkownicy.iteration+$iteration}</td>
+			<td><a href="{$ustawienia.base_url}/{$tlumaczenia_linki.profil}/{$item.login}" title="{$item.login}">{$item.login}</a></td>
+			<td>{$item.imie}</td>
+			<td>{$item.adres}</td>
+			<td>{$item.miasta}</td>
+			<td style="text-align: center">{$item.ile_obrazkow}<br><b>{$item.ile_obrazkow_glowna}</b></td>
+			<td  style="text-align: center"><b>{$item.data|date_format:"%d-%m-%Y"}</b><br>{$item.data|date_format:"%H:%M"}</td>		
+		</tr>
+		{/foreach}
+	</table>
+	{if $ile_stron>1}
+		<div id="wybor_stron">
+			<p>{$tlumaczenia_teksty.strona} {$ktora_strona} / {$ile_stron}</p>
+			<a href="{$url_strony}" title="{$tlumaczenia_teksty.strona} 1" class="link_stron stron_pierwsza {if $ktora_strona==1}nieaktywny{/if}"></a>
+			<a href="{$url_strony}{if !isset($smarty.get.search_users)}?{else}&{/if}page={$ktora_strona-1}" title="{$tlumaczenia_teksty.strona} {$ktora_strona-1}" class="link_stron stron_poprzednia {if $ktora_strona==1}nieaktywny{/if}"></a>
+			<a href="{$url_strony}{if !isset($smarty.get.search_users)}?{else}&{/if}page={$ktora_strona+1}" title="{$tlumaczenia_teksty.strona} {$ktora_strona+1}" class="link_stron stron_nastepna {if $ktora_strona==$ile_stron}nieaktywny{/if}"></a>
+			<a href="{$url_strony}{if !isset($smarty.get.search_users)}?{else}&{/if}page={$ile_stron}" title="{$tlumaczenia_teksty.strona} {$ile_stron}" class="link_stron stron_ostatnia {if $ktora_strona==$ile_stron}nieaktywny{/if}"></a>
+		 </div>
+	{/if}
+{else}
+	<h3 style="text-align:center; margin: 20px auto 30px;">{$tlumaczenia_teksty.nic_nie_znaleziono}</h3>
+{/if}
+</div>

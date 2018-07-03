@@ -1,0 +1,13 @@
+	
+	{if isset($konkurs)}
+		<div id="konkurs">
+			<h2>{$konkurs.tytul}</h2>
+			<h3>{if $konkurs.wlaczony==1}{$tlumaczenia_teksty.aktywny}{else}{$tlumaczenia_teksty.zakonczony}{/if}</h3>
+			{if isset($konkurs.wygral)}<h4>{$tlumaczenia_teksty.zwyciezca}: <a href="{$ustawienia.base_url}/{$tlumaczenia_linki.profil}/{$konkurs.wygral}" title="{$konkurs.wygral}">{$konkurs.wygral}</a></h4>{/if}
+			<p class="p_daty">{$tlumaczenia_teksty.data_start}: <b>{$konkurs.start|date_format:"%d-%m-%Y"}</b> • <b>{$tlumaczenia_teksty.data_koniec}: {$konkurs.koniec|date_format:"%d-%m-%Y"}</b></p>
+			<p>{$konkurs.opis}</p>
+		</div>
+	{else}
+		<h2>{$tlumaczenia_teksty.konkurs_nie_znaleziono}</h2>
+	{/if}
+

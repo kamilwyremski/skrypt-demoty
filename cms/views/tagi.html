@@ -1,0 +1,25 @@
+	<div class="center">
+		<h1>Tagi</h1>
+	</div>
+	<br>
+	{if isset($tagi)}
+	<table class="table">
+		<tr>
+			<td colspan="4">Tagi</td>
+		</tr>
+		<tr>
+			<td></td><td>Nazwa</td><td>Prosta nazwa</td><td class="center">Usuń</td>
+		</tr>
+		{foreach key=key item=item from=$tagi name=tagi}
+		<tr>
+			<td>{$smarty.foreach.tagi.iteration}</td>
+			<td><b>{$item.nazwa}</b></td>
+			<td>{$item.prosta_nazwa}</td>
+			<td class="center"><a href="#" title="Usuń tag" class="usun_tag ikona ikona_usun" data-id="{$item.id}"></a></td>
+		</tr>
+		{/foreach}
+	</table>
+	{else}
+		<h2>Nie dodano jeszcze żadnych tagów</h2>
+	{/if}
+	

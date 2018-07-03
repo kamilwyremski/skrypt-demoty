@@ -1,0 +1,107 @@
+	<div class="page_box" id="edytuj_boks">
+		<div class="inside_page_box">
+			<h1>Edytuj boks:</h1>
+			<form method="post" action="">
+				<input type="hidden" name="akcja" value="edytuj_boks">
+				<input class="cel_id" type="hidden" name="id">
+				<select name="rodzaj" class="boks_rodzaj cel_rodzaj">
+					<option value="tekst">Tekst</option>
+					<option value="statystyki">Statystyki</option>
+					<option value="kategorie">Kategorie</option>
+					<option value="top">Najlepsze obrazki wg głosów</option>
+					<option value="nowe">Najnowsze obrazki i filmy</option>
+					<option value="komentarze">Najnowsze komentarze</option>
+					<option value="wyszukiwarka">Wyszukiwarka</option>
+					<option value="tagi">Tagi</option>
+					<option value="mapa">Mapa Google</option>
+					<option value="stopka">Stopka z linkami</option>
+					<option value="konkurs">Informacja o konkursie</option>
+				</select><br>
+				<textarea class="boks_tresc cel_tresc" name="tresc" placeholder="Treść boksu lub kod reklamy o szerokości 300px" title="Tutaj wpisz treść boksu lub wklej kod reklamy o szerokości 300px"></textarea>
+				<label class="boks_ilosc">Ilość: <input type="number" class="cel_ilosc" name="ilosc" placeholder="Ilość" min="1" max="9" title="Tu wpisz ilość w przedziale 1 - 9" value="1" required></label>
+				<label>&nbsp;</label>
+				<input type="reset" value="Anuluj" class="nie"/>
+				<input type="submit" value="Zapisz"/>
+			</form>
+		</div>
+	</div>
+	<div class="page_box" id="dodaj_boks">
+		<div class="inside_page_box">
+			<h1>Dodaj boks:</h1>
+			<form method="post" action="">
+				<input type="hidden" name="akcja" value="dodaj_boks">
+				<select name="rodzaj" class="boks_rodzaj">
+					<option value="tekst">Tekst</option>
+					<option value="statystyki">Statystyki</option>
+					<option value="kategorie">Kategorie</option>
+					<option value="top">Najlepsze obrazki wg głosów</option>
+					<option value="nowe">Najnowsze obrazki i filmy</option>
+					<option value="komentarze">Najnowsze komentarze</option>
+					<option value="wyszukiwarka">Wyszukiwarka</option>
+					<option value="tagi">Tagi</option>
+					<option value="mapa">Mapa Google</option>
+					<option value="stopka">Stopka z linkami</option>
+					<option value="konkurs">Informacja o konkursie</option>
+				</select><br>
+				<textarea class="boks_tresc" name="tresc" placeholder="Treść boksu lub kod reklamy o szerokości 300px" title="Tutaj wpisz treść boksu lub wklej kod reklamy o szerokości 300px"></textarea>
+				<label class="boks_ilosc">Ilość: <input type="number" name="ilosc" placeholder="Ilość" min="1" max="9" title="Tu wpisz ilość w przedziale 1 - 9" value="1" required></label><br>
+				<input type="reset" value="Anuluj" class="nie"/>
+				<input type="submit" value="Dodaj"/>
+			</form>
+		</div>
+	</div>
+	<div class="page_box" id="usun_boks">
+		<div class="inside_page_box">
+			<h1>Na pewno chcesz usunąć boks?</h1>
+			<form method="post" action="">
+				<input type="hidden" name="akcja" value="usun_boks">
+				<input class="cel_id" type="hidden" name="id">
+				<input type="reset" value="Nie" class="nie"/>
+				<input type="submit" value="Tak"/>
+			</form>
+		</div>
+	</div>
+	
+	<div class="content center">
+		<h1>Boksy</h1>
+		<p>Tutaj możesz dodawać, edytować i usuwać boksy.</p><br>
+		<a href="#dodaj_boks" class="submit" title="Dodaj boks">Dodaj boks</a>
+	</div>
+	<br>
+	{if isset($boksy)}
+	<div class="center">
+		<table class="table table_overflow">
+			<tr>
+				<td colspan="6">Boksy</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td class="center">Rodzaj</td>
+				<td>Podgląd / ilość</td>
+				<td class="center">Pozycja</td>
+				<td class="center">Edytuj</td>
+				<td class="center">Usuń</td>
+			</tr>
+			{foreach key=key item=item from=$boksy name=boksy}
+			<tr>
+				<td>{$smarty.foreach.boksy.iteration}</td>
+				<td class="center">
+					<b>{if $item.rodzaj=='tekst'}Tekst{elseif $item.rodzaj=='statystyki'}Statystyki{elseif $item.rodzaj=='kategorie'}Kategorie{elseif $item.rodzaj=='top'}Najlepsze obrazki i filmy{else if $item.rodzaj=='nowe'}Najnowsze obrazki i filmy{else if $item.rodzaj=='komentarze'}Najnowsze komentarze{else if $item.rodzaj=='tagi'}Chmura tagów{else if $item.rodzaj=='mapa'}Mapa Google{else if $item.rodzaj=='stopka'}Stopka z linkami{else if $item.rodzaj=='wyszukiwarka'}Wyszukiwarka{else if $item.rodzaj=='konkurs'}Informacja o konkursie{/if}</b>
+				</td>
+				{if $item.rodzaj=='tekst'}<td class="tresc">{$item.tresc}</td>{elseif $item.rodzaj=='top' or $item.rodzaj=='nowe' or $item.rodzaj=='komentarze'}<td class="center"><b>{$item.ilosc}<b></td>{else}<td></td>{/if}	
+				<td class="center">
+					<a href="#" title="Pozycja w górę" class="ikona ikona_pozycja_gora boks_pozycja {if $smarty.foreach.boksy.iteration==1}nieaktywna{/if}" data-id="{$item.id}" data-pozycja="{$item.pozycja}" data-dzialanie="0"></a>
+					<a href="#" title="Pozycja w górę" class="ikona ikona_pozycja_dol boks_pozycja {if $smarty.foreach.boksy.last}nieaktywna{/if}" data-id="{$item.id}" data-pozycja="{$item.pozycja}" data-dzialanie="1"></a>
+				</td>
+				<td class="center">
+					<a href="#edytuj_boks" title="Edytuj boks" class="submit_no_css ikona ikona_edytuj boks_edytuj" data-id="{$item.id}" data-tresc="" data-rodzaj="{$item.rodzaj}" data-ilosc="{if $item.rodzaj=='top' or $item.rodzaj=='nowe' or $item.rodzaj=='komentarze'}{$item.ilosc}{else}1{/if}"></a>
+				</td>
+				<td class="center"><a href="#usun_boks" title="Usuń boks" class="submit_no_css ikona ikona_usun" data-id="{$item.id}"></a></td>
+			</tr>
+			{/foreach}
+		</table>
+	</div>
+	{else}
+		<h2>Nie dodano jeszcze żadnych boksów</h2>
+	{/if}
+	

@@ -1,0 +1,55 @@
+
+	
+	<div class="center">
+		<h1>Język - edycja linków</h1>
+		<p><b>Wszystkie pola są obowiązkowe a ich <span style="color:red">zawartości nie mogą się powtarzać</span>!.</b></p>
+		<p>Jako link możesz używać tylko małych liter angielskiego alfabetu oraz znaki _ i -</p>
+		<p>Po lewej wyświetlany jest aktualnie aktywny język</p>
+		<br>
+		<p><a href="?akcja=jezyki" title="Języki - edycja">Wróć do edycji języków</a></p>
+		<br>
+	</div>
+	<br>
+	{if isset($tlumaczenia_linki) and isset($tlumaczenia_linki_aktywny)}
+	<form action="" method="post">
+		<input type="hidden" name="akcja" value="zapisz_jezyk_linki">
+		<table class="table">
+			<tr>
+				<td colspan="2">Język - linki</td>
+			</tr>
+			<tr>
+				<td>Słowo w języku: <b>{$tlumaczenia_linki_aktywny.jezyk}</b></td><td>Słowo w języku: <b>{$tlumaczenia_linki.jezyk}</b></td>
+			</tr>
+			<tr><td><p>{$tlumaczenia_linki_aktywny.rejestracja}</p></td><td><input type="text" name="rejestracja" value="{$tlumaczenia_linki.rejestracja}" maxlength="32" required pattern="[a-z-_]+" placeholder="rejestracja" title="rejestracja"></tr>
+			<tr><td><p>{$tlumaczenia_linki_aktywny.logowanie}</p></td><td><input type="text" name="logowanie" value="{$tlumaczenia_linki.logowanie}" maxlength="32" required pattern="[a-z-_]+" placeholder="logowanie" title="logowanie"></tr>
+			<tr><td><p>{$tlumaczenia_linki_aktywny.dodaj}</p></td><td><input type="text" name="dodaj" value="{$tlumaczenia_linki.dodaj}" maxlength="32" required pattern="[a-z-_]+" placeholder="dodaj" title="dodaj"></tr>
+			<tr><td><p>{$tlumaczenia_linki_aktywny.stworz}</p></td><td><input type="text" name="stworz" value="{$tlumaczenia_linki.stworz}" maxlength="32" required pattern="[a-z-_]+" placeholder="stworz" title="stworz"></tr>
+			<tr><td><p>{$tlumaczenia_linki_aktywny.kategoria}</p></td><td><input type="text" name="kategoria" value="{$tlumaczenia_linki.kategoria}" maxlength="32" required pattern="[a-z-_]+" placeholder="kategoria" title="kategoria"></tr>
+			<tr><td><p>{$tlumaczenia_linki_aktywny.tag}</p></td><td><input type="text" name="tag" value="{$tlumaczenia_linki.tag}" maxlength="32" required pattern="[a-z-_]+" placeholder="tag" title="tag"></tr>
+			<tr><td><p>{$tlumaczenia_linki_aktywny.poczekalnia}</p></td><td><input type="text" name="poczekalnia" value="{$tlumaczenia_linki.poczekalnia}" maxlength="32" required pattern="[a-z-_]+" placeholder="poczekalnia" title="poczekalnia"></tr>
+			<tr><td><p>{$tlumaczenia_linki_aktywny.top}</p></td><td><input type="text" name="top" value="{$tlumaczenia_linki.top}" maxlength="32" required pattern="[a-z-_]+" placeholder="top" title="top"></tr>
+			<tr><td><p>{$tlumaczenia_linki_aktywny.reset_hasla}</p></td><td><input type="text" name="reset_hasla" value="{$tlumaczenia_linki.reset_hasla}" maxlength="32" required pattern="[a-z-_]+" placeholder="reset_hasla" title="reset_hasla"></tr>
+			<tr><td><p>{$tlumaczenia_linki_aktywny.konto}</p></td><td><input type="text" name="konto" value="{$tlumaczenia_linki.konto}" maxlength="32" required pattern="[a-z-_]+" placeholder="konto" title="konto"></tr>
+			<tr><td><p>{$tlumaczenia_linki_aktywny.onas}</p></td><td><input type="text" name="onas" value="{$tlumaczenia_linki.onas}" maxlength="32" required pattern="[a-z-_]+" placeholder="onas" title="onas"></tr>
+			<tr><td><p>{$tlumaczenia_linki_aktywny.regulamin}</p></td><td><input type="text" name="regulamin" value="{$tlumaczenia_linki.regulamin}" maxlength="32" required pattern="[a-z-_]+" placeholder="regulamin" title="regulamin"></tr>
+			<tr><td><p>{$tlumaczenia_linki_aktywny.polityka_prywatnosci}</p></td><td><input type="text" name="polityka_prywatnosci" value="{$tlumaczenia_linki.polityka_prywatnosci}" maxlength="32" required pattern="[a-z-_]+" placeholder="polityka_prywatnosci" title="polityka_prywatnosci"></tr>
+			<tr><td><p>{$tlumaczenia_linki_aktywny.profil}</p></td><td><input type="text" name="profil" value="{$tlumaczenia_linki.profil}" maxlength="32" required pattern="[a-z-_]+" placeholder="profil" title="profil"></tr>
+			<tr><td><p>{$tlumaczenia_linki_aktywny.mapa}</p></td><td><input type="text" name="mapa" value="{$tlumaczenia_linki.mapa}" maxlength="32" required pattern="[a-z-_]+" placeholder="mapa" title="mapa"></tr>
+			<tr><td><p>{$tlumaczenia_linki_aktywny.mapa_uzytkownikow}</p></td><td><input type="text" name="mapa_uzytkownikow" value="{$tlumaczenia_linki.mapa_uzytkownikow}" maxlength="32" required pattern="[a-z-_]+" placeholder="mapa_uzytkownikow" title="mapa_uzytkownikow"></tr>
+			<tr><td><p>{$tlumaczenia_linki_aktywny.edycja}</p></td><td><input type="text" name="edycja" value="{$tlumaczenia_linki.edycja}" maxlength="32" required pattern="[a-z-_]+" placeholder="edycja" title="edycja"></tr>
+			<tr><td><p>{$tlumaczenia_linki_aktywny.uzytkownicy}</p></td><td><input type="text" name="uzytkownicy" value="{$tlumaczenia_linki.uzytkownicy}" maxlength="32" required pattern="[a-z-_]+" placeholder="uzytkownicy" title="uzytkownicy"></tr>
+			<tr><td><p>{$tlumaczenia_linki_aktywny.stworzone}</p></td><td><input type="text" name="stworzone" value="{$tlumaczenia_linki.stworzone}" maxlength="32" required pattern="[a-z-_]+" placeholder="stworzone" title="stworzone"></tr>
+			<tr><td><p>{$tlumaczenia_linki_aktywny.konkursy}</p></td><td><input type="text" name="konkursy" value="{$tlumaczenia_linki.konkursy}" maxlength="32" required pattern="[a-z-_]+" placeholder="konkursy" title="konkursy"></tr>
+			<tr><td><p>{$tlumaczenia_linki_aktywny.konkurs}</p></td><td><input type="text" name="konkurs" value="{$tlumaczenia_linki.konkurs}" maxlength="32" required pattern="[a-z-_]+" placeholder="konkurs" title="konkurs"></tr>
+		</table>
+		<div class="center">
+			<br>
+			<input type="submit" value="Zapisz!">
+			<br><br><br>
+			<p><a href="?akcja=jezyki" title="Języki - edycja">Wróć do edycji języków</a></p>
+		</div>
+	</form>
+	{else}
+		<h3 class="center">Nieprawidłowy link</h3>
+	{/if}
+	

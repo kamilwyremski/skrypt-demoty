@@ -1,0 +1,58 @@
+
+	<div class="center content">
+		<h1>Ustawienia CMS</h1>
+		<h2>Zmień dane dostępowe</h2><br>
+	</div>
+	<form method="post" action="">
+		<input type="hidden" name="zmien_ustawienia_cms" value="1">
+		<table id="ustawienia_cms">
+			<tr>
+				<td><label for="login">Login:</label></td>
+				<td><input type="text" name="nowy_login" value="{$cms_login}" title="Tutaj wpisz nowy login - minimum 3 znaki, możesz użyć cyfr, liter (tylko angielski alfabet) oraz znaków - _" pattern="[A-Za-z0-9-_]{literal}{3,}{/literal}" autofocus required></td>
+			</tr>
+			<tr>
+				<td><label for="haslo">Hasło:</label></td>
+				<td><input type="password" name="nowe_haslo" title="Tutaj wpisz nowe hasło - minimum 3 znaki, możesz użyć cyfr, liter (tylko angielski alfabet) oraz znaków - _" pattern="[A-Za-z0-9-_]{literal}{3,}{/literal}" pattern="[A-Za-z0-9-_]{literal}{3,}{/literal}" required></td>
+			</tr>	
+			<tr>
+				<td><label for="powtorz_haslo">Powtórz hasło:</label></td>
+				<td><input type="password" name="powtorz_nowe_haslo" title="Tutaj wpisz jeszcze raz nowe hasło" pattern="[A-Za-z0-9-_]{literal}{3,}{/literal}" required></td>
+			</tr>					
+		</table>
+		<div class="center">
+			<input type="submit" value="Zapisz"/>
+		</div>
+	</form>
+	<div class="center">
+		<h3>{if isset($komunikat)}{$komunikat}{else}&nbsp;{/if}</h3>
+	</div>
+
+	{if isset($cms_logi)}
+		<h2>Logi logowania</h2><br>
+		<table class="table" id="cms_logi">
+			<tr>
+				<td colspan="5">Logi logowania</td>
+			</tr>
+			<tr>
+				<td></td><td>Login</td><td>Zalogowal</td><td>Data</td><td>IP</td>
+			</tr>
+		{foreach key=key item=item from=$cms_logi name=cms_logi}
+			<tr>
+				<td>{$smarty.foreach.cms_logi.iteration}</td>
+				<td>{$item.login}</td>
+				<td>{if $item.zalogowal==1}<b>Tak</b>{else}<span style="color:red">Nie</span>{/if}</td>
+				<td>{$item.data|date_format:"%H:%M"} / <b>{$item.data|date_format:"%d-%m-%Y"}</b></td>
+				<td>{$item.ip}</td>
+			</tr>
+		{/foreach}
+		</table>
+	<br>
+	<div class="center">
+		<form action="" method="post">
+			<input type="hidden" name="usun_logi_cms" value="1">
+			<input type="submit" value="Usuń logi">
+		</form>
+	</div>
+	{/if}
+	
+

@@ -1,0 +1,79 @@
+	<div class="center">
+		<h1>Ustawienia</h1>
+		<p>Tutaj możesz edytować podstawowe ustawienia strony.</p>
+		<p>Zwróć szczególną uwagę na poprawność "Base URL".</p><br>
+	</div>
+	<div id="ustawienia_box" class="center">
+		<form action="" method="post">
+			<input type="hidden" name="zapisz" value="ustawienia">
+			<input type="text" name="base_url" value="{$ustawienia.base_url}" placeholder="Base URL" maxlength="128" title="Tutaj wpisz adres www witryny" required style="max-width: 400px">
+			<a href="#" id="pobierz_url" title="Pobierz adres URL">Pobierz URL</a>
+			<label><h2>Tytuł witryny: <input type="text" name="tytul" value="{$ustawienia.tytul}" placeholder="Tytuł witryny" maxlength="128" title="Tutaj wpisz tytuł witryny" required style="max-width: 250px"></h2></label>
+			<h2>Słowa kluczowe</h2>
+			<textarea name="keywords" placeholder="Keywords" maxlength="512" title="Tutaj wpisz słowa kluczowe dla witryny">{$ustawienia.keywords}</textarea>
+			<h2>Opis witryny</h2>
+			<textarea name="description" placeholder="Description" title="Tutaj wpisz opis witryny">{$ustawienia.description}</textarea>
+			<label><h2>Email administratora: <input type="email" name="email" value="{$ustawienia.email}" maxlength="128" placeholder="Email administratora" title="Tutaj wpisz adres email administratora" style="max-width: 250px"></h2></label>
+			<label><h2>Adres URL w stopce: <input type="text" name="stopka_url" value="{$ustawienia.stopka_url}" maxlength="64" placeholder="Adres URL w stopce" title="Wpisz adres URL do stopki" style="max-width: 250px"></h2></label>
+			<label><h2>Nazwa adresu URL: <input type="text" name="stopka_nazwa" value="{$ustawienia.stopka_nazwa}" maxlength="64" placeholder="Nazwa adresu URL w sopce" title="Tutaj wpisz nazwę adresu URL w stopce strony" style="max-width: 250px"></h2></label>
+			<label><h2>Aktywny szablon: 
+				<select name="szablon">
+					{foreach key=key item=item from=$szablony}
+					<option value="{$item}" {if $ustawienia.szablon==$item}selected{/if}>{$item}</option>
+					{/foreach}
+				</select>
+			</h2></label>
+			<hr>
+			<label><h2>Obrazków na stronę: <input type="number" name="ile_na_strone" value="{$ustawienia.ile_na_strone}" min="1" max="20" placeholder="Ile obrazków" title="Ilość obrazków wyświetlanych na jednej stronie" required style="max-width: 100px"></h2></label>
+			<label><h2>Obr. na stronę w profilu: <input type="number" name="konto_ile_na_strone" value="{$ustawienia.konto_ile_na_strone}" min="1" max="20" placeholder="Ile obrazków" title="Ilość obrazków wyświetlanych na jednej stronie w profilu użytkownika" required style="max-width: 100px"></h2></label>
+			<label><h2>Maksymalny rozmiar obrazka (upload): <input type="number" name="rozmiar_upload" min="1" max="10000" required placeholder="Rozmiar Upload" title="Maksymalny rozmiar obrazków przesyłanych na serwer" style="max-width: 100px" value="{$ustawienia.rozmiar_upload}">KB</h2></label>
+			<label><h2><input type="checkbox" name="logo_obrazek" {if $ustawienia.logo_obrazek==1}checked{/if}>Logo w formie grafiki</h2></label>
+			<label><h2><input type="checkbox" name="wylacz_niezalogowani" {if $ustawienia.wylacz_niezalogowani==1}checked{/if}>Wyłącz serwis dla niezalogowanych</h2></label>
+			<label><h2><input type="checkbox" name="dodawaj_znak_wodny" {if $ustawienia.dodawaj_znak_wodny==1}checked{/if}>Dodawaj znak wodny do obrazków</h2></label>
+			<label><h2><input type="checkbox" name="glowna_pelne_zdjecia" {if $ustawienia.glowna_pelne_zdjecia==1}checked{/if}>Wyświetlaj na głównej pełne zdjęcia i ukrywaj opis</h2></label>
+			<label><h2><input type="checkbox" name="konkursy" {if $ustawienia.konkursy==1}checked{/if}>Włącz konkursy</h2></label>
+			<label><h2><input type="checkbox" name="komentarze_glosy" {if $ustawienia.komentarze_glosy==1}checked{/if}>Zezwól na głosowanie na komentarze</h2></label>
+			<label><h2><input type="checkbox" name="komentarze_pokaz_najlepszy" {if $ustawienia.komentarze_pokaz_najlepszy==1}checked{/if}>Wyświetlaj u góry najlepszy komentarz wg głosów</h2></label>
+			<h2>Kod Google Analytics</h2>
+			<textarea name="analytics" placeholder="Google Analytics" title="Tutaj wpisz kod Google Analytics">{$ustawienia.analytics}</textarea>
+			<h2>Kod responsywnej reklamy Google Adsense</h2>
+			<p>Proszę dodać do niej klasę "elastyczna"</p>
+			<textarea name="adsense" placeholder="Google Adsense - responsywna" title="Tutaj wpisz kod responsywnej reklamy Google Adsense">{$ustawienia.adsense}</textarea>
+			<label><h2>Wyświetlaj reklamę co: <input type="number" name="reklama_co_obrazkow" value="{$ustawienia.reklama_co_obrazkow}" min="1" max="99" placeholder="Co ile obrazków reklama" title="Wpisz co ile obrazków ma się wyświetlać reklama adsense" style="max-width: 100px"> obrazków</h2></label>
+			<hr>
+			<label><h2><input type="checkbox" name="mapa" {if $ustawienia.mapa==1}checked{/if}>Wyświetlaj mapę Google dla obiektów</h2></label>
+			<label><h2><input type="checkbox" name="mapa_uzytkownikow" {if $ustawienia.mapa_uzytkownikow==1}checked{/if}>Wyświetlaj mapę Google dla użytkowników</h2></label>
+			<label><h2>Limit obiektów na mapie Google: <input type="number" name="limit_mapa" min="1" max="999" required placeholder="Limit Mapa Google" title="Limit obiektów na mapie Google" style="max-width: 100px" value="{$ustawienia.limit_mapa}"></h2></label>
+			<label><h2>Współrzędne centrum (po przecinku): <input type="text" name="mapa_center" value="{$ustawienia.mapa_center}" placeholder="Współrzędne centrum mapy" maxlength="32" title="Współrzędne centrum (wpisz po przecinku)" style="max-width: 250px"></h2></label>
+			<label><h2>Klucz Google Maps API: <input type="text" name="google_maps_api" value="{$ustawienia.google_maps_api}" placeholder="Google Maps API" maxlength="128" title="Tu wklej klucz Google Maps API" style="max-width: 250px"></h2></label>
+			<hr>
+			<label><h2>Adres fanpage na Facebook.com <input type="text" name="facebook" value="{$ustawienia.facebook}" placeholder="Facebook URL" maxlength="256" title="Tutaj wpisz adres url strony na Facebooku" style="max-width: 250px"></h2></label>
+			<label><h2><input type="checkbox" name="komentarze_facebook" {if $ustawienia.komentarze_facebook==1}checked{/if}>Zezwól na komentowanie materiałów przez FB</h2></label>
+			<label><h2><input type="checkbox" name="logowanie_facebook" {if $ustawienia.logowanie_facebook==1}checked{/if}>Zezwól na logowanie przez FB</h2></label>
+			<p>(wymagane podanie API i Secret Aplikacji Facebook)</p>
+			<label><h2>Facebook API: <input type="text" name="facebook_api" maxlength="64" placeholder="Facebook API" title="Tutaj wpisz kod Facebook API Twojej aplikacji" value="{$ustawienia.facebook_api}"  style="max-width: 250px"></h2></label>
+			<label><h2>Facebook Secret: <input type="text" name="facebook_secret" maxlength="64" placeholder="Facebook Secret" title="Tutaj wpisz kod Facebook Secret Twojej aplikacji" value="{$ustawienia.facebook_secret}"  style="max-width: 250px"></h2></label>
+			<hr>
+			<label><h2><input type="checkbox" name="udostepnij_fb" {if $ustawienia.udostepnij_fb==1}checked{/if}>Przyciski "Lubię to" i "Udostępnij" z FB</h2></label>
+			<label><h2><input type="checkbox" name="udostepnij_twitter" {if $ustawienia.udostepnij_twitter==1}checked{/if}>Przycisk "Tweetnij" z Twitter</h2></label>
+			<label><h2><input type="checkbox" name="udostepnij_wykop" {if $ustawienia.udostepnij_wykop==1}checked{/if}>Przycisk z Wykop.pl</h2></label>
+			<label><h2><input type="checkbox" name="udostepnij_google" {if $ustawienia.udostepnij_google==1}checked{/if}>Przycisk z Google Plus</h2></label>
+			<label><h2><input type="checkbox" name="udostepnij_pinterest" {if $ustawienia.udostepnij_pinterest==1}checked{/if}>Przycisk z Pinterest</h2></label>
+			<hr>
+			<label><h2><input type="checkbox" name="tworzenie" {if $ustawienia.tworzenie==1}checked{/if}>Zezwól na tworzenie obrazków</h2></label>
+			<label><h2><input type="checkbox" name="wybor_kolor_ramki" {if $ustawienia.wybor_kolor_ramki==1}checked{/if}>Zezwól na zmianę koloru ramki</h2></label>
+			<label><h2><input type="checkbox" name="logo_w_ramce" {if $ustawienia.logo_w_ramce==1}checked{/if}>Umieszczaj logo w ramce</h2></label>
+			<label><h2>Ramka - tekst logo: <input type="text" name="logo_w_ramce_tekst" value="{$ustawienia.logo_w_ramce_tekst}" maxlength="64" placeholder="Ramka - tekst logo" title="Wpisz tekst do umieszczenia w ramce" style="max-width: 250px"></h2></label>
+			<label><h2>Ramka - kolor tekstu: <input type="color" name="logo_w_ramce_kolor" value="{$ustawienia.logo_w_ramce_kolor}" title="Kolor tekstu w ramce w formacie hexadecymalnym" value="#000000"></h2></label>
+			<label><h2><input type="checkbox" name="memy" {if $ustawienia.memy==1}checked{/if}>Zezwól na tworzenie Memów</h2></label>
+			<label><h2><input type="checkbox" name="domyslnie_mem" {if $ustawienia.domyslnie_mem==1}checked{/if}>Domyślnie tworzony obrazek to Mem</h2></label>
+			<hr>
+			<label><h2><input type="checkbox" name="smtp" {if $ustawienia.smtp==1}checked{/if}>Wysyłaj emaile przez SMTP (wymagane poniższe pola)</h2></label>
+			<label><h2>Email: <input type="text" name="smtp_email" value="{$ustawienia.smtp_email}" maxlength="64" placeholder="SMTP - email" title="Tutaj wpisz email konta smtp" style="max-width: 250px"></h2></label>
+			<label><h2>SMTP Host: <input type="text" name="smtp_host" value="{$ustawienia.smtp_host}" maxlength="64" placeholder="SMTP - host" title="Tutaj wpisz host smtp" style="max-width: 250px"></h2></label>
+			<label><h2>SMTP Użytkownik: <input type="text" name="smtp_uzytkownik" value="{$ustawienia.smtp_uzytkownik}" maxlength="64" placeholder="SMTP - uzytkownik" title="Tutaj wpisz nazwę użytkownika smtp" style="max-width: 250px"></h2></label>
+			<label><h2>SMTP Hasło: <input type="text" name="smtp_haslo" value="{$ustawienia.smtp_haslo}" maxlength="64" placeholder="SMTP - hasło" title="Tutaj wpisz hasło konta smtp" style="max-width: 250px"></h2></label>
+			<br><br>
+			<input type="submit" value="ZAPISZ">
+		</form>
+	</div>

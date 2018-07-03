@@ -1,0 +1,53 @@
+	<div class="page_box" id="dodaj">
+		<div class="inside_page_box">
+			<h1>Dodaj zdjęcie</h1>
+			<form method="post" action="" enctype="multipart/form-data">
+				<input type="hidden" name="akcja" value="dodaj_zdjecie">
+				<input type="file" name="img" required/><br>
+				<input type="reset" value="Anuluj" class="nie"/>
+				<input type="submit" value="Dodaj"/>
+			</form>
+		</div>
+	</div>
+	<div class="page_box" id="usun">
+		<div class="inside_page_box">
+			<h1>Usunąć zdjęcie?</h1>
+			<form method="post" action="">
+				<input type="hidden" name="akcja" value="usun_zdjecie">
+				<input class="cel_id" type="hidden" name="id">
+				<input type="reset" value="Nie" class="nie"/>
+				<input type="submit" value="Tak"/>
+			</form>
+		</div>
+	</div>
+	
+	<div class="content center">
+		<h1>Memy - obrazki</h1>
+		<p>Tutaj możesz dodawać i usuwać obrazki do memów.</p><br>
+		<a href="#dodaj" class="submit" title="Dodaj zdjęcie">Dodaj zdjęcie</a>
+	</div>
+	<br>
+	{if isset($memy_obrazki)}
+	<div class="center">
+		<table class="table table_overflow">
+			<tr>
+				<td colspan="5">Zdjęcia</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>Miniaturka</td>
+				<td class="center">Usuń</td>
+			</tr>
+			{foreach key=key item=item from=$memy_obrazki name=memy_obrazki}
+			<tr>
+				<td>{$smarty.foreach.memy_obrazki.iteration}</td>
+				<td><a href="../upload/{$item.url}" target="_blank" title="{$item.tytul}"><img src="../upload/{$item.miniaturka}" class="obrazki_img" alt="Miniaturka"></a></td>
+				<td class="center"><a href="#usun" title="Usuń zdjęcie" class="submit_no_css ikona ikona_usun" data-id="{$item.id}"></a></td>
+			</tr>
+			{/foreach}
+		</table>
+	</div>
+	{else}
+		<h2>Brak zdjęć do wyświetlenia</h2>
+	{/if}
+	

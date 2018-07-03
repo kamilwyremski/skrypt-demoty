@@ -1,0 +1,59 @@
+<div id="div_logowanie">
+	<div id="okno_logowania">
+		<h1><a href="{$ustawienia.base_url}" title="{$ustawienia.tytul}">{$ustawienia.tytul|truncate:40}</a></h1>
+		<h2>{$tlumaczenia_teksty.rejestracja}</h2>
+		<form method="post" action="">
+			<input type="hidden" name="rejestracja">
+			{if isset($blad_email)}<p class="blad">{$blad_email}</p>{/if}
+			<input type="text" placeholder="{$tlumaczenia_teksty.email}" name="email" title="{$tlumaczenia_teksty.email}"  {if isset($email)}value="{$email}"{/if} maxlength="32" required>
+			{if isset($blad_login)}<p class="blad">{$blad_login}</p>{/if}
+			<input type="text" placeholder="{$tlumaczenia_teksty.login}" name="login" title="{$tlumaczenia_teksty.login}" {if isset($login)}value="{$login}"{/if} maxlength="32" required>
+			{if isset($blad_haslo)}<p class="blad">{$blad_haslo}</p>{/if}
+			<input type="password" placeholder="{$tlumaczenia_teksty.haslo}" name="haslo" title="{$tlumaczenia_teksty.haslo}" {if isset($haslo)}value="{$haslo}"{/if} maxlength="32" required>
+			<input type="password" placeholder="{$tlumaczenia_teksty.powtorz_haslo}" name="powtorz_haslo" title="{$tlumaczenia_teksty.powtorz_haslo}">
+			{if isset($blad_captcha)}<p class="blad">{$blad_captcha}</p>{/if}
+			<img src="{$ustawienia.base_url}/php/captcha.php" alt="captcha" id="image_captcha"><input type="text" placeholder="{$tlumaczenia_teksty.captcha}" title="{$tlumaczenia_teksty.captcha}" name="captcha" id="input_captcha" required>	
+			{if isset($blad_regulamin)}<p class="blad">{$blad_regulamin}</p>{/if}
+			<label style="text-align:center"><input type="checkbox" checked name="regulamin" value="1" required>{$tlumaczenia_teksty.akceptuje} <a href="{$ustawienia.base_url}/{$tlumaczenia_linki.regulamin}" title="{$tlumaczenia_teksty.regulamin}" target="_blank">{$tlumaczenia_teksty.regulamin}</a> {$tlumaczenia_teksty.oraz} <a href="{$ustawienia.base_url}/{$tlumaczenia_linki.polityka_prywatnosci}" title="{$tlumaczenia_teksty.polityke_prywatnosci}" target="_blank">{$tlumaczenia_teksty.polityke_prywatnosci}</a></label>
+			<label style="text-align:center"><input type="checkbox" name="dodatkowe_informacje" id="pokaz_dodatkowe_informacje" {if isset($imie)}checked{/if}>{$tlumaczenia_teksty.dodatkowe_informacje}</label>
+			<div id="dodatkowe_informacje" {if !isset($imie)}style="display:none"{/if}>
+				<input type="text" name="imie" placeholder="{$tlumaczenia_teksty.imie}" title="{$tlumaczenia_teksty.imie}" maxlength="32" {if isset($imie)}value="{$imie}"{/if}>
+				<textarea name="adres" placeholder="{$tlumaczenia_teksty.adres}" title="{$tlumaczenia_teksty.adres}" maxlength="256">{if isset($adres)}{$adres}{/if}</textarea>
+				<textarea name="miasta" placeholder="{$tlumaczenia_teksty.miasta}" title="{$tlumaczenia_teksty.miasta}" maxlength="1024">{if isset($miasta)}{$miasta}{/if}</textarea>
+			</div>
+			{if $ustawienia.mapa_uzytkownikow==1}
+				<p style="text-align: center">{$tlumaczenia_teksty.zaznacz_lokalizacje}:</p>
+				<div id="mapa_google" style="width:260px; height: 260px"></div>
+				{literal}
+				<script src="https://maps.googleapis.com/maps/api/js?v=3.exp{/literal}{if ($ustawienia.google_maps_api)}&key={$ustawienia.google_maps_api}{/if}{literal}"></script>
+				<script>
+					google.maps.event.addDomListener(window, "load", function() {
+						var map = new google.maps.Map(document.getElementById("mapa_google"), {
+							center: new google.maps.LatLng({/literal}{$ustawienia.mapa_center}{literal}),
+							zoom: 5
+						});
+						var marker = new google.maps.Marker({
+							draggable: true,
+							{/literal}{if isset($mapa)}position: new google.maps.LatLng({$mapa}),{/if}{literal}
+							map: map
+						});
+						google.maps.event.addListener(marker, 'dragend', function (event) {
+							$('input[name=mapa]').val(this.getPosition().lat()+','+this.getPosition().lng());
+						});
+						google.maps.event.addListener(map, 'click', function (mapEvent) {
+							map.panTo(mapEvent.latLng);
+							marker.setPosition(map.getCenter());
+							$('input[name=mapa]').val(marker.getPosition().lat()+', '+marker.getPosition().lng());
+						});	
+					});
+				</script>
+				{/literal}
+				<input type="hidden" name="mapa">		
+			{/if}
+			<input type="submit" value="{$tlumaczenia_teksty.rejestracja}">
+		</form>
+		{if $ustawienia.logowanie_facebook==1 && isset($url_facebook)}<a href="{$url_facebook}" title="{$tlumaczenia_teksty.zaloguj_przez_fb}" id="logowanie_facebook"><img src="{$ustawienia.base_url}/views/{$ustawienia.szablon}/images/facebook_ikona.png">{$tlumaczenia_teksty.zaloguj_przez_fb}!</a>{/if}
+		<a href="{$ustawienia.base_url}/{$tlumaczenia_linki.logowanie}" title="{$tlumaczenia_teksty.logowanie}">{$tlumaczenia_teksty.logowanie}</a>
+		<a href="{$ustawienia.base_url}" title="{$ustawienia.tytul}">{$tlumaczenia_teksty.wroc_do_serwisu}</a>
+	</div>
+</div>

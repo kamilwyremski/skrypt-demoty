@@ -1,0 +1,89 @@
+	<div class="page_box" id="edytuj_konkurs">
+		<div class="inside_page_box">
+			<h1>Edytuj konkurs:</h1>
+			<form method="post" action="">
+				<input type="hidden" name="akcja" value="edytuj_konkurs">
+				<input class="cel_id" type="hidden" name="id">
+				<label><input type="checkbox" name="wlaczony" class="cel_wlaczony">Włącz konkurs</label>
+				<input type="text" name="tytul" class="cel_tytul" placeholder="Tytuł konkursu" title="Wpisz tytuł konkursu" maxlength="256" required><br>
+				<textarea name="opis" class="cel_opis" placeholder="Opis konkursu" title="Wpisz opis konkursu (możesz używać tagów html)" required></textarea>
+				<fieldset style="text-align:right">
+					Start: <input type="date" name="start" class="cel_start" title="Wpisz datę rozpoczęcia" required><br>
+					Koniec: <input type="date" name="koniec" class="cel_koniec" title="Wpisz datę zakończenia" required><br>
+					{if isset($konkursy_uzytkownicy)}
+						Zwycięzca:
+						<select name="zwyciezca" class="cel_zwyciezca">
+								<option value="0">-- wybierz --</option>
+							{foreach item=item key=key from=$konkursy_uzytkownicy}
+								<option value="{$item.id}">{$item.login}</option>
+							{/foreach}
+						</select>
+					{/if}
+				</fieldset>
+				<br>
+				<input type="reset" value="Anuluj" class="nie"/>
+				<input type="submit" value="Zapisz"/>
+			</form>
+		</div>
+	</div>
+	<div class="page_box" id="dodaj_konkurs">
+		<div class="inside_page_box">
+			<h1>Dodaj konkurs:</h1>
+			<form method="post" action="">
+				<input type="hidden" name="akcja" value="dodaj_konkurs">
+				<label><input type="checkbox" name="wlaczony" checked>Włącz konkurs</label>
+				<input type="text" name="tytul" placeholder="Tytuł konkursu" title="Wpisz tytuł konkursu" maxlength="256" required><br>
+				<textarea name="opis" placeholder="Opis konkursu" title="Wpisz opis konkursu (możesz używać tagów html)" required></textarea>
+				<fieldset style="text-align:right">
+					Start: <input type="date" name="start" title="Wpisz datę rozpoczęcia" required><br>
+					Koniec: <input type="date" name="koniec" title="Wpisz datę zakończenia" required>
+				</fieldset>
+				<br>
+				<input type="reset" value="Anuluj" class="nie"/>
+				<input type="submit" value="Dodaj"/>
+			</form>
+		</div>
+	</div>
+	<div class="page_box" id="usun_konkurs">
+		<div class="inside_page_box">
+			<h1>Usuń konkurs: <span class="cel_tytul"></span></h1>
+			<form method="post" action="">
+				<input type="hidden" name="akcja" value="usun_konkurs">
+				<input class="cel_id" type="hidden" name="id">
+				<input type="reset" value="Nie" class="nie"/>
+				<input type="submit" value="Tak"/>
+			</form>
+		</div>
+	</div>
+	
+	<div class="center">
+		<h1>Konkursy</h1>
+		<p>Tutaj możesz dodawać, edytować i usuwać konkursy.{if $ustawienia.konkursy==0}<br><span style="color:red">Uwaga! Konkursy nie są włączone w ustawieniach!</span>{/if}</p><br>
+		<a href="#dodaj_konkurs" class="submit" title="Dodaj konkurs">Dodaj konkurs</a>
+	</div>
+	<br>
+	{if isset($konkursy)}
+	<table class="table table_overflow">
+		<tr>
+			<td colspan="8">Konkursy</td>
+		</tr>
+		<tr>
+			<td></td><td class="center">Aktywny</td><td>Tytuł</td><td>Opis</td><td class="center">Zwycięzca</td><td class="center">Data rozpoczęcia<br><b>Data zakończenia</b></td><td class="center">Edytuj</td><td class="center">Usuń</td>
+		</tr>
+		{foreach key=key item=item from=$konkursy name=konkursy}
+		<tr>
+			<td>{$smarty.foreach.konkursy.iteration}</td>
+			<td class="center">{if $item.wlaczony==1}<i class="ikona ikona_ok" style="width:28px; height:28px; margin-top: 5px;"></i>{/if}</td>
+			<td><a href="{$ustawienia.base_url}/konkurs/{$item.id},{$item.prosty_tytul}" title="Konkurs: {$item.tytul}" target="_blank">{$item.tytul}</a></td>
+			<td class="opis">{$item.opis}</td>
+			<td class="center">{if isset($item.wygral)}<a href="{$ustawienia.base_url}/profil/{$item.wygral}" title="Profil użytkownika: {$item.wygral}" target="_blank">{$item.wygral}</a>{/if}</td>
+			<td class="center">{$item.start|date_format:"%d-%m-%Y"}<br><b>{$item.koniec|date_format:"%d-%m-%Y"}</b></td>
+			<td class="center"><a href="#edytuj_konkurs" title="Edytuj konkurs" class="submit_no_css ikona ikona_edytuj" data-id="{$item.id}" data-tytul="{$item.tytul}" data-zwyciezca="{$item.zwyciezca}" data-start="{$item.start}" data-koniec="{$item.koniec}" data-opis="" data-wlaczony="{if $item.wlaczony==1}true{else}false{/if}"></a></td>
+			<td class="center"><a href="#usun_konkurs" title="Usuń konkurs" class="submit_no_css ikona ikona_usun" data-id="{$item.id}" data-tytul="{$item.tytul}"></a></td>
+		</tr>
+		{/foreach}
+	</table>
+	{else}
+		<h2>Nie dodałeś jeszcze żadnych konkursów</h2>
+	{/if}
+	

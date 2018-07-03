@@ -1,0 +1,74 @@
+	<div class="page_box" id="edytuj_jezyk">
+		<div class="inside_page_box">
+			<h1>Edytuj język: <span class="cel_jezyk"></span></h1>
+			<form method="post" action="">
+				<input type="hidden" name="akcja" value="edytuj_jezyk">
+				<input class="cel_jezyk" type="hidden" name="jezyk">
+				<input class="cel_jezyk" type="text" name="nowa_nazwa" placeholder="Wpisz nazwę" title="Wpisz nazwę" maxlength="32" required><br>
+				<input type="reset" value="Anuluj" class="nie"/>
+				<input type="submit" value="Zapisz"/>
+			</form>
+		</div>
+	</div>
+	<div class="page_box" id="dodaj_jezyk">
+		<div class="inside_page_box">
+			<h1>Dodaj język:</h1>
+			<form method="post" action="">
+				<input type="hidden" name="akcja" value="dodaj_jezyk">
+				<input type="text" name="jezyk" placeholder="Wpisz nazwę" title="Wpisz nazwę" maxlength="32" required><br>
+				<label><input type="checkbox" name="kopiuj_teksty" checked>Kopiuj teksty z aktywnego języka</label><br>
+				<input type="reset" value="Anuluj" class="nie"/>
+				<input type="submit" value="Dodaj"/>
+			</form>
+		</div>
+	</div>
+	<div class="page_box" id="usun_jezyk">
+		<div class="inside_page_box">
+			<h1>Usuń język: <span class="cel_jezyk"></span></h1>
+			<p>Uwaga! Wszystkie słowa w danym języku zostaną usunięte!</p>
+			<form method="post" action="">
+				<input type="hidden" name="akcja" value="usun_jezyk">
+				<input class="cel_jezyk" type="hidden" name="jezyk">
+				<input type="reset" value="Nie" class="nie"/>
+				<input type="submit" value="Tak"/>
+			</form>
+		</div>
+	</div>
+	
+	<div class="center">
+		<h1>Języki</h1>
+		<p>Tutaj możesz edytować język w którym wyświetlana jest strona.</p><br>
+		{if isset($blad)}<h3>{$blad}</h3><br>{/if}
+		<h2>Aktywny język:</h2>
+		<form action="" method="post">
+			<input type="hidden" name="akcja" value="ustaw_aktywny_jezyk">
+			<select name="jezyk" title="Ustaw aktywny język">
+			{foreach key=key item=item from=$jezyki name=jezyki}
+				<option value="{$item.jezyk}" {if $item.jezyk==$ustawienia.jezyk}selected{/if}>{$item.jezyk}</option>
+			{/foreach}
+			<input type="submit" value="ZAPISZ"/>
+		</form>
+		<br><br>
+		<a href="#dodaj_jezyk" class="submit" title="Dodaj język">Dodaj język</a>
+	</div>
+	<br>
+	<table class="table">
+		<tr>
+			<td colspan="6">Języki</td>
+		</tr>
+		<tr>
+			<td></td><td>Język</td><td class="center">Edytuj linki</td><td class="center">Edytuj słowa</td><td class="center">Edytuj nazwę</td><td class="center">Usuń</td>
+		</tr>
+		{foreach key=key item=item from=$jezyki name=jezyki}
+		<tr>
+			<td>{$smarty.foreach.jezyki.iteration}</td>
+			<td>{$item.jezyk}</td>
+			<td class="center"><a href="?akcja=jezyk_linki&jezyk={$item.jezyk}" title="Edytuj linki" class="ikona ikona_edytuj"></a></td>
+			<td class="center"><a href="?akcja=jezyk_slowa&jezyk={$item.jezyk}" title="Edytuj słowa" class="ikona ikona_edytuj"></a></td>
+			<td class="center"><a href="#edytuj_jezyk" title="Edytuj nazwę" class="submit_no_css ikona ikona_edytuj" data-jezyk="{$item.jezyk}"></a></td>
+			<td class="center">{if !$item.podstawowy}<a href="#usun_jezyk" title="Usuń język" class="submit_no_css ikona ikona_usun" data-jezyk="{$item.jezyk}"></a>{/if}</td>
+		</tr>
+		{/foreach}
+	</table>
+	
+	

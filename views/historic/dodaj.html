@@ -1,0 +1,89 @@
+	<form action="" method="post" id="form_dodaj" enctype="multipart/form-data">
+		<h2>{$tlumaczenia_teksty.dodaj_nowy}</h2>
+		{if isset($ok_link)}<h3>{$tlumaczenia_teksty.udalo_sie}!<br>{$tlumaczenia_teksty.zobacz}: <a href="{$ok_link}" title="{$tlumaczenia_teksty.zobacz}">{$ok_link}</a></h3>
+		{elseif isset($blad)}<p class="blad">{$blad}</p>{/if}
+		<input type="hidden" name="dodaj">
+		<input type="text" name="tytul" placeholder="{$tlumaczenia_teksty.tytul}" title="{$tlumaczenia_teksty.tytul}" required {if isset($dodaj_tytul)}value="{$dodaj_tytul}"{/if} maxlength="128"><br>
+		<textarea name="opis" placeholder="{$tlumaczenia_teksty.opis}" title="{$tlumaczenia_teksty.opis}" maxlength="3000">{if isset($dodaj_opis)}{$dodaj_opis}{/if}</textarea><br>
+		<ul id="ul_wybor_obrazka">
+			<li><a href="#z_youtube" title="{$tlumaczenia_teksty.film_youtube}">{$tlumaczenia_teksty.film_youtube}</a></li>
+			<li><a href="#z_vimeo" title="{$tlumaczenia_teksty.film_vimeo}">{$tlumaczenia_teksty.film_vimeo}</a></li>
+			<li><a href="#z_dailymotion" title="{$tlumaczenia_teksty.film_dailymotion}">{$tlumaczenia_teksty.film_dailymotion}</a></li>
+			<li><a href="#z_dysku" title="{$tlumaczenia_teksty.obrazek_z_dysku}">{$tlumaczenia_teksty.obrazek_z_dysku}</a></li>
+			<li><a href="#z_internetu" title="{$tlumaczenia_teksty.obrazek_z_internetu}">{$tlumaczenia_teksty.obrazek_z_internetu}</a></li>
+			<li><a href="#stworzony" style="display:none"></a></li>
+		</ul>
+		<div id="z_youtube" class="div_wybor_obrazka">
+			<input type="text" name="z_youtube" placeholder="{$tlumaczenia_teksty.film_youtube}" title="{$tlumaczenia_teksty.film_youtube}" maxlength="128" {if isset($dodaj_z_youtube)}value="{$dodaj_z_youtube}"{/if}>
+		</div>
+		<div id="z_vimeo" class="div_wybor_obrazka">
+			<input type="text" name="z_vimeo" placeholder="{$tlumaczenia_teksty.film_vimeo}" title="{$tlumaczenia_teksty.film_vimeo}" maxlength="128" {if isset($dodaj_z_vimeo)}value="{$dodaj_z_vimeo}"{/if}>
+		</div>
+		<div id="z_dailymotion" class="div_wybor_obrazka">
+			<input type="text" name="z_dailymotion" placeholder="{$tlumaczenia_teksty.film_dailymotion}" title="{$tlumaczenia_teksty.film_dailymotion}" maxlength="128" {if isset($dodaj_z_dailymotion)}value="{$dodaj_z_dailymotion}"{/if}>
+		</div>
+		<div id="z_dysku" class="div_wybor_obrazka">
+			<input type="file" name="z_dysku" title="{$tlumaczenia_teksty.obrazek_z_dysku}" accept="image/*">
+		</div>
+		<div id="z_internetu" class="div_wybor_obrazka">
+			<input type="text" name="z_internetu" placeholder="{$tlumaczenia_teksty.obrazek_z_internetu}" title="{$tlumaczenia_teksty.obrazek_z_internetu}" maxlength="128" {if isset($dodaj_z_internetu)}value="{$dodaj_z_internetu}"{/if}>
+		</div>
+		<div id="stworzony" class="div_wybor_obrazka">
+			<input type="text" readOnly {if isset($dodaj_stworzony)}value="{$ustawienia.base_url}/upload/{$dodaj_stworzony}"{/if} onClick="this.select();">
+			<input type="hidden" name="stworzony" {if isset($dodaj_stworzony)}value="{$dodaj_stworzony}"{/if}>
+		</div>
+		<input type="hidden" name="wybor_obrazka" id="input_wybor_obrazka" value="{if isset($wybor_obrazka)}{$wybor_obrazka}{/if}">
+		{if isset($kategorie)}
+			<fieldset>{$tlumaczenia_teksty.kategoria}: 
+				<select name="kategoria" required>
+					{foreach key=key item=item from=$kategorie name=kategorie}
+						<option value="{$item.id}" class="kategorie_wybor_1" {if isset($dodaj_kategoria) and $dodaj_kategoria==$item.id}selected{/if}>{$item.nazwa}</option>
+						{if isset($item.podkategorie)}
+							{foreach key=key2 item=item2 from=$item.podkategorie name=kategorie2}
+								<option value="{$item2.id}" class="kategorie_wybor_2" {if isset($dodaj_kategoria) and $dodaj_kategoria==$item2.id}selected{/if}>{$item2.nazwa}</option>
+								{if isset($item2.podkategorie)}
+									{foreach key=key3 item=item3 from=$item2.podkategorie name=kategorie3}
+										<option value="{$item3.id}" class="kategorie_wybor_3" {if isset($dodaj_kategoria) and $dodaj_kategoria==$item3.id}selected{/if}>{$item3.nazwa}</option>
+									{/foreach}
+								{/if}
+							{/foreach}
+						{/if}
+					{/foreach}
+				</select>
+			</fieldset>
+		{/if}
+		<br>
+		<p>{$tlumaczenia_teksty.tagi_po_przecinku}:</p>
+		<input type="text" name="tagi" placeholder="{$tlumaczenia_teksty.tagi_po_przecinku}" title="{$tlumaczenia_teksty.tagi_po_przecinku}" {if isset($dodaj_tagi)}value="{$dodaj_tagi}"{/if} maxlength="512">
+		<br>
+		{if $ustawienia.mapa==1}
+			<input type="submit" value="{$tlumaczenia_teksty.dodaj}!"><br><br>
+			<p>{$tlumaczenia_teksty.zaznacz_lokalizacje}</p>
+			<div id="mapa_google"></div>
+			{literal}
+			<script src="https://maps.googleapis.com/maps/api/js?v=3.exp{/literal}{if ($ustawienia.google_maps_api)}&key={$ustawienia.google_maps_api}{/if}{literal}"></script>
+			<script>
+				google.maps.event.addDomListener(window, "load", function() {
+					var map = new google.maps.Map(document.getElementById("mapa_google"), {
+						center: new google.maps.LatLng( {/literal}{$ustawienia.mapa_center}{literal}),
+						zoom: 6
+					});
+					var marker = new google.maps.Marker({
+						draggable: true,
+						map: map
+					});
+					google.maps.event.addListener(marker, 'dragend', function (event) {
+						$('input[name=mapa]').val(this.getPosition().lat()+','+this.getPosition().lng());
+					});
+					google.maps.event.addListener(map, 'click', function (mapEvent) {
+						map.panTo(mapEvent.latLng);
+						marker.setPosition(map.getCenter());
+						$('input[name=mapa]').val(marker.getPosition().lat()+', '+marker.getPosition().lng());
+					});	
+				});
+			</script>
+			{/literal}
+			<input type="hidden" name="mapa">		
+		{/if}
+		<input type="submit" value="{$tlumaczenia_teksty.dodaj}!">
+	</form>

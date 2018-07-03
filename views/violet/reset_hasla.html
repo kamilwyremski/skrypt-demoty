@@ -1,0 +1,16 @@
+<div id="div_logowanie">
+	<div id="okno_logowania">
+		<h1><a href="{$ustawienia.base_url}" title="{$ustawienia.tytul}">{$ustawienia.tytul|truncate:40}</a></h1>
+		<h2>{$tlumaczenia_teksty.reset_hasla}</h2>
+		{if isset($info)}<p class="ok">{$info}</p>{elseif isset($blad)}<p class="blad">{$blad}<p>{/if}
+		<form method="post" action="">
+			<input type="hidden" name="reset_hasla">
+			<input type="email" placeholder="{$tlumaczenia_teksty.email}" name="email" title="{$tlumaczenia_teksty.email}" required value="{if isset($reset_email)}{$reset_email}{/if}" maxlength="32">
+			<img src="{$ustawienia.base_url}/php/captcha.php" alt="Captcha" id="image_captcha"><input type="text" placeholder="{$tlumaczenia_teksty.captcha}" title="{$tlumaczenia_teksty.captcha}" name="captcha" required id="input_captcha">
+			<input type="submit" value="{$tlumaczenia_teksty.reset_hasla}">
+		</form>
+		<a href="{$ustawienia.base_url}/{$tlumaczenia_linki.logowanie}" title="{$tlumaczenia_teksty.logowanie}">{$tlumaczenia_teksty.logowanie}</a>
+		<a href="{$ustawienia.base_url}/{$tlumaczenia_linki.rejestracja}" title="{$tlumaczenia_teksty.rejestracja}">{$tlumaczenia_teksty.rejestracja}</a>
+		<a href="{$ustawienia.base_url}" title="{$ustawienia.tytul}">{$tlumaczenia_teksty.wroc_do_serwisu}</a>
+	</div>
+</div>

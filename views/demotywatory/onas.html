@@ -1,0 +1,22 @@
+<div class="tresc">
+	<h2>{$tlumaczenia_teksty.onas}</h2>
+	{$ustawienia.onas}
+	<br><br>
+	{if $ustawienia.email!=''}
+		<hr style="border:none; border-top: solid 1px grey; margin: 10px 0 30px 0; clear: both">
+		<div id="kontakt">
+			<h2>{$tlumaczenia_teksty.kontakt}</h2>
+			<p>{$tlumaczenia_teksty.kontakt_info}<a href="mailto:{$ustawienia.email}" title="Napisz do nas">{$ustawienia.email}</a></p><br>
+			<form action="" method="post">
+				<input type="text" placeholder="{$tlumaczenia_teksty.imie}" name="imie" value="{if isset($email_imie)}{$email_imie}{/if}" title="{$tlumaczenia_teksty.imie}" required><br>
+				<input type="email" placeholder="{$tlumaczenia_teksty.email}" name="email" value="{if isset($email_email)}{$email_email}{/if}" title="{$tlumaczenia_teksty.email}" required><br>
+				<input type="text" placeholder="{$tlumaczenia_teksty.temat}" name="temat" value="{if isset($email_temat)}{$email_temat}{/if}" title="{$tlumaczenia_teksty.temat}" required><br>
+				<img src="{$ustawienia.base_url}/php/captcha.php" alt="Captcha" style="margin-top:10px"/>
+				<input type="text" name="captcha" placeholder="{$tlumaczenia_teksty.captcha}" required style="min-width:100px; width: 100px; margin:5px 0px 3px 14px; vertical-align:top" title="{$tlumaczenia_teksty.captcha}"><br>
+				<textarea name="tresc" placeholder="{$tlumaczenia_teksty.wiadomosc}" style="margin-top:5px" required title="{$tlumaczenia_teksty.wiadomosc}">{if isset($email_tresc)}{$email_tresc}{/if}</textarea><br>
+				<span>{if isset($email_info)}{$email_info}{/if}</span>
+				<input type="submit" value="{$tlumaczenia_teksty.wyslij}">
+			</form>
+		</div>
+	{/if}
+</div>

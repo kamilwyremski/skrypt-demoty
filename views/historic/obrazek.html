@@ -1,0 +1,148 @@
+{if isset($obrazek)}
+	<div id="strona_obrazek">
+		<h2>{$obrazek.tytul}</h2>
+		{if isset($uzytkownik) && ($uzytkownik.id == $obrazek.autor_id || $uzytkownik.moderator==1)}
+			<div id="obrazek_menu_uz">
+				{if $uzytkownik.moderator==1 && $obrazek.glowna==0}<a href="#" title="{$tlumaczenia_teksty.na_glowna}" class="na_glowna" data-id="{$obrazek.id}">{$tlumaczenia_teksty.na_glowna}</a> | {/if}<a href="{$ustawienia.base_url}/{$tlumaczenia_linki.edycja}/{$obrazek.id},{$obrazek.prosty_tytul}" title="{$tlumaczenia_teksty.edytuj}">{$tlumaczenia_teksty.edytuj}</a> | <a href="#" class="obrazek_usun_obrazek" data-id="{$obrazek.id}" title="{$tlumaczenia_teksty.usun}">{$tlumaczenia_teksty.usun}</a>
+			</div>
+		{/if}
+		{if $ustawienia.wylacz_niezalogowani=='1' && !isset($uzytkownik)}
+			<h5>{$tlumaczenia_teksty.musisz_zalogowany}</h5>
+		{else}
+			{if $obrazek.wybor_obrazka=='z_dysku' || $obrazek.wybor_obrazka=='stworzony'}
+				<a href="{$ustawienia.base_url}/upload/{$obrazek.url}" title="{$obrazek.tytul}"><img src="{$ustawienia.base_url}/upload/{$obrazek.url}" class="obrazek" alt="{$obrazek.tytul}" onerror="this.src='{$ustawienia.base_url}/views/{$ustawienia.szablon}/images/brak_obrazka.png'"></a>
+			{elseif $obrazek.wybor_obrazka=='z_internetu'}
+				<a href="{$obrazek.url}" title="{$obrazek.tytul}"><img src="{$obrazek.url}" class="obrazek" alt="{$obrazek.tytul}" onerror="this.src='{$ustawienia.base_url}/views/{$ustawienia.szablon}/images/brak_obrazka.png'"></a>
+			{elseif $obrazek.wybor_obrazka=='z_youtube' || $obrazek.wybor_obrazka=='z_vimeo' || $obrazek.wybor_obrazka=='z_dailymotion'}
+				<iframe class="iframe" width="100%" height="400" src="{$obrazek.url}?wmode=opaque" frameborder="0" allowfullscreen></iframe>
+			{else}
+				<p>{$tlumaczenia_teksty.nie_mozna_zaladowac}</p>
+			{/if}
+		{/if}
+		<div class="box_glosy">
+			<a href="#" data-id="{$obrazek.id}" data-glos="1" class="glos glos_tak {if $obrazek.glos==1}aktywny{/if}">{$tlumaczenia_teksty.mocne}</a>
+			<a href="#" data-id="{$obrazek.id}" data-glos="-1" class="glos glos_nie {if $obrazek.glos==-1}aktywny{/if}">{$tlumaczenia_teksty.slabe}</a>
+			<p class="glos_p">{$obrazek.glosy}</p>
+		</div>
+		<div id="podpis_obrazka">
+			<p>{if $obrazek.glowna==0}<a href="{$ustawienia.base_url}/{$tlumaczenia_linki.poczekalnia}" title="{$tlumaczenia_teksty.poczekalnia}">{$tlumaczenia_teksty.poczekalnia}</a> • {/if}{if isset($obrazek.nazwa)}<a href="{$ustawienia.base_url}/{$tlumaczenia_linki.kategoria}/{$obrazek.prosta_nazwa}" title="{$obrazek.nazwa}">{$obrazek.nazwa}</a> • {/if}{$tlumaczenia_teksty.autor}: <a href="{$ustawienia.base_url}/{$tlumaczenia_linki.profil}/{$obrazek.login}" title="{$obrazek.login}">{$obrazek.login}</a> • {$tlumaczenia_teksty.data}: <b>{$obrazek.data|date_format:"%d-%m-%Y"}</b> • {$tlumaczenia_teksty.komentarzy}: <b>{$obrazek.ile_komentarzy}</b><br>
+			{if $obrazek.tagi!=''}<span id="span_tagi"><b>{$tlumaczenia_teksty.tagi}:</b> {$obrazek.tagi}</span>{/if}</p>
+			<br>
+			{if $ustawienia.udostepnij_fb}
+				<div class="przycisk_spolecznosciowy">
+					<div class="fb-like" data-href="{$ustawienia.base_url}/{$obrazek.id},{$obrazek.prosty_tytul}" data-layout="button" data-action="like" data-show-faces="true" data-share="true"></div>
+				</div>
+			{/if}
+			{if $ustawienia.udostepnij_twitter}
+				<div class="przycisk_spolecznosciowy">
+					<a href="https://twitter.com/share" class="twitter-share-button" data-url="{$ustawienia.base_url}/{$obrazek.id},{$obrazek.prosty_tytul}" data-lang="pl">Tweet</a>
+					{literal}
+						<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+					{/literal}
+				</div>
+			{/if}
+			{if $ustawienia.udostepnij_wykop}
+				<div class="przycisk_spolecznosciowy">
+					<script language="javascript">
+						// wykopywarka wersja kompaktowa (100x20)
+						var wykop_url=location.href;	// Link do strony
+						var wykop_title=encodeURIComponent(document.title);	// Tytuł strony (pobierany z <title>)
+						var wykop_desc=encodeURIComponent('{$ustawienia.description}');
+						var widget_bg='FFFFFF';
+						var widget_type='compact2';
+						var widget_bold=true;	// pogrubienie napisu Wykop - domyślnie true
+						var widget_url='http://www.wykop.pl/dataprovider/diggerwidget/?url='+encodeURIComponent('{$ustawienia.base_url}/{$obrazek.id},{$obrazek.prosty_tytul}')+'&title='+(wykop_title)+'&desc='+(wykop_desc)+'&bg='+(widget_bg)+'&type='+(widget_type)+'&bold='+(widget_bold);
+						document.write('<div><iframe src="'+widget_url+'" style="border:none;width:100px;height:20px;overflow:hidden;margin:0;padding:0;" frameborder="0" border="0"></iframe></div>');
+					</script>
+				</div>
+			{/if}
+			{if $ustawienia.udostepnij_google}
+				<div class="przycisk_spolecznosciowy">
+					{literal}
+						<script src="https://apis.google.com/js/platform.js" async defer>{lang: 'pl'}</script>
+						<div class="g-plusone" data-size="medium"></div>
+					{/literal}
+				</div>
+			{/if}
+			{if $ustawienia.udostepnij_pinterest}
+				<div class="przycisk_spolecznosciowy">
+					<a href="//www.pinterest.com/pin/create/button/?url={$ustawienia.base_url}/{$obrazek.id},{$obrazek.prosty_tytul}" data-pin-do="buttonPin" data-pin-config="beside"><img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_gray_20.png" /></a>
+					<script async src="//assets.pinterest.com/js/pinit.js"></script>
+				</div>
+			{/if}
+		</div>
+		<p id="box_obrazek_opis">{$obrazek.opis}</p>
+	</div>
+	{if $ustawienia.mapa==1 && $obrazek.mapa!=''}
+		<div id="mapa_google"></div>
+		{literal}
+		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp{/literal}{if ($ustawienia.google_maps_api)}&key={$ustawienia.google_maps_api}{/if}{literal}"></script>
+		<script>
+			google.maps.event.addDomListener(window, "load", function() {
+				var myLatlng = new google.maps.LatLng({/literal}{$obrazek.mapa}{literal});
+				var map = new google.maps.Map(document.getElementById("mapa_google"), {
+					zoom: 10,
+					center: myLatlng
+				});
+				var marker = new google.maps.Marker({
+					position: myLatlng,
+					map: map,
+					title: '{/literal}{$obrazek.tytul}{literal}'
+				});
+			})
+		</script>
+		{/literal}	
+	{/if}
+	{if $ustawienia.adsense!=''}
+		<div class="adsense">
+			{$ustawienia.adsense}
+		</div>
+	{/if}
+	<div id="strona_komentarze">
+		<h2>{$tlumaczenia_teksty.komentarze}</h2>
+		{if isset($komentarze)}
+			{if isset($najlepszy_komentarz)}
+				<h3>{$tlumaczenia_teksty.najlepszy_komentarz}</h3>
+				<div class="komentarz">
+					<span class="komentarz_podpis"><a href="{$ustawienia.base_url}/{$tlumaczenia_linki.profil}/{$najlepszy_komentarz.login}" title="{$najlepszy_komentarz.login}">{$najlepszy_komentarz.login}</a>, {$najlepszy_komentarz.data|date_format:"%d-%m-%Y"}, {$najlepszy_komentarz.data|date_format:"%H:%M"}</span>
+					<p class="komentarz_tresc">{$najlepszy_komentarz.tresc}</p>
+				</div>
+				<br><hr><br>
+			{/if}
+			{foreach item=item key=key from=$komentarze}
+				<div class="komentarz">
+					<span class="komentarz_podpis"><a href="{$ustawienia.base_url}/{$tlumaczenia_linki.profil}/{$item.login}" title="{$item.login}">{$item.login}</a>, {$item.data|date_format:"%d-%m-%Y"}, {$item.data|date_format:"%H:%M"}{if isset($uzytkownik) and ($uzytkownik.moderator==1 || $uzytkownik.id == $item.autor_id)} • <a href="#" class="usun_komentarz" title="{$tlumaczenia_teksty.usun_komentarz}" data-id="{$item.id}">{$tlumaczenia_teksty.usun_komentarz}</a>{/if}</span>
+					<p class="komentarz_tresc">{$item.tresc}</p>
+					{if $ustawienia.komentarze_glosy}
+						<div class="komentarz_glosy">
+							<a href="#" data-id="{$item.id}" data-glos="1" class="komentarz_glos komentarz_glos_tak {if !isset($uzytkownik)}niezalogowany{/if}">{$tlumaczenia_teksty.komentarz_glos_tak}</a>
+							<p class="komentarz_licznik_glosow">{$item.glosy}</p>
+							<a href="#" data-id="{$item.id}" data-glos="-1" class="komentarz_glos komentarz_glos_nie {if !isset($uzytkownik)}niezalogowany{/if}">{$tlumaczenia_teksty.komentarz_glos_nie}</a>
+						</div>
+						<div style="clear:both"></div>
+					{/if}
+				</div>
+			{/foreach}
+		{else}
+			<h3>{$tlumaczenia_teksty.nie_dodano_komentarzy}</h3>
+		{/if}
+		{if isset($uzytkownik)}
+			<form action="" method="post">
+				<input type="hidden" name="komentarz" value="1">
+				<input type="hidden" name="id" value="{$obrazek.id}">
+				{if isset($blad)}<p class="blad">{$blad}</p>{/if}
+				<textarea name="tresc" required title="{$tlumaczenia_teksty.tresc_komentarza}" placeholder="{$tlumaczenia_teksty.tresc_komentarza}" maxlength="1300">{if isset($tresc)}{$tresc}{/if}</textarea>
+				<img src="{$ustawienia.base_url}/php/captcha.php" alt="captcha">
+				<input type="text" placeholder="{$tlumaczenia_teksty.captcha}" title="{$tlumaczenia_teksty.captcha}" name="captcha" required>
+				<input type="submit" value="{$tlumaczenia_teksty.dodaj}">
+			</form>
+		{else}
+			<br><h3>{$tlumaczenia_teksty.komentarz_zalogowany}</h3>
+		{/if}
+		{if $ustawienia.komentarze_facebook}
+			<br><br><div class="fb-comments" data-href="{$ustawienia.base_url}/{$obrazek.id}" data-numposts="10" data-width="100%"></div>
+		{/if}
+	</div>
+{else}
+	<h2>{$tlumaczenia_teksty.nie_znaleziono_obrazka}</h2>
+{/if}

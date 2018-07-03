@@ -1,0 +1,94 @@
+{if isset($podstrona_tytul)}<h2>{$podstrona_tytul}</h2>{/if}
+{if $ustawienia.glowna_pelne_zdjecia=='1'}
+	{literal}
+	<style>
+		.obrazek{
+			max-height: 100%;
+		}
+	</style>
+	{/literal}
+{/if}
+{if isset($obrazki)}
+	{foreach key=key item=item from=$obrazki name=obrazki}
+		{if $ustawienia.adsense!='' && ($smarty.foreach.obrazki.iteration==($ustawienia.reklama_co_obrazkow+1) || $smarty.foreach.obrazki.iteration==($ustawienia.reklama_co_obrazkow*2+1) || $smarty.foreach.obrazki.iteration==($ustawienia.reklama_co_obrazkow*3+1))}
+			<div class="adsense">
+				{$ustawienia.adsense}
+			</div>
+		{/if}
+	<div class="box_obrazek">
+	{if !$ustawienia.glowna_pelne_zdjecia=='1'}
+		<h3><a href="{$ustawienia.base_url}/{$item.id},{$item.prosty_tytul}" title="{$item.tytul}">{$item.tytul}</a></h3>
+		<p class="box_obrazek_p">{if $item.glowna==0}<a href="{$ustawienia.base_url}/{$tlumaczenia_linki.poczekalnia}" title="{$tlumaczenia_teksty.poczekalnia}">{$tlumaczenia_teksty.poczekalnia}</a> • {/if}{if isset($item.nazwa)}<a href="{$ustawienia.base_url}/{$tlumaczenia_linki.kategoria}/{$item.prosta_nazwa}" title="{$item.nazwa}">{$item.nazwa}</a> • {/if}{$tlumaczenia_teksty.autor}: <a href="{$ustawienia.base_url}/{$tlumaczenia_linki.profil}/{$item.login}" title="{$item.login}">{$item.login}</a> • {$tlumaczenia_teksty.data}: <b>{$item.data|date_format:"%d-%m-%Y"}</b> • {$tlumaczenia_teksty.komentarzy}: <b>{$item.ile_komentarzy}</b></p>
+	{/if}
+		<div class="box_obrazek_lewo">
+			{if $ustawienia.wylacz_niezalogowani=='1' && !isset($uzytkownik)}
+				<h5>{$tlumaczenia_teksty.musisz_zalogowany}</h5>
+			{else}
+				{if $item.wybor_obrazka=='z_dysku' || $item.wybor_obrazka=='stworzony'}
+					<a href="{$ustawienia.base_url}/{$item.id},{$item.prosty_tytul}" title="{$item.tytul}"><img src="{$ustawienia.base_url}/upload/{$item.url}" class="obrazek" alt="{$item.tytul}" onerror="this.src='{$ustawienia.base_url}/views/{$ustawienia.szablon}/images/brak_obrazka.png'"></a>
+				{elseif $item.wybor_obrazka=='z_internetu'}
+					<a href="{$ustawienia.base_url}/{$item.id},{$item.prosty_tytul}" title="{$item.tytul}"><img src="{$item.url}" class="obrazek" alt="{$item.tytul}" onerror="this.src='{$ustawienia.base_url}/views/{$ustawienia.szablon}/images/brak_obrazka.png'"></a>
+				{elseif $item.wybor_obrazka=='z_youtube' || $item.wybor_obrazka=='z_vimeo' || $item.wybor_obrazka=='z_dailymotion'}
+					<iframe class="iframe" width="100%" height="400" src="{$item.url}?wmode=opaque" frameborder="0" allowfullscreen></iframe>
+				{/if}
+			{/if}
+		</div>
+		<div class="box_obrazek_prawo">
+			<a href="#" data-id="{$item.id}" data-glos="1" class="glos glos_tak {if $item.glos==1}aktywny{/if}"></a>
+			<p class="glos_p">{$item.glosy}</p>
+			<a href="#" data-id="{$item.id}" data-glos="-1" class="glos glos_nie {if $item.glos==-1}aktywny{/if}"></a>
+		</div>
+	{if !$ustawienia.glowna_pelne_zdjecia=='1'}
+		<p class="box_obrazek_opis">{$item.opis|truncate:300}</p>
+	{/if}
+		<div class="box_zobacz">
+			{if $ustawienia.udostepnij_fb}
+				<div class="przycisk_spolecznosciowy">
+					<div class="fb-like" data-href="{$ustawienia.base_url}/{$item.id},{$item.prosty_tytul}" data-layout="button" data-action="like" data-show-faces="true" data-share="true"></div>
+				</div>
+			{/if}
+			{if $ustawienia.udostepnij_twitter}
+				<div class="przycisk_spolecznosciowy">
+					<a href="https://twitter.com/share" class="twitter-share-button" data-url="{$ustawienia.base_url}/{$item.id},{$item.prosty_tytul}" data-lang="pl">Tweet</a>
+					{literal}
+						<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+					{/literal}
+				</div>
+			{/if}
+			{if $ustawienia.udostepnij_wykop}
+				<div class="przycisk_spolecznosciowy">
+					<script language="javascript">
+						// wykopywarka wersja kompaktowa (100x20)
+						var wykop_url=location.href;	// Link do strony
+						var wykop_title=encodeURIComponent(document.title);	// Tytuł strony (pobierany z <title>)
+						var wykop_desc=encodeURIComponent('{$ustawienia.description}');
+						var widget_bg='FFFFFF';
+						var widget_type='compact2';
+						var widget_bold=true;	// pogrubienie napisu Wykop - domyślnie true
+						var widget_url='http://www.wykop.pl/dataprovider/diggerwidget/?url='+encodeURIComponent('{$ustawienia.base_url}/{$item.id},{$item.prosty_tytul}')+'&title='+(wykop_title)+'&desc='+(wykop_desc)+'&bg='+(widget_bg)+'&type='+(widget_type)+'&bold='+(widget_bold);
+						document.write('<div><iframe src="'+widget_url+'" style="border:none;width:100px;height:20px;overflow:hidden;margin:0;padding:0;" frameborder="0" border="0"></iframe></div>');
+					</script>
+				</div>
+			{/if}
+			{if $ustawienia.udostepnij_pinterest}
+				<div class="przycisk_spolecznosciowy">
+					<a href="//www.pinterest.com/pin/create/button/?url={$ustawienia.base_url}/{$item.id},{$item.prosty_tytul}" data-pin-do="buttonPin" data-pin-config="beside"><img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_gray_20.png" /></a>
+					<script async src="//assets.pinterest.com/js/pinit.js"></script>
+				</div>
+			{/if}
+			<a href="{$ustawienia.base_url}/{$item.id},{$item.prosty_tytul}" title="{$item.tytul}" class="zobacz">{$tlumaczenia_teksty.zobacz}</a>
+		</div>
+	</div>
+	{/foreach}
+	{if $ile_stron>1}
+	<div id="wybor_stron">
+		<p>{$tlumaczenia_teksty.strona} {$ktora_strona} / {$ile_stron}</p>
+		<a href="{$url_strony}" title="{$tlumaczenia_teksty.strona} 1" class="link_stron stron_pierwsza {if $ktora_strona==1}nieaktywny{/if}"></a>
+		<a href="{$url_strony}{if !isset($smarty.get.search)}?{else}&{/if}page={$ktora_strona-1}" title="{$tlumaczenia_teksty.strona} {$ktora_strona-1}" class="link_stron stron_poprzednia {if $ktora_strona==1}nieaktywny{/if}"></a>
+		<a href="{$url_strony}{if !isset($smarty.get.search)}?{else}&{/if}page={$ktora_strona+1}" title="{$tlumaczenia_teksty.strona} {$ktora_strona+1}" class="link_stron stron_nastepna {if $ktora_strona==$ile_stron}nieaktywny{/if}"></a>
+		<a href="{$url_strony}{if !isset($smarty.get.search)}?{else}&{/if}page={$ile_stron}" title="{$tlumaczenia_teksty.strona} {$ile_stron}" class="link_stron stron_ostatnia {if $ktora_strona==$ile_stron}nieaktywny{/if}"></a>
+	 </div>
+	{/if}
+{else}
+	<h3 style="color: grey; padding-top: 15px; text-align: center; font-weight: normal;">{$tlumaczenia_teksty.nie_dodano}</h3>
+{/if}

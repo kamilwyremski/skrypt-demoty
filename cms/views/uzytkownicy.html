@@ -1,0 +1,65 @@
+	<div class="page_box" id="usun_uzytkownika">
+		<div class="inside_page_box">
+			<h1>Usuń użytkownika: <span class="cel_login"></span></h1>
+			<p>Uwaga! <span class="cel_ile_obrazkow"></span> obrazków dodanych przez użytkownika zostanie usuniętych!</p><br>
+			<form method="post" action="">
+				<input type="hidden" name="akcja" value="usun_uzytkownika">
+				<input class="cel_id" type="hidden" name="id">
+				<input type="reset" value="Nie" class="nie"/>
+				<input type="submit" value="Tak"/>
+			</form>
+		</div>
+	</div>
+	
+	<div class="content center">
+		<h1>{if isset($nazwa)}{$nazwa}{else}Użytkownicy{/if}</h1>
+		<p>Tutaj możesz aktywować oraz usuwać użytkowników.<br><span style="color:red">Uwaga!</span> Usuwając danego użytkownika usuwasz wszystkie obrazki i komentarze które on dodał!</p><br>
+	</div>
+	<br>
+	{if isset($uzytkownicy)}
+	<div class="center">
+		<table class="table table_overflow">
+			<tr>
+				<td colspan="9">{if isset($nazwa)}{$nazwa}{else}Użytkownicy{/if}</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>Login<a href="{$url_sortowania}&sortuj=login" title="Sortuj po loginie" class="ikona sortuj_gora"></a><a href="{$url_sortowania}&sortuj=login&desc" title="Sortuj odwrotnie po loginie" class="ikona sortuj_dol"></a></td>
+				<td>Email<a href="{$url_sortowania}&sortuj=email" title="Sortuj po adresie Email" class="ikona sortuj_gora"></a><a href="{$url_sortowania}&sortuj=email&desc" title="Sortuj odwrotnie po adresie Email" class="ikona sortuj_dol"></a></td>
+				<td class="center">Dodanych obrazków<br><b>Obrazków na głównej</b></td>
+				<td class="center">Komentarzy</td>
+				<td class="center">Moderator<a href="{$url_sortowania}&sortuj=moderator" title="Sortuj po moderatorach" class="ikona sortuj_gora"></a><a href="{$url_sortowania}&sortuj=moderator&desc" title="Sortuj odwrotnie po moderatorach" class="ikona sortuj_dol"></a></td>
+				<td class="center">Aktywuj<a href="{$url_sortowania}&sortuj=aktywny" title="Sortuj wg aktywnych" class="ikona sortuj_gora"></a><a href="{$url_sortowania}&sortuj=aktywny&desc" title="Sortuj odwrotnie wg aktywnych" class="ikona sortuj_dol"></a></td>
+				<td class="center">Data<a href="{$url_sortowania}" title="Sortuj po dacie" class="ikona sortuj_gora"></a><a href="{$url_sortowania}&sortuj=data&desc" title="Sortuj odwrotnie po dacie" class="ikona sortuj_dol"></a></td>
+				<td class="center">Usuń</td>
+			</tr>
+			{foreach key=key item=item from=$uzytkownicy name=uzytkownicy}
+			<tr>
+				<td>{$smarty.foreach.uzytkownicy.iteration+$iteration}</td>
+				<td>{if $item.rejestracja_facebook==1}<img src="images/fb-icon.gif" alt="Rejestracja przez Facebook" class="facebook_icon_mini">{/if}<a href="{$ustawienia.base_url}/{$tlumaczenia_linki.profil}/{$item.login}" target="_blank" title="Profil użytkownika {$item.login}">{$item.login}</a></td>
+				<td><a href="mailto:{$item.email}" title="Napisz do {$item.email}">{$item.email}</a></td>
+				<td class="center">{$item.ile_obrazkow}<br><b>{$item.ile_obrazkow_glowna}</b></td>
+				<td class="center">{$item.ile_komentarzy}</td>
+				<td class="center">
+					{if $item.moderator==1}<a href="#" class="ustaw_moderator" data-moderator="0" data-id="{$item.id}" title="Usuń moderatora">Tak</a>
+					{else}<a href="#" class="ustaw_moderator" data-moderator="1" data-id="{$item.id}" title="Ustaw moderatora">Nie</a>{/if}</td>
+				<td class="center">{if $item.aktywny==0}<a href="#" title="Aktywuj użytkownika" class="aktywuj_uzytkownika ikona ikona_dodaj" data-id="{$item.id}"></a>{/if}</td>
+				<td class="center"><b>{$item.data|date_format:"%d-%m-%Y"}</b><br>{$item.data|date_format:"%H:%M"}</td>		
+				<td class="center"><a href="#usun_uzytkownika" title="Usuń użytkownika" class="submit_no_css ikona ikona_usun" data-id="{$item.id}" data-login="{$item.login}" data-ile_obrazkow="{$item.ile_obrazkow}"></a></td>
+			</tr>
+			{/foreach}
+		</table>
+	</div>
+	{if $ile_stron>1}
+	<div id="wybor_stron">
+		<p>Strona {$ktora_strona} z {$ile_stron}</p>
+		<a href="{$url_strony}" title="Pierwsza strona" class="link_strony link_strony_pierwsza {if $ktora_strona==1}nieaktywny{/if}"></a>
+		<a href="{$url_strony}&strona={$ktora_strona-1}" title="Poprzednia strona" class="link_strony link_strony_lewo {if $ktora_strona==1}nieaktywny{/if}"></a>	
+		<a href="{$url_strony}&strona={$ktora_strona+1}" title="Następna strona" class="link_strony link_strony_prawo {if $ktora_strona==$ile_stron}nieaktywny{/if}"></a>
+		<a href="{$url_strony}&strona={$ile_stron}" title="Ostatnia strona" class="link_strony link_strony_ostatnia {if $ktora_strona==$ile_stron}nieaktywny{/if}"></a>
+	 </div>
+	{/if}
+	{else}
+		<h2>Brak użytkowników do wyświetlenia.</h2>
+	{/if}
+	

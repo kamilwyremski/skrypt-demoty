@@ -1,0 +1,53 @@
+#menu{
+	position: fixed; top:0; left:0; right:0; background-color: #1c1314; vertical-align: top; text-align:center; z-index: 10;
+	box-shadow: 0 0 10px rgba(0,0,0,0.2); border-bottom: solid 3px #c91907;
+}
+a#logo{
+	display: inline-block; vertical-align: top; padding-top:12px;
+}
+#logo img{
+	max-width: 150px; max-height: 45px;
+}
+#menu ul{
+	display: inline-block; margin: 12px 20px 12px 1%; 
+}
+#menu ul li{
+	display: inline-block; position: relative; text-align:left;
+}
+#menu ul li a{
+	color: white; display: block; padding: 10px 6px; font-weight: bold;
+}
+#menu ul li a:hover, h1 a:hover{
+	color: #cccccc;
+}
+#menu ul li a.active{
+	background-color: #c91907;
+}
+#menu ul ul {
+    opacity:0;    visibility:hidden;    position:absolute;  left:0; background-color: black; margin:0; transition: all 0.5s; width: 200px; 
+	padding: 2px 0 2px 5px;	z-index:20; border: solid 1px rgba(255,255,255,0.4);
+}
+#menu li:hover  ul {
+    opacity:1;    visibility:visible; 
+}
+#menu ul ul li a{
+	color: #e4e4e4; padding: 0;
+}
+#menu ul ul li a:hover{
+	color: white;
+}
+#menu ul ul li{
+	display:block; float: none; padding-left: 0px;
+}
+#menu ul ul ul {
+   position:static; width: auto; border: none;
+}
+#menu ul ul ul li{
+	padding-left: 20px;
+}
+#menu ul li a.logowanie_facebook_mini{
+	display: inline-block;
+}
+#menu ul li a.logowanie_facebook_mini img{
+	position: relative; top: 3px; left:-6px;
+}

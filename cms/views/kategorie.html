@@ -1,0 +1,115 @@
+	<div class="page_box" id="edytuj_kategorie">
+		<div class="inside_page_box">
+			<h1>Edytuj kategorie: <span class="cel_nazwa"></span></h1>
+			<form method="post" action="">
+				<input type="hidden" name="akcja" value="edytuj_kategorie">
+				<input class="cel_id" type="hidden" name="id">
+				<input class="cel_nazwa" type="text" name="nazwa" placeholder="Wpisz nazwę" title="Wpisz nazwę" maxlength="45" required><br>
+				<select name="kategoria_glowna" class="cel_kategoria_glowna">
+					<option value="0" class="kategorie_wybor_1">Kategoria główna</option>
+					{if isset($kategorie)}
+						{foreach key=key item=item from=$kategorie name=kategorie}
+						<option value="{$item.id}" class="kategorie_wybor_1">{$item.nazwa}</option>
+							{if isset($item.podkategorie)}
+								{foreach key=key2 item=item2 from=$item.podkategorie name=kategorie2}
+									<option value="{$item2.id}" class="kategorie_wybor_2">{$item2.nazwa}</option>
+								{/foreach}
+							{/if}
+						{/foreach}
+					{/if}		
+				</select><br>
+				<input type="reset" value="Anuluj" class="nie"/>
+				<input type="submit" value="Zapisz"/>
+			</form>
+		</div>
+	</div>
+	<div class="page_box" id="dodaj_kategorie">
+		<div class="inside_page_box">
+			<h1>Dodaj kategorie:</h1>
+			<form method="post" action="">
+				<input type="hidden" name="akcja" value="dodaj_kategorie">
+				<input type="text" name="nazwa" placeholder="Wpisz nazwę" title="Wpisz nazwę" maxlength="45" required><br>
+				<select name="kategoria_glowna">
+					<option value="0" class="kategorie_wybor_1">Kategoria główna</option>
+					{if isset($kategorie)}
+						{foreach key=key item=item from=$kategorie name=kategorie}
+						<option value="{$item.id}" class="kategorie_wybor_1">{$item.nazwa}</option>
+							{if isset($item.podkategorie)}
+								{foreach key=key2 item=item2 from=$item.podkategorie name=kategorie2}
+									<option value="{$item2.id}" class="kategorie_wybor_2">{$item2.nazwa}</option>
+								{/foreach}
+							{/if}
+						{/foreach}
+					{/if}		
+				</select><br>
+				<input type="reset" value="Anuluj" class="nie"/>
+				<input type="submit" value="Dodaj"/>
+			</form>
+		</div>
+	</div>
+	<div class="page_box" id="usun_kategorie">
+		<div class="inside_page_box">
+			<h1>Usuń kategorie: <span class="cel_nazwa"></span></h1>
+			<form method="post" action="">
+				<input type="hidden" name="akcja" value="usun_kategorie">
+				<input class="cel_id" type="hidden" name="id">
+				<label><input type="checkbox" name="usun_obrazki"> Usuń także obrazki (<span class="cel_ile_obrazkow"></span>)</p><br>
+				<input type="reset" value="Nie" class="nie"/>
+				<input type="submit" value="Tak"/>
+			</form>
+		</div>
+	</div>
+	
+	<div class="center">
+		<h1>Kategorie</h1>
+		<p>Tutaj możesz edytować kategorie.</p><br>
+		<a href="#dodaj_kategorie" class="submit" title="Dodaj kategorie">Dodaj kategorie</a>
+	</div>
+	<br>
+	{if isset($kategorie)}
+	<table class="table">
+		<tr>
+			<td colspan="7">Kategorie</td>
+		</tr>
+		<tr>
+			<td></td><td colspan="3">Nazwa</td><td class="center">Ilość obrazków</td><td class="center">Edytuj</td><td class="center">Usuń</td>
+		</tr>
+		{foreach key=key item=item from=$kategorie name=kategorie}
+		<tr>
+			<td>{$smarty.foreach.kategorie.iteration}</td>
+			<td colspan="3"><a href="{$ustawienia.base_url}/{$tlumaczenia_linki.kategoria}/{$item.prosta_nazwa}" title="Kategoria: {$item.nazwa}" target="_blank">{$item.nazwa}</a></td>
+			<td class="center">{$item.ile_obrazkow}</td>
+			<td class="center"><a href="#edytuj_kategorie" title="Edytuj kategorie" class="submit_no_css ikona ikona_edytuj" data-id="{$item.id}" data-nazwa="{$item.nazwa}" data-kategoria_glowna="{$item.kategoria_glowna}"></a></td>
+			<td class="center"><a href="#usun_kategorie" title="Usuń kategorie" class="submit_no_css ikona ikona_usun" data-id="{$item.id}" data-nazwa="{$item.nazwa}" data-ile_obrazkow="{$item.ile_obrazkow}"></a></td>
+		</tr>
+			{if isset($item.podkategorie)}
+				{foreach key=key2 item=item2 from=$item.podkategorie name=kategorie2}
+				<tr>
+					<td></td>
+					<td>{$smarty.foreach.kategorie2.iteration}</td>
+					<td colspan="2"><a href="{$ustawienia.base_url}/{$tlumaczenia_linki.kategoria}/{$item2.prosta_nazwa}" title="Podkategoria: {$item2.nazwa}" target="_blank">{$item2.nazwa}</a></td>
+					<td class="center">{$item2.ile_obrazkow}</td>
+					<td class="center"><a href="#edytuj_kategorie" title="Edytuj podkategorie" class="submit_no_css ikona ikona_edytuj" data-id="{$item2.id}" data-nazwa="{$item2.nazwa}" data-kategoria_glowna="{$item2.kategoria_glowna}"></a></td>
+					<td class="center"><a href="#usun_kategorie" title="Usuń podkategorie" class="submit_no_css ikona ikona_usun" data-id="{$item2.id}" data-nazwa="{$item2.nazwa}" data-ile_obrazkow="{$item2.ile_obrazkow}"></a></td>
+				</tr>
+					{if isset($item2.podkategorie)}
+						{foreach key=key3 item=item3 from=$item2.podkategorie name=kategorie3}
+						<tr>
+							<td></td>
+							<td></td>
+							<td>{$smarty.foreach.kategorie3.iteration}</td>
+							<td><a href="{$ustawienia.base_url}/{$tlumaczenia_linki.kategoria}/{$item3.prosta_nazwa}" title="Podkategoria: {$item3.nazwa}" target="_blank">{$item3.nazwa}</a></td>
+							<td class="center">{$item3.ile_obrazkow}</td>
+							<td class="center"><a href="#edytuj_kategorie" title="Edytuj podkategorie" class="submit_no_css ikona ikona_edytuj" data-id="{$item3.id}" data-nazwa="{$item3.nazwa}" data-kategoria_glowna="{$item3.kategoria_glowna}"></a></td>
+							<td class="center"><a href="#usun_kategorie" title="Usuń podkategorie" class="submit_no_css ikona ikona_usun" data-id="{$item3.id}" data-nazwa="{$item3.nazwa}" data-ile_obrazkow="{$item3.ile_obrazkow}"></a></td>
+						</tr>
+						{/foreach}
+					{/if}
+				{/foreach}
+			{/if}
+		{/foreach}
+	</table>
+	{else}
+		<h2>Nie dodałeś jeszcze żadnej kategorii</h2>
+	{/if}
+	

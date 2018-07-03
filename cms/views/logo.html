@@ -1,0 +1,26 @@
+	<div class="center">
+		<h1>Logo i znak wodny</h1>
+		<p>Tutaj możesz zmienić logo, logo dla faceboka, favicon oraz znak wodny.</p><br>
+	</div>
+	<div id="box_logo" class="center">
+		<form action="" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="zmien_logo" value="1">
+			<h2>Logo</h2>
+			<a href="../obrazy/logo.png" title="Logo" target="_blank"><img src="../obrazy/logo.png?{$smarty.now}" alt="Logo"></a><br>
+			<input type="file" name="logo" title="Zmień logo. Dozwolony format pliku to: png" data-typ="PNG">
+			<h5>Niewłaściwy format pliku. Prawidłowe rozszerzenie to: png</h5><br><br>
+			<h2>Logo dla Facebook-a</h2>
+			<a href="../obrazy/logo_facebook.png" title="Logo dla Facebook-a" target="_blank"><img src="../obrazy/logo_facebook.png?{$smarty.now}" alt="Logo Facebook"></a><br>
+			<input type="file" name="logo_facebook" title="Zmień logo dla Facebook-a. Dozwolony format pliku to: png" data-typ="PNG">
+			<h5>Niewłaściwy format pliku. Prawidłowe rozszerzenie to: png</h5><br><br>
+			<h2>Znak wodny</h2>
+			<a href="../obrazy/watermark.png" title="Znak wodny" target="_blank"><img src="../obrazy/watermark.png?{$smarty.now}" alt="Znak wodny"></a><br>
+			<input type="file" name="watermark" title="Zmień znak wodny. Dozwolony format pliku to: png" data-typ="PNG">
+			<h5>Niewłaściwy format pliku. Prawidłowe rozszerzenie to: png</h5><br><br>
+			<h2>Favicon</h2>
+			<a href="../obrazy/favicon.ico" title="Favicon" target="_blank"><img src="../obrazy/favicon.ico?{$smarty.now}" alt="Favicon"></a><br>
+			<input type="file" name="favicon" title="Zmień favicon. Dozwolony format pliku to: ico" data-typ="ICO">		
+			<h5>Niewłaściwy format pliku. Prawidłowe rozszerzenie to: ico</h5><br><br>
+			<input type="submit" value="ZAPISZ">
+		</form>
+	</div>

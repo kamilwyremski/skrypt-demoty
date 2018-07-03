@@ -1,0 +1,59 @@
+	<div class="page_box" id="usun_stworzony">
+		<div class="inside_page_box">
+			<h1>Usuń stworzony obrazek: <span class="cel_tytul"></span></h1>
+			<form method="post" action="">
+				<input type="hidden" name="akcja" value="usun_stworzony">
+				<input class="cel_id" type="hidden" name="id">
+				<input type="reset" value="Nie" class="nie"/>
+				<input type="submit" value="Tak"/>
+			</form>
+		</div>
+	</div>
+	
+	<div class="content center">
+		<h1>Stworzone obrazki</h1>
+		<p>Tutaj możesz usuwać obrazki stworzone przez użytkowników.</p>
+		<p><span style="color:red">Uwaga!</span> usunięcie wygenerowanego obrazka powoduje usunięcie obrazków utworzonych na jego podstawie</p><br>
+	</div>
+	<br>
+	{if isset($stworzone)}
+	<div class="center">
+		<table class="table table_overflow">
+			<tr>
+				<td colspan="6">Stworzone obrazki</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>Miniaturka</td>
+				<td>Tytuł<a href="{$url_sortowania}&sortuj=tytul" title="Sortuj po tytułach" class="ikona sortuj_gora"></a><a href="{$url_sortowania}&sortuj=tytul&desc" title="Sortuj odwrotnie po tytułach" class="ikona sortuj_dol"></a></td>
+				<td style="min-width:60px">Autor</td>
+				<td class="center" style="min-width:65px">Data<a href="{$url_sortowania}" title="Sortuj po dacie" class="ikona sortuj_gora"></a><a href="{$url_sortowania}&sortuj=data&desc" title="Sortuj odwrotnie po dacie" class="ikona sortuj_dol"></a></td>
+				<td class="center">Usuń</td>
+			</tr>
+			{foreach key=key item=item from=$stworzone name=stworzone}
+			<tr>
+				<td>{$smarty.foreach.stworzone.iteration+$iteration}</td>
+				<td><a href="../upload/{$item.url}" target="_blank" title="{$item.tytul}"><img src="../upload/{$item.url}" class="obrazki_img" alt="{$item.tytul}"></a>
+				<td>{$item.tytul}</td>
+				<td>
+					{if isset($item.login)}<a href="{$ustawienia.base_url}/{$tlumaczenia_linki.profil}/{$item.login}" title="Profil użytkownika {$item.login}" target="_blank">{$item.login}</a>{/if}
+				</td>
+				<td class="center"><b>{$item.data|date_format:"%d-%m-%Y"}</b><br>{$item.data|date_format:"%H:%M"}</td>		
+				<td class="center"><a href="#usun_stworzony" title="Usuń obrazek" class="submit_no_css ikona ikona_usun" data-id="{$item.id}" data-tytul="{$item.tytul}"></a></td>
+			</tr>
+			{/foreach}
+		</table>
+	</div>
+	{if $ile_stron>1}
+	<div id="wybor_stron">
+		<p>Strona {$ktora_strona} z {$ile_stron}</p>
+		<a href="{$url_strony}" title="Pierwsza strona" class="link_strony link_strony_pierwsza {if $ktora_strona==1}nieaktywny{/if}"></a>
+		<a href="{$url_strony}&strona={$ktora_strona-1}" title="Poprzednia strona" class="link_strony link_strony_lewo {if $ktora_strona==1}nieaktywny{/if}"></a>	
+		<a href="{$url_strony}&strona={$ktora_strona+1}" title="Następna strona" class="link_strony link_strony_prawo {if $ktora_strona==$ile_stron}nieaktywny{/if}"></a>
+		<a href="{$url_strony}&strona={$ile_stron}" title="Ostatnia strona" class="link_strony link_strony_ostatnia {if $ktora_strona==$ile_stron}nieaktywny{/if}"></a>
+	 </div>
+	{/if}
+	{else}
+		<h2>Brak obrazków do wyświetlenia</h2>
+	{/if}
+	

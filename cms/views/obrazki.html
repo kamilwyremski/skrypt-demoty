@@ -1,0 +1,106 @@
+	<div class="page_box" id="usun_obrazek">
+		<div class="inside_page_box">
+			<h1>Usuń obrazek / film: <span class="cel_tytul"></span></h1>
+			<form method="post" action="">
+				<input type="hidden" name="akcja" value="usun_obrazek">
+				<input class="cel_id" type="hidden" name="id">
+				<input type="reset" value="Nie" class="nie"/>
+				<input type="submit" value="Tak"/>
+			</form>
+		</div>
+	</div>
+	
+	<div class="content center">
+		<h1>Obrazki i filmy {$nazwa_kategorii}</h1>
+		<p>Tutaj możesz usuwać obrazki i filmy dodane przez użytkowników.</p><br>
+		{if $nazwa_kategorii=='w Poczekalni'}
+			<div class="page_box" id="usun_poczekalnie">
+				<div class="inside_page_box">
+					<h1>Usunąć wszystko z poczekalni?</h1>
+					<form method="post" action="">
+						<input type="hidden" name="akcja" value="usun_poczekalnie">
+						<input type="reset" value="Nie" class="nie"/>
+						<input type="submit" value="Tak"/>
+					</form>
+				</div>
+			</div>
+			<div class="page_box" id="aktywuj_poczekalnie">
+				<div class="inside_page_box">
+					<h1>Aktywować wszystko z poczekalni?</h1>
+					<form method="post" action="">
+						<input type="hidden" name="akcja" value="aktywuj_poczekalnie">
+						<input type="reset" value="Nie" class="nie"/>
+						<input type="submit" value="Tak"/>
+					</form>
+				</div>
+			</div>
+			<a href="#usun_poczekalnie" title="Usuń wszystkie obrazki i filmy z Poczekalni" class="submit">Opróżnij Poczekalnie</a>
+			<a href="#aktywuj_poczekalnie" title="Aktywuj wszystkie obrazki i filmy z Poczekalni" class="submit">Aktywuj wszystkie</a>
+		{/if}
+	</div>
+	<br>
+	{if isset($obrazki)}
+	<div class="center">
+		<form action="" method="post">
+		<input type="hidden" name="akcja" value="usun_obrazki">
+		<table class="table table_overflow">
+			<tr>
+				<td colspan="12">Obrazki i filmy</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td>Miniaturka</td>
+				<td>Tytuł<a href="{$url_sortowania}&sortuj=tytul" title="Sortuj po tytułach" class="ikona sortuj_gora"></a><a href="{$url_sortowania}&sortuj=tytul&desc" title="Sortuj odwrotnie po tytułach" class="ikona sortuj_dol"></a></td>
+				<td>Kategoria</td>
+				<td style="min-width:60px">Autor<br><a href="{$url_sortowania}&sortuj=login" title="Sortuj po loginie" class="ikona sortuj_gora"></a><a href="{$url_sortowania}&sortuj=login&desc" title="Sortuj odwrotnie po loginie" class="ikona sortuj_dol"></a></td>
+				<td class="center" style="min-width:65px">Głosy<br><a href="{$url_sortowania}&sortuj=glosy" title="Sortuj po głosach" class="ikona sortuj_gora"></a><a href="{$url_sortowania}&sortuj=glosy&desc" title="Sortuj odwrotnie po głosach" class="ikona sortuj_dol"></a></td>
+				<td class="center">Ilość komentarzy</td>
+				<td class="center" style="min-width:65px">Data (główna)<br><a href="{$url_sortowania}&sortuj=data_glowna" title="Sortuj po dacie dodania na główną" class="ikona sortuj_gora"></a><a href="{$url_sortowania}&sortuj=data_glowna&desc" title="Sortuj odwrotnie po dacie dodania na główną" class="ikona sortuj_dol"></a></td>
+				<td class="center" style="min-width:65px">Data<a href="{$url_sortowania}&sortuj=data" title="Sortuj po dacie" class="ikona sortuj_gora"></a><a href="{$url_sortowania}" title="Sortuj odwrotnie po dacie" class="ikona sortuj_dol"></a></td>
+				<td class="center">Aktywuj<a href="{$url_sortowania}&sortuj=glowna" title="Sortuj po aktywnych" class="ikona sortuj_gora"></a><a href="{$url_sortowania}&sortuj=glowna&desc" title="Sortuj odwrotnie po aktywnych" class="ikona sortuj_dol"></a></td>
+				<td class="center">Usuń</td>
+			</tr>
+			{foreach key=key item=item from=$obrazki name=obrazki}
+			<tr>
+				<td class="center"><input type="checkbox" name="id[{$item.id}]">
+				<td>{$smarty.foreach.obrazki.iteration+$iteration}</td>
+				<td>{if $item.wybor_obrazka=='z_dysku' || $item.wybor_obrazka=='stworzony'}
+						<a href="../upload/{$item.url}" target="_blank" title="{$item.tytul}"><img src="../upload/{$item.url}" class="obrazki_img" alt="{$item.tytul}"></a>
+					{elseif $item.wybor_obrazka=='z_internetu'}
+						<a href="{$item.url}" target="_blank" title="{$item.tytul}"><img src="{$item.url}" class="obrazki_img" alt="{$item.tytul}"></a>
+					{elseif $item.wybor_obrazka=='z_youtube' || $item.wybor_obrazka=='z_vimeo' || $item.wybor_obrazka=='z_dailymotion'}
+						<a href="{$item.miniaturka}" target="_blank" title="{$item.tytul}"><img src="{$item.miniaturka}" class="obrazki_img" alt="{$item.tytul}"></a>
+					{/if}</td>
+				<td><a href="{$ustawienia.base_url}/{$item.id},{$item.prosty_tytul}" title="{$item.tytul}" target="_blank">{$item.tytul}</a></td>
+				<td>{if isset($item.nazwa)}<a href="{$ustawienia.base_url}/{$tlumaczenia_linki.kategoria}/{$item.prosta_nazwa}" title="Kategoria: {$item.nazwa}" target="_blank">{$item.nazwa}</a><br>{/if}
+					{if $item.glowna==0}<a href="{$ustawienia.base_url}/{$tlumaczenia_linki.poczekalnia}" title="Poczekalnia" target="_blank">Poczekalnia</a>{/if}</td>
+				<td><a href="{$ustawienia.base_url}/{$tlumaczenia_linki.profil}/{$item.login}" title="Profil użytkownika {$item.login}" target="_blank">{$item.login}</a></td>
+				<td class="center">{$item.glosy}</td>
+				<td class="center">{$item.ile_komentarzy}</td>
+				<td class="center">{if $item.glowna}<b>{$item.data_glowna|date_format:"%d-%m-%Y"}</b><br>{$item.data_glowna|date_format:"%H:%M"}{/if}</td>		
+				<td class="center"><b>{$item.data|date_format:"%d-%m-%Y"}</b><br>{$item.data|date_format:"%H:%M"}</td>		
+				<td class="center">{if $item.glowna==0}<a href="#" title="Aktywuj / Dodaj na główną" class="aktywuj_obrazek ikona ikona_dodaj" data-id="{$item.id}"></a>{/if}</td>
+				<td class="center"><a href="#usun_obrazek" title="Usuń obrazek" class="submit_no_css ikona ikona_usun" data-id="{$item.id}" data-tytul="{$item.tytul}"></a></td>
+			</tr>
+			{/foreach}
+			<tr>
+				<td><input type="submit" value="USUŃ" style="padding:3px; font-size: 10px; margin:0;"></td>
+				<td colspan="11"></td>
+			</tr>
+		</table>
+		</form>
+	</div>
+	{if $ile_stron>1}
+	<div id="wybor_stron">
+		<p>Strona {$ktora_strona} z {$ile_stron}</p>
+		<a href="{$url_strony}" title="Pierwsza strona" class="link_strony link_strony_pierwsza {if $ktora_strona==1}nieaktywny{/if}"></a>
+		<a href="{$url_strony}&strona={$ktora_strona-1}" title="Poprzednia strona" class="link_strony link_strony_lewo {if $ktora_strona==1}nieaktywny{/if}"></a>	
+		<a href="{$url_strony}&strona={$ktora_strona+1}" title="Następna strona" class="link_strony link_strony_prawo {if $ktora_strona==$ile_stron}nieaktywny{/if}"></a>
+		<a href="{$url_strony}&strona={$ile_stron}" title="Ostatnia strona" class="link_strony link_strony_ostatnia {if $ktora_strona==$ile_stron}nieaktywny{/if}"></a>
+	 </div>
+	{/if}
+	{else}
+		<h2>Brak obrazków i filmów do wyświetlenia</h2>
+	{/if}
+	

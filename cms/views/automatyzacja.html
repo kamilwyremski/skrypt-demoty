@@ -1,0 +1,64 @@
+﻿	<div class="center">
+		<h1>Automatyzacja</h1>
+		<p>Tutaj możesz ustawić funkcję które powinny się automatycznie uruchamiać raz dziennie</p>
+		<p>Do prawidłowego działania ustaw działanie CRON na serwerze dla pliku cron-daily.php w głównym folderze witryny.</p><br>
+	</div>
+	<div id="automatyzacja_box" class="center">
+		<form action="" method="post">
+			<input type="hidden" name="zapisz" value="automatyzacja">
+			<label><input type="checkbox" name="wlacz" {if $automatyzacja.wlacz==1}checked{/if}>Włącz automatyczne zadania</label><br>
+			<label><input type="checkbox" name="generuj_sitemap" {if $automatyzacja.generuj_sitemap==1}checked{/if}>Generuj automatycznie plik sitemap.xml</label><br>
+			<label><input type="checkbox" name="usun_bledne_obrazki" {if $automatyzacja.usun_bledne_obrazki==1}checked{/if}>Automatycznie usuń nieistniejące obrazki na serwerze</label>
+			<hr>
+			<label><input type="checkbox" name="wlacz_wszystkie" {if $automatyzacja.wlacz_wszystkie==1}checked{/if}>Dodaj wszystkie obrazki i filmy z poczekalni</label><br>
+			<fieldset><input type="checkbox" name="wlacz_dni_wiecej" {if $automatyzacja.wlacz_dni_wiecej==1}checked{/if}>Dodaj obrazki i filmy dodane <b>więcej</b> niż <input type="number" name="dni_wiecej" value="{$automatyzacja.dni_wiecej}" min="0" max="999"> dni temu.</fieldset>
+			<fieldset><input type="checkbox" name="wlacz_dni_mniej" {if $automatyzacja.wlacz_dni_mniej==1}checked{/if}>Dodaj obrazki i filmy dodane <b>mniej</b> niż <input type="number" name="dni_mniej" value="{$automatyzacja.dni_mniej}" min="0" max="999"> dni temu.</fieldset>
+			<fieldset><input type="checkbox" name="wlacz_glosy" {if $automatyzacja.wlacz_glosy==1}checked{/if}>Dodaj obrazki i filmy które osiągnęły minimum <input type="number" name="glosy" value="{$automatyzacja.glosy}"> punktów z głosów</fieldset>
+			<fieldset><input type="checkbox" name="wlacz_komentarze" {if $automatyzacja.wlacz_komentarze==1}checked{/if}>Dodaj obrazki i filmy do których dodano minimum <input type="number" name="komentarze" value="{$automatyzacja.komentarze}" min="0"> komentarzy</fieldset>
+			<hr>
+		{if isset($automatyzacja_uzytkownicy)}
+			<label><input type="checkbox" name="wlacz_obrazki_inne_strony" {if $automatyzacja.wlacz_obrazki_inne_strony==1}checked{/if}>Automatycznie dodaj obrazki z innych stron</label>
+			<fieldset>Minimalne wymiary: szerokość: <input type="number" name="min_szerokosc" value="{$automatyzacja.min_szerokosc}" min="0" max="9999">px, wysokość: <input type="number" name="min_wysokosc" value="{$automatyzacja.min_wysokosc}" min="0" max="9999">px</fieldset>
+			<textarea name="lista_stron" placeholder="Lista stron (kolejne adresy wklej w nowej linii)" title="Tu wpisz listę stron z których mają być automatycznie pobierane obrazki (kolejne adresy wklej w nowej linii)" {if $automatyzacja.wlacz_obrazki_inne_strony==1}required{/if} class="inne_obrazki">{$automatyzacja.lista_stron}</textarea><br>
+			<label>Dodaj obrazki do: 
+				<select name="inne_strony_cel">
+					<option value="0" {if $automatyzacja.inne_strony_cel=='0'}selected{/if}>Poczekalnia</option>
+					<option value="1" {if $automatyzacja.inne_strony_cel=='1'}selected{/if}>Główna</option>
+				</select>
+			</label>
+			<label>Dodaj obrazki jako użytkownik: 
+				<select name="inne_strony_uzytkownik" {if $automatyzacja.wlacz_obrazki_inne_strony==1}required{/if} class="inne_obrazki">
+						<option value="">-- wybierz --</option>
+					{foreach item=item key=key from=$automatyzacja_uzytkownicy}
+						<option value="{$item.id}" {if $automatyzacja.inne_strony_uzytkownik==$item.id}selected{/if}>{$item.login}</option>
+					{/foreach}
+				</select>
+			</label>
+			{if isset($kategorie)}
+				<label>Dodaj obrazki do kategorii: 
+					<select name="inne_strony_kategoria" class="inne_obrazki">
+							<option value="">-- wybierz --</option>
+						{foreach key=key item=item from=$kategorie name=kategorie}
+							<option value="{$item.id}" class="kategorie_wybor_1" {if $automatyzacja.inne_strony_kategoria==$item.id}selected{/if}>{$item.nazwa}</option>
+							{if isset($item.podkategorie)}
+								{foreach key=key2 item=item2 from=$item.podkategorie name=kategorie2}
+									<option value="{$item2.id}" class="kategorie_wybor_2" {if $automatyzacja.inne_strony_kategoria==$item2.id}selected{/if}>{$item2.nazwa}</option>
+									{if isset($item2.podkategorie)}
+										{foreach key=key3 item=item3 from=$item2.podkategorie name=kategorie3}
+											<option value="{$item3.id}" class="kategorie_wybor_3" {if $automatyzacja.inne_strony_kategoria==$item3.id}selected{/if}>{$item3.nazwa}</option>
+										{/foreach}
+									{/if}
+								{/foreach}
+							{/if}
+						{/foreach}
+					</select>
+				</label>
+			{/if}
+		{else}
+			<p>Automatycznie dodawanie obrazków z innych stron nie jest dostępne ponieważ nie ma żadnych zarejestrowanych użytkowników ani/lub dodanych kategorii.</p>
+		{/if}
+			<br><br>
+			<input type="submit" value="ZAPISZ I URUCHOM" name="uruchom">
+			<input type="submit" value="ZAPISZ">
+		</form>
+	</div>

@@ -1,0 +1,25 @@
+<div id="konkursy">
+	<h2>{$tlumaczenia_teksty.konkursy}</h2>
+	{if isset($konkursy)}
+		{if $ustawienia.adsense!=''}
+			<div class="adsense">
+				{$ustawienia.adsense}
+			</div>
+		{/if}
+		<table>
+			<tr>
+				<td>{$tlumaczenia_teksty.konkurs}</td><td style="text-align:center">{$tlumaczenia_teksty.status}</td><td style="text-align:center">{$tlumaczenia_teksty.zwyciezca}</td><td style="text-align:center">{$tlumaczenia_teksty.data_koniec}</td>
+			</tr>
+			{foreach key=key item=item from=$konkursy name=konkursy}
+			<tr>
+				<td><a href="{$ustawienia.base_url}/{$tlumaczenia_linki.konkurs}/{$item.id},{$item.prosty_tytul}" title="{$item.tytul}">{$item.tytul}</a></td>
+				<td style="text-align:center">{if $item.wlaczony==1}<b>{$tlumaczenia_teksty.aktywny}</b>{else}{$tlumaczenia_teksty.zakonczony}{/if}</td>
+				<td style="text-align:center">{if isset($item.wygral)}<a href="{$ustawienia.base_url}/profil/{$item.wygral}" title="{$item.wygral}">{$item.wygral}</a>{/if}</td>
+				<td style="text-align:center">{$item.koniec|date_format:"%d-%m-%Y"}</td>
+			</tr>
+			{/foreach}
+		</table>
+	{else}
+		<h3 style="color: grey; padding-top: 15px; text-align: center; font-weight: normal;">{$tlumaczenia_teksty.konkurs_nie_znaleziono}</h3>
+	{/if}
+</div>

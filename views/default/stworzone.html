@@ -1,0 +1,28 @@
+<h2>{$tlumaczenia_teksty.stworzone}</h2>
+{if isset($stworzone)}
+	{foreach key=key item=item from=$stworzone name=stworzone}
+		{if $ustawienia.adsense!='' && ($smarty.foreach.obrazki.iteration==3 || $smarty.foreach.obrazki.iteration==6)}
+			<div class="adsense">
+				{$ustawienia.adsense}
+			</div>
+		{/if}
+	<div class="box_obrazek">
+		{if $ustawienia.wylacz_niezalogowani=='1' && !isset($uzytkownik)}
+			<h5>{$tlumaczenia_teksty.musisz_zalogowany}</h5>
+		{else}
+			<img src="{$ustawienia.base_url}/upload/{$item.url}" class="obrazek" alt="{$item.tytul}" onerror="this.src='{$ustawienia.base_url}/views/{$ustawienia.szablon}/images/brak_obrazka.png'"></a>
+		{/if}
+	</div>
+	{/foreach}
+	{if $ile_stron>1}
+		<div id="wybor_stron">
+			<p>{$tlumaczenia_teksty.strona} {$ktora_strona} / {$ile_stron}</p>
+			<a href="{$url_strony}" title="{$tlumaczenia_teksty.strona} 1" class="link_stron stron_pierwsza {if $ktora_strona==1}nieaktywny{/if}"></a>
+			<a href="{$url_strony}{if !isset($smarty.get.search)}?{else}&{/if}page={$ktora_strona-1}" title="{$tlumaczenia_teksty.strona} {$ktora_strona-1}" class="link_stron stron_poprzednia {if $ktora_strona==1}nieaktywny{/if}"></a>
+			<a href="{$url_strony}{if !isset($smarty.get.search)}?{else}&{/if}page={$ktora_strona+1}" title="{$tlumaczenia_teksty.strona} {$ktora_strona+1}" class="link_stron stron_nastepna {if $ktora_strona==$ile_stron}nieaktywny{/if}"></a>
+			<a href="{$url_strony}{if !isset($smarty.get.search)}?{else}&{/if}page={$ile_stron}" title="{$tlumaczenia_teksty.strona} {$ile_stron}" class="link_stron stron_ostatnia {if $ktora_strona==$ile_stron}nieaktywny{/if}"></a>
+		 </div>
+	{/if}
+{else}
+	<h3 style="color: grey; padding-top: 15px; text-align: center; font-weight: normal;">{$tlumaczenia_teksty.nie_dodano}</h3>
+{/if}
