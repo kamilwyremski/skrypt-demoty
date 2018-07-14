@@ -56,22 +56,22 @@ if(isset($_GET['search']) and $_GET['search']!=''){
 }
 
 $limit_start = policz_strony($ustawienia['ile_na_strone'], 'obrazki', $warunek);
-
-$q = mysql_query('select obrazki.id, obrazki.glowna, obrazki.tytul, obrazki.prosty_tytul, obrazki.kategoria, obrazki.opis, obrazki.wybor_obrazka, obrazki.url, obrazki.miniaturka, obrazki.autor_id, obrazki.glosy, obrazki.data, uzytkownicy.login from obrazki, uzytkownicy where obrazki.autor_id = uzytkownicy.id and '.$warunek.' limit '.$limit_start.','.$ustawienia['ile_na_strone'].'');
-
 $ip = get_client_ip();
 if(isset($uzytkownik)){$autor_id=$uzytkownik['id'];}else{$autor_id=0;}
+
+$q = mysql_query('select obrazki.*, kategorie.nazwa, kategorie.prosta_nazwa, uzytkownicy.login, (select count(1) from komentarze where obrazek_id=obrazki.id) as ile_komentarzy, (select glos from glosy where obrazek_id=obrazki.id and (ip="'.$ip.'" or (autor_id!=0 and autor_id="'.$autor_id.'")) limit 1) as glos from obrazki LEFT JOIN uzytkownicy ON obrazki.autor_id = uzytkownicy.id LEFT JOIN kategorie ON kategorie.id = obrazki.kategoria where true and '.$warunek.' limit '.$limit_start.','.$ustawienia['ile_na_strone'].'');
+
 while($dane = mysql_fetch_array($q)){
-	$q2 = mysql_query('select nazwa, prosta_nazwa from kategorie where id="'.$dane['kategoria'].'" limit 1');
-	while($dane2 = mysql_fetch_array($q2)){	
-		$dane['nazwa'] = $dane2['nazwa'];
-		$dane['prosta_nazwa'] = $dane2['prosta_nazwa'];
+	$tagi = explode('-', $dane['tagi']);
+	$dane['tagi'] = '';
+	for($i=0; $i <= count($tagi) - 1; $i++){
+		if($tagi[$i]>0){
+			$q2 = mysql_query('select nazwa, prosta_nazwa from tagi where id='.$tagi[$i].'');
+			while($dane2 = mysql_fetch_array($q2)){$tagi_nazwa= $dane2;}
+			$dane['tagi'] .= ' <a href="'.$ustawienia['base_url'].'/'.$tlumaczenia_linki['tag'].'/'.$tagi_nazwa['prosta_nazwa'].'" title="Tag: '.$tagi_nazwa['nazwa'].'">'.$tagi_nazwa['nazwa'].'</a> ';
+		}
 	}
-	$dane['ile_komentarzy'] = mysql_num_rows(mysql_query('select id from komentarze where obrazek_id="'.$dane['id'].'"'));
 	$dane['opis'] = htmlspecialchars_decode($dane['opis']);
-	$q2 = mysql_query('select glos from glosy where obrazek_id="'.$dane['id'].'" and (ip="'.$ip.'" or (autor_id!=0 and autor_id="'.$autor_id.'")) limit 1');
-	$dane['glos'] = 0;
-	while($dane2 = mysql_fetch_array($q2)){	$dane['glos'] = $dane2['glos'];}
 	$obrazki[] = $dane;
 }
 if(isset($obrazki)){
