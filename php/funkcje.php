@@ -32,14 +32,8 @@ function pobierz_boksy(){
 }
 
 function pobierz_miniaturki($order='rand() limit 9'){
-	$q = mysql_query('select id, tytul, prosty_tytul, glowna, wybor_obrazka, url, miniaturka, glosy, data, kategoria from obrazki order by '.$order);
+	$q = mysql_query('select obrazki.*, uzytkownicy.login, (select count(1) from komentarze where obrazek_id=obrazki.id) as ile_komentarzy, kategorie.nazwa, kategorie.prosta_nazwa from obrazki LEFT JOIN uzytkownicy ON obrazki.autor_id = uzytkownicy.id LEFT JOIN kategorie ON kategorie.id = obrazki.kategoria order by '.$order);
 	while($dane = mysql_fetch_array($q)){
-		$q2 = mysql_query('select nazwa, prosta_nazwa from kategorie where id="'.$dane['kategoria'].'" limit 1');
-		while($dane2 = mysql_fetch_array($q2)){	
-			$dane['nazwa'] = $dane2['nazwa'];
-			$dane['prosta_nazwa'] = $dane2['prosta_nazwa'];
-		}
-		$dane['ile_komentarzy'] = mysql_num_rows(mysql_query('select 1 from komentarze where obrazek_id="'.$dane['id'].'"'));
 		$wynik[] = $dane;
 	}
 	if(isset($wynik)){
@@ -82,9 +76,9 @@ function pobierz_dane_do_boksow(){
 	if(isset($nowe_komentarze)){$smarty->assign("nowe_komentarze", $nowe_komentarze);}
 	
 	$ile_wszystkich_tagow=0;
-	$q = mysql_query('select * from tagi order by rand() limit 30');
+	$q = mysql_query('select *, (select count(1) from obrazki where tagi like concat("%-",tagi.id,"-%")) as ile from tagi order by rand() limit 30');
 	while($dane = mysql_fetch_array($q)){
-		$ile_tablica[] = $dane['ile'] = $ile = mysql_num_rows(mysql_query('select id from obrazki where tagi like "%-'.$dane['id'].'-%"'));
+		$ile_tablica[] = $ile = $dane['ile'];
 		$ile_wszystkich_tagow += $ile;
 		$tagi[] = $dane;
 	}
