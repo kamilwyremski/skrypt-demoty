@@ -22,7 +22,7 @@ function pobierz_kategorie(){
 }
 
 function pobierz_boksy(){
-	global $smarty;
+	global $smarty, $boksy;
 	$q = mysql_query('select * from boksy order by pozycja');
 	while($dane = mysql_fetch_array($q)){
 		$dane['tresc']=htmlspecialchars_decode($dane['tresc']);
@@ -48,52 +48,76 @@ function pobierz_losowe_obrazki(){
 	$smarty->assign("losowe_obrazki", pobierz_miniaturki());
 }
 
+function in_array_boksy($rodzaj){
+	global $boksy;
+    foreach($boksy as $boks) {
+        if($boks['rodzaj']==$rodzaj){
+			return true;
+		}
+    }
+    return false;
+}
+
 function pobierz_dane_do_boksow(){
 	global $smarty, $ustawienia;
-	$statystyki = array();
-	$statystyki['obrazki'] = mysql_num_rows(mysql_query('select id from obrazki where glowna=1'));
-	$statystyki['poczekalnia'] = mysql_num_rows(mysql_query('select id from obrazki where glowna=0'));
-	$statystyki['komentarze'] = mysql_num_rows(mysql_query('select id from komentarze'));
-	$statystyki['glosy'] = mysql_num_rows(mysql_query('select id from glosy'));
-	$statystyki['kategorie'] = mysql_num_rows(mysql_query('select id from kategorie'));
-	$statystyki['tagi'] = mysql_num_rows(mysql_query('select id from tagi'));
-	$statystyki['uzytkownicy'] = mysql_num_rows(mysql_query('select id from uzytkownicy where aktywny=1'));
-	if($ustawienia['tworzenie']==1){
-		$statystyki['stworzone'] = mysql_num_rows(mysql_query('select id from stworzone'));
-	}
-	$smarty->assign("statystyki", $statystyki);
 	
-	$top = pobierz_miniaturki('obrazki.glosy desc limit 9');
-	if(isset($top)){$smarty->assign("top", $top);}
-	$nowe = pobierz_miniaturki('obrazki.data desc limit 9');
-	if(isset($nowe)){$smarty->assign("nowe", $nowe);}
-
-	$q = mysql_query('select komentarze.tresc, komentarze.data, uzytkownicy.login, obrazki.id, obrazki.prosty_tytul, obrazki.tytul from komentarze, uzytkownicy, obrazki where komentarze.autor_id = uzytkownicy.id and komentarze.obrazek_id = obrazki.id order by komentarze.data desc limit 9');
-	while($dane = mysql_fetch_array($q)){
-		$dane['tresc']=htmlspecialchars_decode($dane['tresc']);
-		$nowe_komentarze[] = $dane;
-	}
-	if(isset($nowe_komentarze)){$smarty->assign("nowe_komentarze", $nowe_komentarze);}
-	
-	$ile_wszystkich_tagow=0;
-	$q = mysql_query('select *, (select count(1) from obrazki where tagi like concat("%-",tagi.id,"-%")) as ile from tagi order by rand() limit 30');
-	while($dane = mysql_fetch_array($q)){
-		$ile_tablica[] = $ile = $dane['ile'];
-		$ile_wszystkich_tagow += $ile;
-		$tagi[] = $dane;
-	}
-	if(isset($tagi)){
-		$max = max($ile_tablica);
-		for($i=0; $i < count($tagi); $i++){
-			$tagi[$i]['rozmiar'] = ($tagi[$i]['ile']/$max)*20+10;
+	if(in_array_boksy('statystyki', $boksy)){
+		$statystyki = array();
+		$statystyki['obrazki'] = mysql_num_rows(mysql_query('select id from obrazki where glowna=1'));
+		$statystyki['poczekalnia'] = mysql_num_rows(mysql_query('select id from obrazki where glowna=0'));
+		$statystyki['komentarze'] = mysql_num_rows(mysql_query('select id from komentarze'));
+		$statystyki['glosy'] = mysql_num_rows(mysql_query('select id from glosy'));
+		$statystyki['kategorie'] = mysql_num_rows(mysql_query('select id from kategorie'));
+		$statystyki['tagi'] = mysql_num_rows(mysql_query('select id from tagi'));
+		$statystyki['uzytkownicy'] = mysql_num_rows(mysql_query('select id from uzytkownicy where aktywny=1'));
+		if($ustawienia['tworzenie']==1){
+			$statystyki['stworzone'] = mysql_num_rows(mysql_query('select id from stworzone'));
 		}
-		$smarty->assign("tagi", $tagi);
+		$smarty->assign("statystyki", $statystyki);
 	}
 	
-	if($ustawienia['konkursy']==1){
-		$q = mysql_query('select id, tytul, prosty_tytul, koniec from konkursy where start < CURRENT_DATE() and koniec > CURRENT_DATE() and wlaczony="1" order by rand() limit 1');
-		while($dane = mysql_fetch_array($q)){$konkurs_boks=$dane;}
-		if(isset($konkurs_boks)){$smarty->assign("konkurs_boks", $konkurs_boks);}
+	if(in_array_boksy('top', $boksy)){
+		$top = pobierz_miniaturki('obrazki.glosy desc limit 9');
+		if(isset($top)){$smarty->assign("top", $top);}
+	}
+	
+	if(in_array_boksy('nowe', $boksy)){
+		$nowe = pobierz_miniaturki('obrazki.data desc limit 9');
+		if(isset($nowe)){$smarty->assign("nowe", $nowe);}
+	}
+
+	if(in_array_boksy('komentarze', $boksy)){
+		$q = mysql_query('select komentarze.tresc, komentarze.data, uzytkownicy.login, obrazki.id, obrazki.prosty_tytul, obrazki.tytul from komentarze, uzytkownicy, obrazki where komentarze.autor_id = uzytkownicy.id and komentarze.obrazek_id = obrazki.id order by komentarze.data desc limit 9');
+		while($dane = mysql_fetch_array($q)){
+			$dane['tresc']=htmlspecialchars_decode($dane['tresc']);
+			$nowe_komentarze[] = $dane;
+		}
+		if(isset($nowe_komentarze)){$smarty->assign("nowe_komentarze", $nowe_komentarze);}
+	}
+	
+	if(in_array_boksy('tagi', $boksy)){
+		$ile_wszystkich_tagow=0;
+		$q = mysql_query('select *, (select count(1) from obrazki where tagi like concat("%-",tagi.id,"-%")) as ile from tagi order by rand() limit 30');
+		while($dane = mysql_fetch_array($q)){
+			$ile_tablica[] = $ile = $dane['ile'];
+			$ile_wszystkich_tagow += $ile;
+			$tagi[] = $dane;
+		}
+		if(isset($tagi)){
+			$max = max($ile_tablica);
+			for($i=0; $i < count($tagi); $i++){
+				$tagi[$i]['rozmiar'] = ($tagi[$i]['ile']/$max)*20+10;
+			}
+			$smarty->assign("tagi", $tagi);
+		}
+	}
+	
+	if(in_array_boksy('konkurs', $boksy)){	
+		if($ustawienia['konkursy']==1){
+			$q = mysql_query('select id, tytul, prosty_tytul, koniec from konkursy where start < CURRENT_DATE() and koniec > CURRENT_DATE() and wlaczony="1" order by rand() limit 1');
+			while($dane = mysql_fetch_array($q)){$konkurs_boks=$dane;}
+			if(isset($konkurs_boks)){$smarty->assign("konkurs_boks", $konkurs_boks);}
+		}
 	}
 }
 
