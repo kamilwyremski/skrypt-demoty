@@ -11,9 +11,9 @@
 	<meta property="og:description" content="{$description}"/>
 	<meta property="og:title" content="{$title}"/>
 	
-	<link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet'>
-	<link href='http://fonts.googleapis.com/css?family=Oswald&subset=latin,latin-ext' rel='stylesheet'>
-	<link href='http://fonts.googleapis.com/css?family=Ubuntu+Condensed&subset=latin,latin-ext' rel='stylesheet'>
+	<link href='https://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet'>
+	<link href='https://fonts.googleapis.com/css?family=Oswald&subset=latin,latin-ext' rel='stylesheet'>
+	<link href='https://fonts.googleapis.com/css?family=Ubuntu+Condensed&subset=latin,latin-ext' rel='stylesheet'>
 	<link rel="stylesheet" href="{$ustawienia.base_url}/views/{$ustawienia.szablon}/css/style.css"/>
 	<link rel="stylesheet" href="{$ustawienia.base_url}/views/{$ustawienia.szablon}/css/menu.css"/>
 	<link rel="stylesheet" href="{$ustawienia.base_url}/views/{$ustawienia.szablon}/css/mobile.css"/>
