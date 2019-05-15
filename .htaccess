@@ -1,5 +1,14 @@
 RewriteEngine on
 
+#RewriteCond %{HTTPS} !=on
+#RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /(.*)index\.php($|\ |\?)
+RewriteRule ^ /%1 [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+RewriteRule ^(.*)$ http://%1%{REQUEST_URI} [R=301,QSA,NC,L]
+
 RewriteBase /
 
 RewriteRule ^(views|upload|obrazy|php|model|cms|install|tmp)($|/) - [L]
@@ -8,11 +17,5 @@ RewriteRule ^([0-9]+),(.*)$ index.php?akcja=obrazek&id=$1 [NC,QSA,L]
 RewriteRule ^([a-z-_]+)/([0-9]+),(.*)$ index.php?akcja=$1&id=$2 [NC,QSA,L]
 RewriteRule ^([a-z-_]+)/(.*)$ index.php?akcja=$1&id=$2 [NC,QSA,L]
 RewriteRule ^([a-z-_]+)$ index.php?akcja=$1 [NC,QSA,L]
-
-RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /(.*)index\.php($|\ |\?)
-RewriteRule ^ /%1 [R=301,L]
-
-RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
-RewriteRule ^(.*)$ http://%1%{REQUEST_URI} [R=301,QSA,NC,L]
 
 ErrorDocument 404 /index.php?akcja=404
