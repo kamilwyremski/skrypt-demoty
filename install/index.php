@@ -6,6 +6,10 @@ error_reporting(0);
 
 ob_start();
 
+if(phpversion()<5.4 or phpversion()>=7){
+	die('Nieprawidlowa wersja PHP na serwerze. Obslugiwane: 5.4 - 5.6');
+}
+
 $install = true;
 
 include('../config/db.php');
