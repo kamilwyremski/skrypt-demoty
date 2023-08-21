@@ -122,6 +122,7 @@
 </div>
 <footer>
 	<p>{$tlumaczenia_teksty.stopka_opis}</p>
+	<!-- Skrypt na licencji MIT. Usuwanie informacji o autorze oprogramowania jest zakazane -->
 	<p>Copyright © 2017 by <a href="{$ustawienia.stopka_url}" target="_blank" title="{$ustawienia.stopka_nazwa}">{$ustawienia.stopka_nazwa}</a></p>	
 	{$ustawienia.stopka}
 </footer>
