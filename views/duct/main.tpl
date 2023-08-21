@@ -111,6 +111,7 @@
 		{if $ustawienia.konkursy==1}<li><a href="{$ustawienia.base_url}/{$tlumaczenia_linki.konkursy}" title="{$tlumaczenia_teksty.konkursy}">{$tlumaczenia_teksty.konkursy}</a></li>{/if}
 	</ul>
 	<p>{$tlumaczenia_teksty.stopka_opis}</p>
+	<!-- Skrypt na licencji MIT. Usuwanie informacji o autorze oprogramowania jest zakazane -->
 	<p>Copyright © 2017 by <a href="{$ustawienia.stopka_url}" target="_blank" title="{$ustawienia.stopka_nazwa}">{$ustawienia.stopka_nazwa}</a></p>	
 	{$ustawienia.stopka}
 </footer>
